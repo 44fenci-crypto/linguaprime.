@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LinguaPrime v9 - Çalışıyor</title>
+<title>LinguaPrime v9 - Yedeklemeli</title>
 <style>
 * {
   box-sizing: border-box;
@@ -133,6 +133,14 @@ body {
 
 .sidebar button.primary {
   background: #4f46e5;
+}
+
+.sidebar button.danger {
+  background: #dc2626;
+}
+
+.sidebar button.warning {
+  background: #ea580c;
 }
 
 .deck-list {
@@ -362,6 +370,26 @@ body.dark .modal input, body.dark .modal select {
   .card-word { font-size: 24px; }
   .btn { padding: 10px 16px; font-size: 12px; }
 }
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  z-index: 2000;
+  animation: fadeOut 2s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
 </style>
 </head>
 <body>
@@ -371,10 +399,12 @@ body.dark .modal input, body.dark .modal select {
 <div class="sidebar" id="sidebar">
   <h3>🗂️ LinguaPrime v9</h3>
   <button onclick="closeSidebar()">✕ Kapat</button>
+  
   <h4>📚 Desteler</h4>
   <div id="deckList" class="deck-list"></div>
   <button onclick="createDeck()">➕ Yeni Deste</button>
   <button onclick="deleteDeck()" style="background:#dc2626">🗑 Sil Deste</button>
+  
   <h4>⚙️ Ayarlar</h4>
   <select id="directionSelect" onchange="changeDirection()">
     <option value="nltr">🇳🇱 NL → TR</option>
@@ -384,10 +414,19 @@ body.dark .modal input, body.dark .modal select {
     <option value="normal">🃏 Normal Mod</option>
     <option value="test">✍️ Yazma Testi</option>
   </select>
+  
   <h4>📋 Kartlar</h4>
   <button class="primary" onclick="openAddCardModal()">✍️ Kart Ekle</button>
   <input type="file" id="csvFile" accept=".csv" style="display:none" onchange="importCSV(this)">
   <button onclick="document.getElementById('csvFile').click()">📂 CSV Yükle</button>
+  <button onclick="exportCSV()">📤 CSV İndir</button>
+  
+  <h4>💾 Yedekleme</h4>
+  <button onclick="backupData()">📥 Tüm Verileri Yedekle</button>
+  <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(this)">
+  <button onclick="document.getElementById('restoreFile').click()">🔄 Yedekten Geri Yükle</button>
+  <button onclick="resetAllData()" class="danger" style="background:#dc2626">🗑️ Tüm Verileri Sıfırla</button>
+  
   <h4>📊 Araçlar</h4>
   <button onclick="openAnalysis()">📊 Analiz</button>
   <button onclick="openManager()">📋 Kart Yönetimi</button>
@@ -452,7 +491,7 @@ body.dark .modal input, body.dark .modal select {
 
 <script>
 // ============================================
-// LINGUAPRIME V9 - FULLY WORKING
+// LINGUAPRIME V9 - WITH BACKUP
 // ============================================
 
 let app = {
@@ -466,6 +505,14 @@ let app = {
 let currentCardIndex = -1;
 let isFlipped = false;
 let testAnswer = "";
+
+function showToast(msg) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
 
 function save() { localStorage.setItem("linguaPrime", JSON.stringify(app)); }
 
@@ -649,8 +696,8 @@ function updateDeckList() {
   });
 }
 
-function createDeck() { const n = prompt("Deste adı:"); if(n && n.trim()) { app.decks.push({ name: n.trim(), cards: [] }); app.currentDeck = app.decks.length-1; save(); updateDeckList(); pickCard(); updateStats(); } }
-function deleteDeck() { if(app.decks.length<=1) { alert("En az bir deste olmalı!"); return; } if(confirm(`"${deck().name}" silinsin mi?`)) { app.decks.splice(app.currentDeck,1); app.currentDeck=0; save(); updateDeckList(); pickCard(); updateStats(); } }
+function createDeck() { const n = prompt("Deste adı:"); if(n && n.trim()) { app.decks.push({ name: n.trim(), cards: [] }); app.currentDeck = app.decks.length-1; save(); updateDeckList(); pickCard(); updateStats(); showToast(`✅ "${n.trim()}" deste oluşturuldu`); } }
+function deleteDeck() { if(app.decks.length<=1) { alert("En az bir deste olmalı!"); return; } if(confirm(`"${deck().name}" silinsin mi?`)) { app.decks.splice(app.currentDeck,1); app.currentDeck=0; save(); updateDeckList(); pickCard(); updateStats(); showToast(`🗑️ "${deck().name}" silindi`); } }
 function changeDirection() { app.direction = document.getElementById("directionSelect").value; save(); pickCard(); }
 function changeMode() { app.mode = document.getElementById("modeSelect").value; save(); pickCard(); }
 function openAddCardModal() { document.getElementById("addCardModal").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
@@ -660,14 +707,70 @@ function addCard() {
   const m = document.getElementById("newMeaning").value.trim();
   if(!w || !m) { alert("Kelime ve anlam zorunlu!"); return; }
   deck().cards.push({ word: w, meaning: m, sentence: document.getElementById("newSentence").value.trim(), category: document.getElementById("newCategory").value, diffLabel: document.getElementById("newDiff").value, correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: Date.now(), history:[] });
-  save(); updateDeckList(); pickCard(); updateStats(); closeAddCardModal();
+  save(); updateDeckList(); pickCard(); updateStats(); closeAddCardModal(); showToast(`✅ "${w}" eklendi`);
 }
 function importCSV(input) {
   const file = input.files[0];
   if(!file) return;
   const reader = new FileReader();
-  reader.onload = e => { let c=0; e.target.result.split(/\r?\n/).forEach((line,i)=>{ if(i===0) return; const p=line.split(";"); if(p.length>=2 && p[0].trim() && p[1].trim()) { deck().cards.push({ word:p[0].trim(), meaning:p[1].trim(), sentence:p[2]?.trim()||"", category:p[4]?.trim()||"Genel", diffLabel:p[5]?.trim()||"", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due:Date.now(), history:[] }); c++; } }); save(); updateDeckList(); pickCard(); updateStats(); alert(`${c} kart yüklendi!`); };
+  reader.onload = e => { let c=0; e.target.result.split(/\r?\n/).forEach((line,i)=>{ if(i===0) return; const p=line.split(";"); if(p.length>=2 && p[0].trim() && p[1].trim()) { deck().cards.push({ word:p[0].trim(), meaning:p[1].trim(), sentence:p[2]?.trim()||"", category:p[4]?.trim()||"Genel", diffLabel:p[5]?.trim()||"", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due:Date.now(), history:[] }); c++; } }); save(); updateDeckList(); pickCard(); updateStats(); showToast(`✅ ${c} kart yüklendi!`); };
   reader.readAsText(file,"UTF-8"); input.value="";
+}
+function exportCSV() {
+  let csv = "kelime;anlam;cümle;zıt anlam;kategori;etiket;grammar_type;unite\n";
+  deck().cards.forEach(c => { csv += `${c.word};${c.meaning};${c.sentence||""};;${c.category||"Genel"};${c.diffLabel||""};;\n`; });
+  const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${deck().name}_${new Date().toISOString().slice(0,10)}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast("📤 CSV indiriliyor");
+}
+function backupData() {
+  const data = JSON.stringify(app);
+  const blob = new Blob([data], {type: "application/json"});
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `linguaprime_yedek_${new Date().toISOString().slice(0,19).replace(/:/g, "-")}.json`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast("💾 Yedek alındı");
+}
+function restoreData(input) {
+  const file = input.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      app.decks = data.decks || [{ name: "Genel", cards: [] }];
+      app.currentDeck = data.currentDeck || 0;
+      app.direction = data.direction || "nltr";
+      app.mode = data.mode || "normal";
+      app.streak = data.streak || { current:0, longest:0, lastStudy:"", todayDone:0, dailyGoal:20, totalCards:0, totalCorrect:0 };
+      save();
+      updateUI();
+      pickCard();
+      updateStats();
+      updateStreakDisplay();
+      showToast("🔄 Yedek başarıyla geri yüklendi!");
+    } catch(err) { alert("Geçersiz yedek dosyası!"); }
+  };
+  reader.readAsText(file);
+  input.value = "";
+}
+function resetAllData() {
+  if(confirm("⚠️ TÜM VERİLER KALICI OLARAK SİLİNECEK! Devam etmek istiyor musunuz?")) {
+    localStorage.removeItem("linguaPrime");
+    app = { decks: [{ name: "Genel", cards: [] }], currentDeck: 0, direction: "nltr", mode: "normal", streak: { current:0, longest:0, lastStudy:"", todayDone:0, dailyGoal:20, totalCards:0, totalCorrect:0 } };
+    addSampleCards();
+    updateUI();
+    pickCard();
+    updateStats();
+    updateStreakDisplay();
+    showToast("🗑️ Tüm veriler sıfırlandı");
+  }
 }
 function openAnalysis() {
   let c=0,w=0;
@@ -681,13 +784,13 @@ function openManager() {
   const cards = deck().cards;
   if(cards.length===0) { document.getElementById("managerContent").innerHTML = "<p>Henüz kart yok</p>"; }
   else { let html = `<table style="width:100%;border-collapse:collapse"><thead><tr style="border-bottom:2px solid #ddd"><th>Kelime</th><th>Anlam</th><th>Kategori</th><th>Doğru</th><th>Yanlış</th><th></th></tr></thead><tbody>`;
-    cards.forEach((c,i)=>{ html += `<tr><td style="padding:8px">${c.word}</td><td style="padding:8px">${c.meaning}</td><td style="padding:8px">${c.category||"Genel"}</td><td style="padding:8px;color:#16a34a">${c.correct||0}</td><td style="padding:8px;color:#dc2626">${c.wrong||0}</td><td style="padding:8px"><button onclick="deleteCardFromManager(${i})" style="background:#dc2626;color:white;border:none;padding:6px 12px;border-radius:8px">🗑 Sil</button></td></tr>`; });
+    cards.forEach((c,i)=>{ html += `<tr style="border-bottom:1px solid #eee"><td style="padding:8px">${c.word}</td><td style="padding:8px">${c.meaning}</td><td style="padding:8px">${c.category||"Genel"}</td><td style="padding:8px;color:#16a34a">${c.correct||0}</td><td style="padding:8px;color:#dc2626">${c.wrong||0}</td><td style="padding:8px"><button onclick="deleteCardFromManager(${i})" style="background:#dc2626;color:white;border:none;padding:6px 12px;border-radius:8px">🗑 Sil</button></td></tr>`; });
     html += `</tbody></table>`; document.getElementById("managerContent").innerHTML = html;
   }
   document.getElementById("managerModal").classList.add("open"); document.getElementById("overlay").classList.add("open");
 }
 function closeManager() { document.getElementById("managerModal").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
-function deleteCardFromManager(i) { if(confirm("Silinsin mi?")) { deck().cards.splice(i,1); save(); updateDeckList(); pickCard(); updateStats(); openManager(); } }
+function deleteCardFromManager(i) { if(confirm("Silinsin mi?")) { deck().cards.splice(i,1); save(); updateDeckList(); pickCard(); updateStats(); openManager(); showToast("🗑️ Kart silindi"); } }
 function openSidebar() { document.getElementById("sidebar").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
 function closeSidebar() { document.getElementById("sidebar").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
 function toggleTheme() { document.body.classList.toggle("dark"); localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light"); }
