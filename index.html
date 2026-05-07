@@ -3,801 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>LinguaPrime v9 - Yedeklemeli</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>LinguaPrime NL - Hollandaca Dil Koçu</title>
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root {
+    --bg: #f2f2f7; --card-bg: #ffffff; --text: #1c1c1e;
+    --accent: #007aff; --de-color: #007aff; --het-color: #34c759;
+    --hard: #ff3b30; --medium: #ff9500; --easy: #34c759;
 }
+[data-theme="dark"] { --bg: #1c1c1e; --card-bg: #2c2c2e; --text: #f2f2f7; }
 
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f0f0f5;
-  color: #1c1c1e;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; flex-direction: column; height: 100vh; overflow: hidden;
 }
 
-.header {
-  background: white;
-  padding: 12px 16px;
-  border-bottom: 1px solid #e5e5ea;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+.menu-btn { font-size: 24px; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--card-bg); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
-.streak-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.streak {
-  background: #f97316;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.goal {
-  font-size: 12px;
-  color: #666;
-  background: #f3f4f6;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-.stats {
-  display: flex;
-  gap: 12px;
-}
-
-.stat {
-  background: #e8e8ed;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: bold;
-}
-
+/* SIDEBAR (OVERLAY MENU) */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: -300px;
-  width: 300px;
-  height: 100%;
-  background: #1c1c1e;
-  color: white;
-  transition: left 0.3s ease;
-  z-index: 1000;
-  padding: 20px;
-  overflow-y: auto;
+    position: fixed; top: 0; left: 0; width: 300px; height: 100%; 
+    background: var(--card-bg); z-index: 1000; transform: translateX(-100%); 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 30px 20px; box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+    overflow-y: auto;
 }
+.sidebar.open { transform: translateX(0); }
+.sidebar-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3); z-index: 999; display: none;
+    backdrop-filter: blur(3px);
+}
+.sidebar-overlay.open { display: block; }
 
-.sidebar.open {
-  left: 0;
-}
+/* CARD & CONTENT */
+main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+.card-container { width: 100%; max-width: 350px; height: 400px; perspective: 1000px; }
+.card { width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+.card.flipped { transform: rotateY(180deg); }
+.card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px; border-radius: 24px; background: var(--card-bg); text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+.card-back { transform: rotateY(180deg); justify-content: flex-start; }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  display: none;
-}
+.card.de-article { border-top: 8px solid var(--de-color); }
+.card.het-article { border-top: 8px solid var(--het-color); }
 
-.overlay.open {
-  display: block;
-}
+.grammar-badge { background: rgba(0,122,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
+.word-main { font-size: 32px; font-weight: 800; }
+.info-box { width: 100%; text-align: left; margin-top: 12px; padding: 10px; background: rgba(0,0,0,0.03); border-radius: 12px; }
 
-.menu-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 8px;
-}
+/* TEST AREA */
+#testArea { display: none; width: 100%; max-width: 350px; background: var(--card-bg); padding: 30px; border-radius: 24px; text-align: center; }
+.word-display { font-size: 24px; letter-spacing: 4px; margin: 20px 0; font-family: monospace; }
+input#wordInput { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #eee; font-size: 18px; text-align: center; outline: none; }
 
-.sidebar h3 {
-  margin-bottom: 16px;
-  font-size: 18px;
-}
+.controls { display: flex; gap: 10px; padding: 20px; width: 100%; max-width: 400px; margin: 0 auto; visibility: hidden; }
+.btn { flex: 1; padding: 14px; border-radius: 12px; border: none; font-weight: 700; color: white; cursor: pointer; }
 
-.sidebar h4 {
-  margin: 20px 0 8px 0;
-  font-size: 14px;
-  color: #aaa;
-}
-
-.sidebar button, .sidebar select {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 10px;
-  border: none;
-  font-size: 14px;
-  background: #2c2c2e;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebar button.primary {
-  background: #4f46e5;
-}
-
-.sidebar button.danger {
-  background: #dc2626;
-}
-
-.sidebar button.warning {
-  background: #ea580c;
-}
-
-.deck-list {
-  margin: 10px 0;
-}
-
-.deck-item {
-  background: #2c2c2e;
-  text-align: left;
-  padding: 10px;
-  margin: 4px 0;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.deck-item.active {
-  background: #4f46e5;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.card-container {
-  width: 100%;
-  max-width: 520px;
-  margin: 20px auto;
-  cursor: pointer;
-  perspective: 1000px;
-}
-
-.card {
-  background: white;
-  border-radius: 24px;
-  text-align: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-  transition: transform 0.5s ease;
-  min-height: 320px;
-  position: relative;
-  transform-style: preserve-3d;
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  width: 100%;
-  backface-visibility: hidden;
-  border-radius: 24px;
-  padding: 40px 24px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-}
-
-.card-word {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 16px 0;
-}
-
-.card-category {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 8px;
-}
-
-.card-sentence {
-  font-size: 14px;
-  color: #666;
-  font-style: italic;
-  margin-top: 16px;
-}
-
-.diff-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-}
-
-.button-group {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 12px 24px;
-  border-radius: 30px;
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.1s ease;
-}
-
-.btn:active {
-  transform: scale(0.96);
-}
-
-.btn-primary {
-  background: #4f46e5;
-  color: white;
-}
-
-.btn-secondary {
-  background: #e8e8ed;
-  color: #333;
-}
-
-.btn-again {
-  background: #dc2626;
-  color: white;
-}
-
-.btn-hard {
-  background: #ea580c;
-  color: white;
-}
-
-.btn-good {
-  background: #16a34a;
-  color: white;
-}
-
-.btn-easy {
-  background: #4f46e5;
-  color: white;
-}
-
-.test-input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 24px;
-  border-radius: 24px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-  z-index: 1001;
-  display: none;
-}
-
-.modal.open {
-  display: block;
-}
-
-.modal input, .modal select {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-}
-
-.mode-badge {
-  text-align: center;
-  font-size: 12px;
-  color: #888;
-  margin-top: 20px;
-}
-
-body.dark {
-  background: #1a1a1e;
-  color: #f5f5f5;
-}
-
-body.dark .header {
-  background: #2c2c2e;
-  border-color: #3a3a3c;
-}
-
-body.dark .card {
-  background: #2c2c2e;
-  color: #f5f5f5;
-}
-
-body.dark .stat, body.dark .goal {
-  background: #3a3a3c;
-  color: #f5f5f5;
-}
-
-body.dark .btn-secondary {
-  background: #3a3a3c;
-  color: #f5f5f5;
-}
-
-body.dark .modal {
-  background: #2c2c2e;
-  color: #f5f5f5;
-}
-
-body.dark .modal input, body.dark .modal select {
-  background: #3a3a3c;
-  color: #f5f5f5;
-  border-color: #555;
-}
-
-@media (max-width: 600px) {
-  .card-word { font-size: 24px; }
-  .btn { padding: 10px 16px; font-size: 12px; }
-}
-
-.toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 14px;
-  z-index: 2000;
-  animation: fadeOut 2s ease forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
-}
+#unitFilters button { padding: 8px 12px; margin: 4px; border-radius: 8px; border: 1px solid #ddd; background: white; cursor: pointer; }
+#unitFilters button.active { background: var(--accent); color: white; border-color: var(--accent); }
 </style>
 </head>
 <body>
 
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="sidebar">
-  <h3>🗂️ LinguaPrime v9</h3>
-  <button onclick="closeSidebar()">✕ Kapat</button>
-  
-  <h4>📚 Desteler</h4>
-  <div id="deckList" class="deck-list"></div>
-  <button onclick="createDeck()">➕ Yeni Deste</button>
-  <button onclick="deleteDeck()" style="background:#dc2626">🗑 Sil Deste</button>
-  
-  <h4>⚙️ Ayarlar</h4>
-  <select id="directionSelect" onchange="changeDirection()">
-    <option value="nltr">🇳🇱 NL → TR</option>
-    <option value="trnl">🇹🇷 TR → NL</option>
-  </select>
-  <select id="modeSelect" onchange="changeMode()">
-    <option value="normal">🃏 Normal Mod</option>
-    <option value="test">✍️ Yazma Testi</option>
-  </select>
-  
-  <h4>📋 Kartlar</h4>
-  <button class="primary" onclick="openAddCardModal()">✍️ Kart Ekle</button>
-  <input type="file" id="csvFile" accept=".csv" style="display:none" onchange="importCSV(this)">
-  <button onclick="document.getElementById('csvFile').click()">📂 CSV Yükle</button>
-  <button onclick="exportCSV()">📤 CSV İndir</button>
-  
-  <h4>💾 Yedekleme</h4>
-  <button onclick="backupData()">📥 Tüm Verileri Yedekle</button>
-  <input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(this)">
-  <button onclick="document.getElementById('restoreFile').click()">🔄 Yedekten Geri Yükle</button>
-  <button onclick="resetAllData()" class="danger" style="background:#dc2626">🗑️ Tüm Verileri Sıfırla</button>
-  
-  <h4>📊 Araçlar</h4>
-  <button onclick="openAnalysis()">📊 Analiz</button>
-  <button onclick="openManager()">📋 Kart Yönetimi</button>
-  <button onclick="toggleTheme()">🌙 Koyu Tema</button>
-</div>
-
-<div class="header">
-  <div><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-  <div class="streak-box">
-    <div class="streak" id="streakDisplay">🔥 0</div>
-    <div class="goal" id="goalDisplay">📅 0/20</div>
-  </div>
-  <div class="stats">
-    <div class="stat">✅ <span id="correctCount">0</span></div>
-    <div class="stat">❌ <span id="wrongCount">0</span></div>
-    <div class="stat">⏳ <span id="dueCount">0</span></div>
-  </div>
-</div>
-
-<div class="main">
-  <div class="card-container" onclick="onCardClick()">
-    <div class="card" id="card">
-      <div class="card-front" id="cardFront">
-        <div class="card-category" id="frontCategory">Kategori</div>
-        <div class="card-word" id="frontWord">Yükleniyor...</div>
-        <div class="diff-badge" id="frontDiff"></div>
-      </div>
-      <div class="card-back" id="cardBack">
-        <div class="card-category" id="backCategory">Kategori</div>
-        <div class="card-word" id="backWord"></div>
-        <div class="card-sentence" id="backSentence"></div>
-        <div class="diff-badge" id="backDiff"></div>
-      </div>
+    <h2 style="margin-bottom: 20px;">Menü</h2>
+    
+    <div style="margin-bottom: 25px;">
+        <label style="font-weight:bold; font-size:14px; display:block; margin-bottom:8px;">Veri Yükle</label>
+        <button onclick="document.getElementById('csvInput').click()" style="width:100%; padding:12px; border-radius:10px; border:2px dashed var(--accent); background:none; color:var(--accent); font-weight:bold; cursor:pointer;">CSV Dosyası Seç</button>
+        <input type="file" id="csvInput" style="display:none" accept=".csv" onchange="handleFile(this.files[0])">
     </div>
-  </div>
-  <div id="actionButtons" class="button-group"></div>
-  <div class="mode-badge" id="modeBadge"></div>
+
+    <div style="margin-bottom: 25px;">
+        <label style="font-weight:bold; font-size:14px; display:block; margin-bottom:8px;">Çalışma Modu</label>
+        <select id="workMode" onchange="changeMode()" style="width:100%; padding:10px; border-radius:8px;">
+            <option value="flashcard">Kartlar</option>
+            <option value="writing">Yazma Testi</option>
+        </select>
+    </div>
+
+    <div>
+        <label style="font-weight:bold; font-size:14px; display:block; margin-bottom:8px;">Üniteler</label>
+        <div id="unitFilters"></div>
+    </div>
 </div>
 
-<div class="modal" id="addCardModal">
-  <h3>✍️ Yeni Kart</h3>
-  <input type="text" id="newWord" placeholder="Kelime (NL)">
-  <input type="text" id="newMeaning" placeholder="Anlam (TR)">
-  <input type="text" id="newSentence" placeholder="Örnek Cümle">
-  <select id="newCategory"><option>Genel</option><option>Fiiller</option><option>Hayvanlar</option><option>Ev</option><option>Yiyecekler</option><option>Meslekler</option></select>
-  <select id="newDiff"><option value="">Zorluk Yok</option><option value="kolay">🟢 Kolay</option><option value="orta">🟡 Orta</option><option value="zor">🔴 Zor</option></select>
-  <button class="btn btn-primary" onclick="addCard()">➕ Ekle</button>
-  <button class="btn btn-secondary" onclick="closeAddCardModal()">İptal</button>
-</div>
+<header>
+    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+    <div id="stats" style="font-weight:bold;">Ünite: -</div>
+    <div class="menu-btn" id="muteBtn" onclick="toggleMute()">🔊</div>
+</header>
 
-<div class="modal" id="analysisModal">
-  <h3>📊 Analiz</h3>
-  <div id="analysisContent"></div>
-  <button class="btn btn-secondary" onclick="closeAnalysis()">Kapat</button>
-</div>
+<main>
+    <div id="cardContainer" class="card-container">
+        <div class="card" id="mainCard" onclick="this.classList.toggle('flipped')">
+            <div class="card-face">
+                <div class="word-main">Welkom!</div>
+                <p style="color:#8e8e93; margin-top:10px;">Lütfen CSV yükleyin</p>
+            </div>
+            <div class="card-face card-back" id="cardBack"></div>
+        </div>
+    </div>
 
-<div class="modal" id="managerModal">
-  <h3>📋 Kart Yönetimi</h3>
-  <div id="managerContent"></div>
-  <button class="btn btn-secondary" onclick="closeManager()">Kapat</button>
+    <div id="testArea"></div>
+</main>
+
+<div class="controls" id="actionControls">
+    <button class="btn" style="background:var(--hard)" onclick="handleRate('again')">Zor</button>
+    <button class="btn" style="background:var(--medium)" onclick="handleRate('good')">Orta</button>
+    <button class="btn" style="background:var(--easy)" onclick="handleRate('easy')">Kolay</button>
 </div>
 
 <script>
-// ============================================
-// LINGUAPRIME V9 - WITH BACKUP
-// ============================================
+let allCards = [], currentCards = [], currentIndex = 0, isMuted = false, currentMode = 'flashcard';
 
-let app = {
-  decks: [],
-  currentDeck: 0,
-  direction: "nltr",
-  mode: "normal",
-  streak: { current: 0, longest: 0, lastStudy: "", todayDone: 0, dailyGoal: 20, totalCards: 0, totalCorrect: 0 }
-};
-
-let currentCardIndex = -1;
-let isFlipped = false;
-let testAnswer = "";
-
-function showToast(msg) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 2000);
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
 }
 
-function save() { localStorage.setItem("linguaPrime", JSON.stringify(app)); }
-
-function load() {
-  const saved = localStorage.getItem("linguaPrime");
-  if (saved) {
-    try {
-      const data = JSON.parse(saved);
-      app.decks = data.decks || [];
-      app.currentDeck = data.currentDeck || 0;
-      app.direction = data.direction || "nltr";
-      app.mode = data.mode || "normal";
-      app.streak = data.streak || { current:0, longest:0, lastStudy:"", todayDone:0, dailyGoal:20, totalCards:0, totalCorrect:0 };
-    } catch(e) {}
-  }
-  if (app.decks.length === 0) app.decks = [{ name: "Genel", cards: [] }];
-  if (app.decks[app.currentDeck].cards.length === 0) addSampleCards();
-  updateUI();
-  pickCard();
-  updateStats();
-  updateStreakDisplay();
+function toggleMute() {
+    isMuted = !isMuted;
+    document.getElementById('muteBtn').innerText = isMuted ? '❌' : '🔊';
 }
 
-function addSampleCards() {
-  const now = Date.now();
-  app.decks[app.currentDeck].cards.push(
-    { word: "lopen", meaning: "yürümek", sentence: "Ik loop naar huis.", category: "Fiiller", diffLabel: "kolay", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: now - 86400000, history:[] },
-    { word: "fietsen", meaning: "bisiklet sürmek", sentence: "Wij fietsen naar school.", category: "Fiiller", diffLabel: "kolay", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: now - 86400000, history:[] },
-    { word: "de hond", meaning: "köpek", sentence: "De hond blaft.", category: "Hayvanlar", diffLabel: "kolay", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: now - 86400000, history:[] },
-    { word: "het huis", meaning: "ev", sentence: "Het huis is groot.", category: "Ev", diffLabel: "orta", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: now - 86400000, history:[] },
-    { word: "eten", meaning: "yemek yemek", sentence: "Ik eet een appel.", category: "Fiiller", diffLabel: "kolay", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: now - 86400000, history:[] }
-  );
-  save();
+function handleFile(file) {
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const text = e.target.result;
+        allCards = parseCSV(text);
+        currentCards = [...allCards];
+        currentIndex = 0;
+        updateUnitFilters();
+        showNext();
+        toggleSidebar();
+        document.getElementById('actionControls').style.visibility = 'visible';
+    };
+    reader.readAsText(file);
 }
 
-function deck() { return app.decks[app.currentDeck]; }
-function today() { return new Date().toISOString().slice(0,10); }
-function getQuestion(c) { return app.direction === "nltr" ? c.word : c.meaning; }
-function getAnswer(c) { return app.direction === "nltr" ? c.meaning : c.word; }
-
-function updateSM2(card, quality) {
-  let { repetitions, interval, ease } = card;
-  if (quality === "again") { repetitions = 0; interval = 1; ease = Math.max(1.3, ease - 0.2); }
-  else if (quality === "hard") { repetitions = 1; interval = 1; ease = Math.max(1.3, ease - 0.15); }
-  else if (quality === "good") {
-    repetitions++;
-    if (repetitions === 1) interval = 1;
-    else if (repetitions === 2) interval = 6;
-    else interval = Math.round(interval * ease);
-    ease = Math.min(2.5, ease + 0.1);
-  } else {
-    repetitions++;
-    if (repetitions === 1) interval = 4;
-    else if (repetitions === 2) interval = 12;
-    else interval = Math.round(interval * ease * 1.3);
-    ease = Math.min(2.5, ease + 0.15);
-  }
-  const days = quality === "again" ? 0 : quality === "hard" ? 1 : interval;
-  return { ...card, repetitions, interval, ease, due: Date.now() + days * 86400000 };
+function parseCSV(text) {
+    return text.split(/\r?\n/).filter(line => line.trim()).map(line => {
+        const c = line.split(';');
+        return { word:c[0], mean:c[1], sentence:c[2], opposite:c[3], grammarType:c[6], unit:c[7] || '1' };
+    }).filter(c => c.word && c.mean);
 }
 
-function pickCard() {
-  const cards = deck().cards;
-  if (cards.length === 0) { currentCardIndex = -1; renderEmptyState(); return; }
-  const now = Date.now();
-  const dueCards = cards.filter(c => (c.due || 0) <= now);
-  currentCardIndex = dueCards.length > 0 ? cards.findIndex(c => c === dueCards[0]) : 0;
-  renderCard();
+function updateUnitFilters() {
+    const units = [...new Set(allCards.map(c => c.unit))].sort((a,b)=>a-b);
+    const container = document.getElementById('unitFilters');
+    container.innerHTML = '<button onclick="filterUnit(\'all\')" class="active" id="ubtn-all">Hepsi</button>';
+    units.forEach(u => {
+        container.innerHTML += `<button onclick="filterUnit('${u}')" id="ubtn-${u}">${u}</button>`;
+    });
 }
 
-function renderEmptyState() {
-  document.getElementById("frontWord").innerHTML = "🎉";
-  document.getElementById("frontCategory").innerHTML = "Tebrikler!";
-  document.getElementById("frontDiff").innerHTML = "";
-  document.getElementById("card").classList.remove("flipped");
-  document.getElementById("actionButtons").innerHTML = "";
-  document.getElementById("modeBadge").innerHTML = "📭 Hiç kart yok. Yeni kart ekleyin!";
-  isFlipped = false;
+function filterUnit(u) {
+    document.querySelectorAll('#unitFilters button').forEach(b => b.classList.remove('active'));
+    document.getElementById('ubtn-' + u).classList.add('active');
+    currentCards = u === 'all' ? [...allCards] : allCards.filter(c => c.unit === u);
+    currentIndex = 0;
+    showNext();
+    toggleSidebar();
 }
 
-function renderCard() {
-  if (currentCardIndex === -1 || currentCardIndex >= deck().cards.length) { renderEmptyState(); return; }
-  const card = deck().cards[currentCardIndex];
-  document.getElementById("frontWord").innerHTML = getQuestion(card);
-  document.getElementById("frontCategory").innerHTML = card.category || "Genel";
-  document.getElementById("frontDiff").innerHTML = getDiffBadge(card.diffLabel);
-  document.getElementById("backWord").innerHTML = getAnswer(card);
-  document.getElementById("backCategory").innerHTML = card.category || "Genel";
-  document.getElementById("backSentence").innerHTML = card.sentence || "";
-  document.getElementById("backDiff").innerHTML = getDiffBadge(card.diffLabel);
-  isFlipped = false;
-  document.getElementById("card").classList.remove("flipped");
-  renderActionButtons();
-  const modeNames = { normal: "🃏 Normal Mod", test: "✍️ Yazma Testi" };
-  const dirNames = { nltr: "🇳🇱 → 🇹🇷", trnl: "🇹🇷 → 🇳🇱" };
-  document.getElementById("modeBadge").innerHTML = `${modeNames[app.mode]} · ${dirNames[app.direction]}`;
+function changeMode() {
+    currentMode = document.getElementById('workMode').value;
+    showNext();
 }
 
-function getDiffBadge(label) {
-  if (!label) return "";
-  const colors = { kolay: '🟢 Kolay', orta: '🟡 Orta', zor: '🔴 Zor' };
-  const bg = label === 'zor' ? '#fef2f2' : label === 'orta' ? '#fff7ed' : '#f0fdf4';
-  const col = label === 'zor' ? '#dc2626' : label === 'orta' ? '#ea580c' : '#16a34a';
-  return `<span style="background:${bg};color:${col};padding:4px 12px;border-radius:20px;font-size:11px">${colors[label]}</span>`;
-}
+function showNext() {
+    if(!currentCards.length) return;
+    if(currentIndex >= currentCards.length) currentIndex = 0;
+    
+    const card = currentCards[currentIndex];
+    const cardEl = document.getElementById('mainCard');
+    document.getElementById('stats').innerText = "Ünite: " + card.unit;
+    cardEl.classList.remove('flipped');
+    
+    // Artikel Renk
+    cardEl.classList.remove('de-article', 'het-article');
+    if(card.word.toLowerCase().startsWith('de ')) cardEl.classList.add('de-article');
+    if(card.word.toLowerCase().startsWith('het ')) cardEl.classList.add('het-article');
 
-function renderActionButtons() {
-  const container = document.getElementById("actionButtons");
-  if (app.mode === "normal") {
-    if (!isFlipped) {
-      container.innerHTML = `<button class="btn btn-primary" onclick="flipCard()">🔄 Kartı Çevir</button><button class="btn btn-secondary" onclick="skipCard()">⏭️ Sonraki</button>`;
+    if(currentMode === 'flashcard') {
+        document.getElementById('cardContainer').style.display = 'block';
+        document.getElementById('testArea').style.display = 'none';
+        document.getElementById('mainCard').querySelector('.card-face').innerHTML = `
+            ${card.grammarType ? `<div class="grammar-badge">${card.grammarType}</div>` : ''}
+            <div class="word-main">${card.word}</div>
+        `;
+        document.getElementById('cardBack').innerHTML = `
+            <div style="font-size:24px; font-weight:bold; color:var(--accent); margin-bottom:15px;">${card.mean}</div>
+            ${card.sentence ? `<div class="info-box"><small>Cümle</small><div>${card.sentence}</div></div>` : ''}
+            ${card.opposite ? `<div class="info-box"><small>Zıt Anlam</small><div>↔️ ${card.opposite}</div></div>` : ''}
+        `;
+        if(!isMuted) speak(card.word);
     } else {
-      container.innerHTML = `<button class="btn btn-again" onclick="answerCard('again')">🔄 Tekrar</button><button class="btn btn-hard" onclick="answerCard('hard')">⚠️ Zor</button><button class="btn btn-good" onclick="answerCard('good')">✅ İyi</button><button class="btn btn-easy" onclick="answerCard('easy')">⭐ Kolay</button>`;
+        startWriting(card);
     }
-  } else {
-    const card = deck().cards[currentCardIndex];
-    testAnswer = getAnswer(card);
-    container.innerHTML = `<input type="text" id="testInput" class="test-input" placeholder="Cevabını yaz..."><button class="btn btn-primary" onclick="checkTestAnswer()">✓ Kontrol Et</button><button class="btn btn-secondary" onclick="skipCard()">⏭️ Sonraki</button>`;
-    setTimeout(() => { const inp = document.getElementById("testInput"); if(inp) inp.focus(); }, 100);
-  }
 }
 
-function flipCard() { isFlipped = true; document.getElementById("card").classList.add("flipped"); renderActionButtons(); }
-function onCardClick() { if (app.mode === "normal" && !isFlipped && currentCardIndex !== -1) flipCard(); }
-function skipCard() { pickCard(); }
+function startWriting(card) {
+    document.getElementById('cardContainer').style.display = 'none';
+    document.getElementById('testArea').style.display = 'block';
+    let hidden = card.word.split('').map(c => (c===' '?' ': (Math.random()>0.5?'_':c))).join('');
+    if(!hidden.includes('_')) hidden = card.word.replace(/[a-z]/i, '_');
 
-function checkTestAnswer() {
-  const input = document.getElementById("testInput");
-  if (!input) return;
-  if (input.value.trim().toLowerCase() === testAnswer.toLowerCase()) answerCard("good");
-  else { alert(`❌ Yanlış! Doğru: ${testAnswer}`); answerCard("again"); }
-}
-
-function answerCard(quality) {
-  if (currentCardIndex === -1) return;
-  const card = deck().cards[currentCardIndex];
-  const isCorrect = (quality === "good" || quality === "easy");
-  
-  const updated = updateSM2({...card}, quality);
-  updated.correct = (card.correct || 0) + (isCorrect ? 1 : 0);
-  updated.wrong = (card.wrong || 0) + (isCorrect ? 0 : 1);
-  deck().cards[currentCardIndex] = updated;
-  
-  const t = today();
-  const s = app.streak;
-  if (s.lastStudy === t) s.todayDone++;
-  else { s.todayDone = 1; const y = new Date(); y.setDate(y.getDate()-1); s.current = (s.lastStudy === y.toISOString().slice(0,10)) ? s.current+1 : 1; s.longest = Math.max(s.longest, s.current); }
-  s.lastStudy = t;
-  s.totalCards++;
-  s.totalCorrect += isCorrect ? 1 : 0;
-  
-  save();
-  updateStats();
-  updateStreakDisplay();
-  pickCard();
+    document.getElementById('testArea').innerHTML = `
+        <div style="color:var(--accent); font-weight:bold; margin-bottom:10px;">${card.mean}</div>
+        <div class="word-display">${hidden}</div>
+        <input type="text" id="wordInput" placeholder="Yazın..." autocomplete="off">
+    `;
+    const input = document.getElementById('wordInput');
+    input.focus();
+    input.addEventListener('input', (e) => {
+        if(normalize(e.target.value) === normalize(card.word)) {
+            e.target.style.borderColor = "var(--easy)";
+            setTimeout(() => handleRate('good'), 600);
+        }
+    });
 }
 
-function updateStats() {
-  let c=0,w=0,d=0,n=Date.now();
-  deck().cards.forEach(card => { c+=card.correct||0; w+=card.wrong||0; if((card.due||0)<=n) d++; });
-  document.getElementById("correctCount").innerHTML = c;
-  document.getElementById("wrongCount").innerHTML = w;
-  document.getElementById("dueCount").innerHTML = d;
+function normalize(t) {
+    return t.toLowerCase().replace(/[ıİ]/g,'i').replace(/[öÖ]/g,'o').replace(/[üÜ]/g,'u').replace(/[şŞ]/g,'s').replace(/[ğĞ]/g,'g').replace(/[çÇ]/g,'c').replace(/ij/g,'y').replace(/[^a-z]/g,'');
 }
 
-function updateStreakDisplay() {
-  const s = app.streak;
-  document.getElementById("streakDisplay").innerHTML = s.current > 0 ? `🔥 ${s.current}` : "💤 0";
-  document.getElementById("goalDisplay").innerHTML = `📅 ${s.todayDone}/${s.dailyGoal}`;
+function speak(t) {
+    if(isMuted) return;
+    window.speechSynthesis.cancel();
+    const m = new SpeechSynthesisUtterance(t);
+    m.lang = 'nl-NL';
+    window.speechSynthesis.speak(m);
 }
 
-function updateDeckList() {
-  const container = document.getElementById("deckList");
-  container.innerHTML = "";
-  app.decks.forEach((d, i) => {
-    const div = document.createElement("div");
-    div.className = "deck-item" + (i === app.currentDeck ? " active" : "");
-    div.innerHTML = `${d.name} (${d.cards.length})`;
-    div.onclick = () => { app.currentDeck = i; save(); updateDeckList(); pickCard(); updateStats(); closeSidebar(); };
-    container.appendChild(div);
-  });
+function handleRate(d) {
+    if(d === 'again') currentCards.push(currentCards[currentIndex]);
+    currentIndex++;
+    showNext();
 }
-
-function createDeck() { const n = prompt("Deste adı:"); if(n && n.trim()) { app.decks.push({ name: n.trim(), cards: [] }); app.currentDeck = app.decks.length-1; save(); updateDeckList(); pickCard(); updateStats(); showToast(`✅ "${n.trim()}" deste oluşturuldu`); } }
-function deleteDeck() { if(app.decks.length<=1) { alert("En az bir deste olmalı!"); return; } if(confirm(`"${deck().name}" silinsin mi?`)) { app.decks.splice(app.currentDeck,1); app.currentDeck=0; save(); updateDeckList(); pickCard(); updateStats(); showToast(`🗑️ "${deck().name}" silindi`); } }
-function changeDirection() { app.direction = document.getElementById("directionSelect").value; save(); pickCard(); }
-function changeMode() { app.mode = document.getElementById("modeSelect").value; save(); pickCard(); }
-function openAddCardModal() { document.getElementById("addCardModal").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
-function closeAddCardModal() { document.getElementById("addCardModal").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); document.getElementById("newWord").value = ""; document.getElementById("newMeaning").value = ""; document.getElementById("newSentence").value = ""; }
-function addCard() {
-  const w = document.getElementById("newWord").value.trim();
-  const m = document.getElementById("newMeaning").value.trim();
-  if(!w || !m) { alert("Kelime ve anlam zorunlu!"); return; }
-  deck().cards.push({ word: w, meaning: m, sentence: document.getElementById("newSentence").value.trim(), category: document.getElementById("newCategory").value, diffLabel: document.getElementById("newDiff").value, correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due: Date.now(), history:[] });
-  save(); updateDeckList(); pickCard(); updateStats(); closeAddCardModal(); showToast(`✅ "${w}" eklendi`);
-}
-function importCSV(input) {
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => { let c=0; e.target.result.split(/\r?\n/).forEach((line,i)=>{ if(i===0) return; const p=line.split(";"); if(p.length>=2 && p[0].trim() && p[1].trim()) { deck().cards.push({ word:p[0].trim(), meaning:p[1].trim(), sentence:p[2]?.trim()||"", category:p[4]?.trim()||"Genel", diffLabel:p[5]?.trim()||"", correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due:Date.now(), history:[] }); c++; } }); save(); updateDeckList(); pickCard(); updateStats(); showToast(`✅ ${c} kart yüklendi!`); };
-  reader.readAsText(file,"UTF-8"); input.value="";
-}
-function exportCSV() {
-  let csv = "kelime;anlam;cümle;zıt anlam;kategori;etiket;grammar_type;unite\n";
-  deck().cards.forEach(c => { csv += `${c.word};${c.meaning};${c.sentence||""};;${c.category||"Genel"};${c.diffLabel||""};;\n`; });
-  const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `${deck().name}_${new Date().toISOString().slice(0,10)}.csv`;
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast("📤 CSV indiriliyor");
-}
-function backupData() {
-  const data = JSON.stringify(app);
-  const blob = new Blob([data], {type: "application/json"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `linguaprime_yedek_${new Date().toISOString().slice(0,19).replace(/:/g, "-")}.json`;
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast("💾 Yedek alındı");
-}
-function restoreData(input) {
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      app.decks = data.decks || [{ name: "Genel", cards: [] }];
-      app.currentDeck = data.currentDeck || 0;
-      app.direction = data.direction || "nltr";
-      app.mode = data.mode || "normal";
-      app.streak = data.streak || { current:0, longest:0, lastStudy:"", todayDone:0, dailyGoal:20, totalCards:0, totalCorrect:0 };
-      save();
-      updateUI();
-      pickCard();
-      updateStats();
-      updateStreakDisplay();
-      showToast("🔄 Yedek başarıyla geri yüklendi!");
-    } catch(err) { alert("Geçersiz yedek dosyası!"); }
-  };
-  reader.readAsText(file);
-  input.value = "";
-}
-function resetAllData() {
-  if(confirm("⚠️ TÜM VERİLER KALICI OLARAK SİLİNECEK! Devam etmek istiyor musunuz?")) {
-    localStorage.removeItem("linguaPrime");
-    app = { decks: [{ name: "Genel", cards: [] }], currentDeck: 0, direction: "nltr", mode: "normal", streak: { current:0, longest:0, lastStudy:"", todayDone:0, dailyGoal:20, totalCards:0, totalCorrect:0 } };
-    addSampleCards();
-    updateUI();
-    pickCard();
-    updateStats();
-    updateStreakDisplay();
-    showToast("🗑️ Tüm veriler sıfırlandı");
-  }
-}
-function openAnalysis() {
-  let c=0,w=0;
-  deck().cards.forEach(card => { c+=card.correct||0; w+=card.wrong||0; });
-  const tot=c+w, pct=tot?Math.round(c/tot*100):0;
-  document.getElementById("analysisContent").innerHTML = `<div style="text-align:center"><div style="font-size:48px;color:#16a34a;font-weight:bold">${c}</div><div>✅ Doğru</div><div style="font-size:48px;color:#dc2626;font-weight:bold;margin-top:16px">${w}</div><div>❌ Yanlış</div><div style="font-size:32px;font-weight:bold;margin-top:20px">📊 ${pct}%</div><div>Başarı</div><div style="margin-top:20px;font-size:12px;color:#666">📚 Toplam ${deck().cards.length} kart</div></div>`;
-  document.getElementById("analysisModal").classList.add("open"); document.getElementById("overlay").classList.add("open");
-}
-function closeAnalysis() { document.getElementById("analysisModal").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
-function openManager() {
-  const cards = deck().cards;
-  if(cards.length===0) { document.getElementById("managerContent").innerHTML = "<p>Henüz kart yok</p>"; }
-  else { let html = `<table style="width:100%;border-collapse:collapse"><thead><tr style="border-bottom:2px solid #ddd"><th>Kelime</th><th>Anlam</th><th>Kategori</th><th>Doğru</th><th>Yanlış</th><th></th></tr></thead><tbody>`;
-    cards.forEach((c,i)=>{ html += `<tr style="border-bottom:1px solid #eee"><td style="padding:8px">${c.word}</td><td style="padding:8px">${c.meaning}</td><td style="padding:8px">${c.category||"Genel"}</td><td style="padding:8px;color:#16a34a">${c.correct||0}</td><td style="padding:8px;color:#dc2626">${c.wrong||0}</td><td style="padding:8px"><button onclick="deleteCardFromManager(${i})" style="background:#dc2626;color:white;border:none;padding:6px 12px;border-radius:8px">🗑 Sil</button></td></tr>`; });
-    html += `</tbody></table>`; document.getElementById("managerContent").innerHTML = html;
-  }
-  document.getElementById("managerModal").classList.add("open"); document.getElementById("overlay").classList.add("open");
-}
-function closeManager() { document.getElementById("managerModal").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
-function deleteCardFromManager(i) { if(confirm("Silinsin mi?")) { deck().cards.splice(i,1); save(); updateDeckList(); pickCard(); updateStats(); openManager(); showToast("🗑️ Kart silindi"); } }
-function openSidebar() { document.getElementById("sidebar").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
-function closeSidebar() { document.getElementById("sidebar").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
-function toggleTheme() { document.body.classList.toggle("dark"); localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light"); }
-function updateUI() { document.getElementById("directionSelect").value = app.direction; document.getElementById("modeSelect").value = app.mode; updateDeckList(); }
-
-if(localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
-load();
 </script>
 </body>
 </html>
