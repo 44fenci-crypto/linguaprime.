@@ -113,8 +113,8 @@ body{
 .deck-row button{flex:1;padding:6px;border-radius:8px;border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:background .15s}
 .deck-row button:hover{background:rgba(255,255,255,.12)}
 .deck-row button.danger:hover{background:#dc2626}
-.deck-toggle-btn{justify-content:center;gap:6px;color:#4f46e5;border-color:rgba(79,70,229,.2);background:rgba(79,70,229,.08);}
-.deck-toggle-btn:hover{background:rgba(79,70,229,.12);}
+.deck-row .deck-toggle-btn{flex:1;padding:6px;border-radius:8px;border:none;background:rgba(79,70,229,.08);color:#4f46e5;font-size:11px;font-weight:600;cursor:pointer;transition:background .15s}
+.deck-row .deck-toggle-btn:hover{background:rgba(79,70,229,.12);}
 
 /* Select */
 .sb-select{
@@ -125,7 +125,10 @@ body{
 
 /* Filter / Category */
 .filter-section{display:flex;flex-direction:column;gap:4px}
+.filter-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-right:4px;cursor:pointer}
 .filter-sublabel{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.22);padding:0 4px}
+.section-toggle{font-size:12px;color:rgba(255,255,255,.55);transition:transform .2s ease}
+.filter-section-body.closed{display:none}
 .cat-list{display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto}
 .cat-item{
   display:flex;align-items:center;justify-content:space-between;
@@ -167,6 +170,7 @@ body{
   padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06);
   flex-shrink:0;flex-wrap:nowrap;
   background:rgba(255,255,255,.3);backdrop-filter:blur(4px);
+  z-index:101;position:relative;
 }
 .menu-btn{
   width:36px;height:36px;border-radius:10px;border:none;
@@ -175,6 +179,14 @@ body{
   flex-shrink:0;transition:background .15s;
 }
 .menu-btn:active{background:rgba(0,0,0,.12)}
+.menu-btn-fixed{
+  position:fixed;top:12px;left:16px;z-index:102;
+  width:36px;height:36px;border-radius:10px;border:none;
+  background:rgba(0,0,0,.07);color:#333;cursor:pointer;
+  font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.menu-btn-fixed:active{background:rgba(0,0,0,.12)}
 .top-left{display:flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden}
 .top-right{display:flex;align-items:center;gap:5px;flex-shrink:0}
 .info-label{font-size:11px;font-weight:600;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
@@ -234,6 +246,10 @@ body{
 .card.accent-separable .card-face::before{background:linear-gradient(90deg,#d9f99d,#86efac);}
 .card.accent-grammar .card-face::before{background:linear-gradient(90deg,#fbcfe8,#f9a8d4);}
 .card.accent-unit .card-face::before{background:linear-gradient(90deg,#facc15,#fde047);}
+.card.accent-de .card-face{background:linear-gradient(135deg,#dbeafe,#93c5fd);color:#0f172a;border-color:rgba(59,130,246,.2);}
+.card.accent-de .card-face::before{background:linear-gradient(90deg,#93c5fd,#3b82f6);}
+.card.accent-het .card-face{background:linear-gradient(135deg,#ede9fe,#a78bfa);color:#1f2937;border-color:rgba(139,92,246,.2);}
+.card.accent-het .card-face::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6);}
 .card.accent-default .card-face::before{background:linear-gradient(90deg,#d1d5db,#e5e7eb);}
 .card-back-face{
   position:absolute;top:0;left:0;right:0;
@@ -275,16 +291,17 @@ body{
 }
 
 .card-sentence{
-  margin-top:10px;padding:8px 12px;border-radius:12px;
-  background:#f8f9fa;font-size:12px;font-style:italic;color:#666;
-  text-align:left;width:100%;
+  margin-top:14px;padding:12px 14px;border-radius:14px;
+  background:#f8f9fa;font-size:13px;line-height:1.6;font-style:italic;color:#333;
+  text-align:left;width:100%;word-break:break-word;
 }
 .card-antonym{
-  position:absolute;bottom:10px;left:14px;
-  font-size:11px;color:#aaa;font-weight:500;
-  transition:opacity .5s,transform .5s;
+  margin-top:12px;padding:10px 14px;border-radius:14px;
+  background:rgba(59,130,246,.08);color:#1e3a8a;font-weight:600;
+  font-size:13px;line-height:1.5;display:block;width:100%;word-break:break-word;
+  transition:opacity .4s,transform .4s;
 }
-.card-antonym.hidden{opacity:0;transform:translateY(4px)}
+.card-antonym.hidden{opacity:0;transform:translateY(6px)}
 .card-antonym.visible{opacity:1;transform:translateY(0)}
 .card-flip-hint{position:absolute;bottom:8px;right:12px;font-size:10px;color:#ccc}
 
@@ -527,7 +544,7 @@ body.dark .goal-label{color:#555}
 body.dark .best-badge{background:rgba(255,255,255,.05);color:#555}
 body.dark .set-goal-btn{color:#555}
 body.dark .top-bar{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.06)}
-body.dark .menu-btn{background:rgba(255,255,255,.06);color:#ccc}
+body.dark .menu-btn-fixed{background:rgba(255,255,255,.06);color:#ccc}
 body.dark .info-label{color:#555}
 body.dark .pill{background:#2a2a2e;border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
 body.dark .pill.due-active{border-color:rgba(99,102,241,.5);color:#818cf8}
@@ -590,7 +607,6 @@ body.dark .week-day{color:#444}.week-day.today{color:#818cf8}
 body.dark .week-total{color:#333}
 body.dark .chart-legend .legend-item{color:#555}
 @media(min-width:768px){
-  .sidebar-wrap{position:relative;transform:none!important;height:auto}
   .sidebar-backdrop{display:none!important}
   .best-badge{display:block}
   .card-area{padding:20px 32px}
@@ -616,6 +632,8 @@ body.dark .chart-legend .legend-item{color:#555}
 </div>
 
 <div class="layout">
+  <!-- HAMBURGER BUTTON -->
+  <button class="menu-btn-fixed" onclick="toggleSidebar()">☰</button>
   <!-- SIDEBAR BACKDROP (mobile) -->
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
@@ -624,7 +642,6 @@ body.dark .chart-legend .legend-item{color:#555}
     <div class="sidebar">
       <div class="sb-header">
         <span class="sb-logo">LinguaPrime</span>
-        <button class="sb-close" onclick="closeSidebar()">✕</button>
       </div>
       <div class="sb-body">
 
@@ -635,7 +652,7 @@ body.dark .chart-legend .legend-item{color:#555}
         </button>
         <div class="acc-body open" id="acc-body-decks">
           <div class="deck-list" id="deckList"></div>
-          <div class="deck-row">
+          <div class="deck-row" id="deckControls">
             <button onclick="createDeck()">➕ Yeni</button>
             <button class="danger" onclick="deleteDeck()">🗑 Sil</button>
           </div>
@@ -660,6 +677,7 @@ body.dark .chart-legend .legend-item{color:#555}
             <option value="article">🧩 de/het Tahmini</option>
           </select>
           <button class="sb-btn" id="ttsToggleBtn" onclick="toggleTTS()">🔊 Sesli Okuma Açık</button>
+          <button class="sb-btn" id="continuousToggleBtn" onclick="toggleContinuousMode()">🔄 Sürekli Tekrar Açık</button>
         </div>
         <hr class="sb-divider">
 
@@ -678,17 +696,32 @@ body.dark .chart-legend .legend-item{color:#555}
             </div>
           </div>
           <div class="filter-section">
+          <div class="filter-section-head" onclick="toggleFilterSection('catSection')">
             <div class="filter-sublabel">Kategoriler</div>
+            <span class="section-toggle" id="catSectionToggle">▾</span>
+          </div>
+          <div class="filter-section-body" id="catSection">
             <div class="cat-list" id="catList"></div>
           </div>
-          <div class="filter-section">
+        </div>
+        <div class="filter-section">
+          <div class="filter-section-head" onclick="toggleFilterSection('unitSection')">
             <div class="filter-sublabel">Tema / Unite</div>
+            <span class="section-toggle" id="unitSectionToggle">▾</span>
+          </div>
+          <div class="filter-section-body" id="unitSection">
             <div class="cat-list" id="unitList"></div>
           </div>
-          <div class="filter-section">
+        </div>
+        <div class="filter-section">
+          <div class="filter-section-head" onclick="toggleFilterSection('grammarSection')">
             <div class="filter-sublabel">Dilbilgisi Türü</div>
+            <span class="section-toggle" id="grammarSectionToggle">▾</span>
+          </div>
+          <div class="filter-section-body" id="grammarSection">
             <div class="cat-list" id="grammarTypeList"></div>
           </div>
+        </div>
           <button class="clear-filter" id="clearFilterBtn" onclick="clearFilter()" style="display:none">✕ Filtreyi temizle</button>
         </div>
         <hr class="sb-divider">
@@ -702,7 +735,7 @@ body.dark .chart-legend .legend-item{color:#555}
           <button class="sb-btn primary" onclick="openAddCard()">✍️ Kart Ekle</button>
           <input type="file" id="csvInput" accept=".csv" style="display:none" onchange="handleCSV(event)">
           <button class="sb-btn" onclick="document.getElementById('csvInput').click()">📂 CSV Yükle</button>
-          <div class="csv-hint">kelime ; anlam ; cümle ; zıt anlam ; kategori ; etiket ; grammar_type ; unite</div>
+          <div class="csv-hint">kelime ; anlam ; cümle ; zıt kelime ; kategori ; seviye ; grammar_type ; unite</div>
         </div>
         <hr class="sb-divider">
 
@@ -715,6 +748,9 @@ body.dark .chart-legend .legend-item{color:#555}
           <button class="sb-btn" onclick="openAnalysis()">📊 Analiz</button>
           <button class="sb-btn" onclick="openManager()">📋 Kart Yönetimi</button>
           <button class="sb-btn" id="badgesBtn" onclick="openBadges()">🏆 Rozetler</button>
+          <button class="sb-btn" onclick="exportBackup()">💾 Yedekle</button>
+          <input type="file" id="backupInput" accept=".json" style="display:none" onchange="handleBackupImport(event)">
+          <button class="sb-btn" onclick="document.getElementById('backupInput').click()">📥 Yedek Yükle</button>
           <button class="sb-btn" onclick="toggleTheme()">
             <span id="themeIcon">🌙</span> <span id="themeLabel">Koyu Tema</span>
           </button>
@@ -728,7 +764,6 @@ body.dark .chart-legend .legend-item{color:#555}
   <div class="main">
     <!-- TOP BAR -->
     <div class="top-bar">
-      <button class="menu-btn" onclick="openSidebar()">☰</button>
       <div class="top-left">
         <span class="info-label" id="infoLabel"></span>
         <div class="session-mini" id="sessionMini" style="display:none">
@@ -949,8 +984,8 @@ function defStreak(){return{current:0,longest:0,lastStudy:'',todayDone:0,dailyGo
 function defFilter(){return{categories:[],diffLabels:[],units:[],grammarTypes:[]};}
 
 function escapeHtml(str){return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-function formatDutchArticle(text){return String(text).replace(/(^|\s)(de|het)(?=\s)/gi,'$1<span class="article-token">$2</span>');}
-function formatByLang(text,lang){return lang==='nl'?formatDutchArticle(escapeHtml(text)):escapeHtml(text);}
+function formatDutchArticle(text){return String(text).trim();}
+function formatByLang(text,lang){return escapeHtml(text);}
 function parseDutchArticle(text){
   const raw=String(text||'').trim();
   const match=raw.match(/^(de|het)\s+(.+)$/i);
@@ -1002,10 +1037,11 @@ let app=(()=>{
       direction:s.direction||'nltr',
       mode:s.mode||'normal',
       ttsEnabled:ttsPref==='off'?false:(s.ttsEnabled!==false&&s.ttsEnabled!=='off'),
+      continuousMode:s.continuousMode||false,
       streak:{...defStreak(),...(s.streak||{})},
       filter:{...defFilter(),...(s.filter||{})},
     };
-  }catch{return{decks:[{name:'Genel',cards:[]}],currentDeck:0,direction:'nltr',mode:'normal',ttsEnabled:true,streak:defStreak(),filter:defFilter()};}
+  }catch{return{decks:[{name:'Genel',cards:[]}],currentDeck:0,direction:'nltr',mode:'normal',ttsEnabled:true,continuousMode:false,streak:defStreak(),filter:defFilter()};}
 })();
 
 function save(){localStorage.setItem('lp_app',JSON.stringify(app));}
@@ -1081,6 +1117,7 @@ window.onload=()=>{
   document.getElementById('modeSelect').value=app.mode;
   if(localStorage.getItem('lp_theme')==='dark')applyDark(true);
   updateTTSToggle();
+  updateContinuousToggle();
   initCardSwipe();
   updateDeckList();
   updateCatList();
@@ -1099,6 +1136,17 @@ function openSidebar(){
 function closeSidebar(){
   document.getElementById('sidebarWrap').classList.remove('open');
   document.getElementById('sidebarBackdrop').classList.remove('open');
+}
+function toggleSidebar(){
+  const wrap=document.getElementById('sidebarWrap');
+  const backdrop=document.getElementById('sidebarBackdrop');
+  if(wrap.classList.contains('open')){
+    wrap.classList.remove('open');
+    backdrop.classList.remove('open');
+  } else {
+    wrap.classList.add('open');
+    backdrop.classList.add('open');
+  }
 }
 function toggleAcc(id){
   const body=document.getElementById('acc-body-'+id);
@@ -1119,6 +1167,9 @@ function applyDark(on){
 function toggleTheme(){const on=!document.body.classList.contains('dark');applyDark(on);localStorage.setItem('lp_theme',on?'dark':'light');}
 function updateTTSToggle(){const btn=document.getElementById('ttsToggleBtn');if(btn){btn.textContent=app.ttsEnabled?'🔊 Sesli Okuma Açık':'🔈 Sesli Okuma Kapalı';}}
 function toggleTTS(){app.ttsEnabled=!app.ttsEnabled;localStorage.setItem('lp_tts',app.ttsEnabled?'on':'off');updateTTSToggle();showToast(app.ttsEnabled?'✅ Sesli okuma açık':'🔇 Sesli okuma kapalı');}
+function toggleContinuousMode(){app.continuousMode=!app.continuousMode;save();updateContinuousToggle();pickCard();showToast(app.continuousMode?'🔄 Sürekli tekrar açık':'⏰ SM-2 tekrar açık');}
+function updateTTSToggle(){const btn=document.getElementById('ttsToggleBtn');if(btn){btn.textContent=app.ttsEnabled?'🔊 Sesli Okuma Açık':'🔈 Sesli Okuma Kapalı';}}
+function updateContinuousToggle(){const btn=document.getElementById('continuousToggleBtn');if(btn){btn.textContent=app.continuousMode?'🔄 Sürekli Tekrar Açık':'⏰ SM-2 Tekrar Açık';}}
 function initCardSwipe(){const card=document.getElementById('card');if(!card)return;card.addEventListener('touchstart',e=>{const t=e.touches[0];touchStartX=t.clientX;touchStartY=t.clientY;},{passive:true});card.addEventListener('touchend',e=>{const t=e.changedTouches[0];const dx=t.clientX-touchStartX;const dy=t.clientY-touchStartY;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){if(app.mode==='normal'){if(!flipped){handleCardClick();return;} if(dx>0)answer('good'); else answer('again');} else if(app.mode==='test'){if(dx>0){const inp=document.getElementById('testInp');if(inp)checkTest();} else answer('again');} else if(app.mode==='hint'){if(dx>0)answer('good');else answer('again');}}},{passive:true});}
 
 // ═══════════════════════════════════════════════════
@@ -1126,6 +1177,13 @@ function initCardSwipe(){const card=document.getElementById('card');if(!card)ret
 // ═══════════════════════════════════════════════════
 function updateDeckList(){
   const list=document.getElementById('deckList');list.innerHTML='';
+  const controls=document.getElementById('deckControls');
+  if(controls){
+    // Toggle butonlarını temizle
+    const toggles=controls.querySelectorAll('.deck-toggle-btn');
+    toggles.forEach(t=>t.remove());
+  }
+
   if(app.decks.length===0){
     list.innerHTML='<div style="font-size:12px;opacity:.55;padding:8px 0">Henüz deste yok</div>';
     return;
@@ -1136,11 +1194,15 @@ function updateDeckList(){
     b.className='deck-item active';
     b.innerHTML=`<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.name}</span><span class="deck-item-count">(${d.cards.length})</span>`;
     list.appendChild(b);
-    const toggle=document.createElement('button');
-    toggle.className='deck-item deck-toggle-btn';
-    toggle.innerHTML=`Tüm desteleri göster <span class="deck-item-count">(${app.decks.length})</span>`;
-    toggle.onclick=()=>{deckShowAll=true;updateDeckList();};
-    list.appendChild(toggle);
+
+    // Toggle butonunu controls'a ekle
+    if(controls){
+      const toggle=document.createElement('button');
+      toggle.className='deck-toggle-btn';
+      toggle.innerHTML=`Tümünü göster (${app.decks.length})`;
+      toggle.onclick=()=>{deckShowAll=true;updateDeckList();};
+      controls.appendChild(toggle);
+    }
     return;
   }
   app.decks.forEach((d,i)=>{
@@ -1151,12 +1213,14 @@ function updateDeckList(){
     b.ondblclick=()=>{const n=prompt('Yeni isim:',d.name);if(n?.trim()){app.decks[i].name=n.trim();save();updateDeckList();}};
     list.appendChild(b);
   });
-  if(app.decks.length>1){
+
+  // Toggle butonunu controls'a ekle
+  if(app.decks.length>1 && controls){
     const toggle=document.createElement('button');
-    toggle.className='deck-item deck-toggle-btn';
-    toggle.innerHTML=`Dar görünüm`;
+    toggle.className='deck-toggle-btn';
+    toggle.innerHTML='Dar görünüm';
     toggle.onclick=()=>{deckShowAll=false;updateDeckList();};
-    list.appendChild(toggle);
+    controls.appendChild(toggle);
   }
 }
 function createDeck(){const n=prompt('Deste adı:');if(!n?.trim())return;app.decks.push({name:n.trim(),cards:[]});app.currentDeck=app.decks.length-1;deckShowAll=false;save();updateDeckList();updateCatList();pickCard();updateStats();showToast('✅ "'+n.trim()+'" oluşturuldu');}
@@ -1183,7 +1247,7 @@ function updateCatList(){
   // "Tümü" butonu
   const allBtn=document.createElement('button');
   allBtn.className='cat-item'+(app.filter.categories.length===0&&app.filter.diffLabels.length===0&&app.filter.units.length===0&&app.filter.grammarTypes.length===0?' active':'');
-  allBtn.innerHTML=`<span>📚 Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
+  allBtn.innerHTML=`<span>📚 Kategori Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
   allBtn.onclick=()=>clearFilter();
   list.appendChild(allBtn);
 
@@ -1211,7 +1275,7 @@ function updateUnitList(){
   const list=document.getElementById('unitList');list.innerHTML='';
   const allBtn=document.createElement('button');
   allBtn.className='cat-item'+(app.filter.units.length===0?' active':'');
-  allBtn.innerHTML=`<span>📌 Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
+  allBtn.innerHTML=`<span>📌 Unite Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
   allBtn.onclick=()=>{app.filter.units=[];save();pickCard();updateStats();updateUnitList();updateFilterUI();};
   list.appendChild(allBtn);
   usedUnits.forEach(unit=>{
@@ -1233,7 +1297,7 @@ function updateGrammarTypeList(){
   const list=document.getElementById('grammarTypeList');list.innerHTML='';
   const allBtn=document.createElement('button');
   allBtn.className='cat-item'+(app.filter.grammarTypes.length===0?' active':'');
-  allBtn.innerHTML=`<span>📌 Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
+  allBtn.innerHTML=`<span>📌 Dilbilgisi Tümü</span><span class="cat-count">${deck().cards.length}</span>`;
   allBtn.onclick=()=>{app.filter.grammarTypes=[];save();pickCard();updateStats();updateGrammarTypeList();updateFilterUI();};
   list.appendChild(allBtn);
   usedTypes.forEach(type=>{
@@ -1248,6 +1312,14 @@ function updateGrammarTypeList(){
   if(usedTypes.length===0){
     list.innerHTML='<div style="font-size:10px;color:rgba(255,255,255,.2);padding:6px 8px">Henüz dilbilgisi türü yok</div>';
   }
+}
+
+function toggleFilterSection(id){
+  const body=document.getElementById(id);
+  const toggle=document.getElementById(id.replace('Section','SectionToggle'));
+  if(!body||!toggle)return;
+  const closed=body.classList.toggle('closed');
+  toggle.style.transform=closed?'rotate(-90deg)':'rotate(0deg)';
 }
 
 function toggleUnitFilter(unit){
@@ -1325,8 +1397,26 @@ function pickCard(){
   const filtered=getFilteredCards();
   if(!filtered.length){currentRealIdx=null;renderCard();updateFilterUI();return;}
   const now=Date.now();
-  const due=filtered.filter(c=>c.due<=now).sort((a,b)=>a.due-b.due);
-  const chosen=due.length?due[0]:[...filtered].sort((a,b)=>a.due-b.due)[0];
+
+  let chosen;
+  if(app.continuousMode){
+    // Sürekli tekrar modu: tüm kartları sırayla göster
+    if(currentRealIdx===null||currentRealIdx<0){
+      chosen=filtered[0];
+    }else{
+      const currentInFiltered=filtered.findIndex(c=>c===deck().cards[currentRealIdx]);
+      const nextIdx=(currentInFiltered+1)%filtered.length;
+      if(currentInFiltered===filtered.length-1 && nextIdx===0){
+        resetSessionCounters();
+      }
+      chosen=filtered[nextIdx];
+    }
+  }else{
+    // SM-2 modu: sadece due olan kartları göster
+    const due=filtered.filter(c=>c.due<=now).sort((a,b)=>a.due-b.due);
+    chosen=due.length?due[0]:[...filtered].sort((a,b)=>a.due-b.due)[0];
+  }
+
   // Gerçek index bul
   currentRealIdx=deck().cards.findIndex(c=>c===chosen||
     (c.word===chosen.word&&c.meaning===chosen.meaning&&c.due===chosen.due));
@@ -1347,8 +1437,13 @@ let flipped=false;
 function renderCard(){
   flipped=false;
   const cardEl=document.getElementById('card');
-  cardEl.classList.remove('flipped','shake','pop','accent-irregular','accent-tense','accent-modal','accent-separable','accent-grammar','accent-unit','accent-default');
-  clearTimeout(antonymTimer);
+  // Kart geçişinde kısa süreli arka yüz görünümünü önlemek için
+  cardEl.style.transition='none';
+  cardEl.classList.remove('flipped','shake','pop','accent-irregular','accent-tense','accent-modal','accent-separable','accent-grammar','accent-unit','accent-article','accent-default');
+  // Force reflow
+  void cardEl.offsetHeight;
+  // Transition'ı geri aç
+  setTimeout(()=>{cardEl.style.transition='';},10);
 
   const front=document.getElementById('cardFront');
   const back=document.getElementById('cardBack');
@@ -1366,9 +1461,9 @@ function renderCard(){
   }
 
   const card=deck().cards[currentRealIdx];
-  const accentClass=getCardAccent(card);
-  cardEl.classList.add(accentClass);
   const articleInfo=parseDutchArticle(card.word);
+  const accentClass=(app.mode!=='article'&&articleInfo.article)?'accent-'+articleInfo.article:getCardAccent(card);
+  cardEl.classList.add(accentClass);
   const q=getQ(card),a=getA(card);
   const qForDisplay=(app.mode==='article'&&qLang()==='nl'&&articleInfo.article)?articleInfo.noun:q;
   const qHtml=formatByLang(qForDisplay,qLang());
@@ -1405,8 +1500,8 @@ function renderCard(){
       <div class="card-word">${aHtml}</div>
       ${tts?`<button class="spk-btn" onclick="event.stopPropagation();speak('${a.replace(/'/g,"\\'")}','${aLang()}')">🔊</button>`:''}
     </div>
-    ${card.sentence?`<div class="card-sentence">💬 ${card.sentence}</div>`:''}
-    ${card.antonym?`<div class="card-antonym hidden" id="antonymEl">↔ Zıt: <b>${card.antonym}</b></div>`:''}
+    ${card.sentence?`<div class="card-sentence">💬 ${escapeHtml(card.sentence)}</div>`:''}
+    ${card.antonym?`<div class="card-antonym hidden" id="antonymEl">↔ Zıt anlam: <strong>${escapeHtml(card.antonym)}</strong></div>`:''}
     ${app.mode==='normal'?'<div class="card-flip-hint">nasıl gitti?</div>':''}`;
 
   if(app.mode==='test')renderTest(a);
@@ -1888,6 +1983,43 @@ function exportCSV(){
   const a=document.createElement('a');a.href=url;a.download=deck().name+'.csv';a.click();
   URL.revokeObjectURL(url);showToast('✅ CSV indirildi!');
 }
+function exportBackup(){
+  const payload={...app,streak:{...app.streak},filter:{...app.filter},decks:app.decks.map(d=>({name:d.name,cards:d.cards.map(c=>({
+    ...c,history:c.history||[]
+  }))}))};
+  const json=JSON.stringify(payload,null,2);
+  const blob=new Blob([json],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;
+  a.download='linguaprime-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('💾 Yedek indirildi!');
+}
+function handleBackupImport(event){
+  const file=event.target.files[0];if(!file)return;event.target.value='';
+  if(!confirm('Yedeği yükleyince mevcut veriler kaybolacak. Devam edilsin mi?'))return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      app={
+        decks:(data.decks||[{name:'Genel',cards:[]}]).map(d=>({...d,cards:(d.cards||[]).map(migrateCard)})),
+        currentDeck:typeof data.currentDeck==='number'?data.currentDeck:0,
+        direction:data.direction||'nltr',
+        mode:data.mode||'normal',
+        ttsEnabled:typeof data.ttsEnabled==='boolean'?data.ttsEnabled:true,
+        continuousMode:!!data.continuousMode,
+        streak:{...defStreak(),...(data.streak||{})},
+        filter:{...defFilter(),...(data.filter||{})}
+      };
+      save();
+      updateDeckList();updateCatList();updateUnitList();updateGrammarTypeList();updateStats();renderCard();
+      showToast('✅ Yedek yüklendi!');
+    }catch(err){showToast('❌ Geçersiz yedek dosyası','err');}
+  };
+  reader.readAsText(file,'UTF-8');
+}
 
 // ═══════════════════════════════════════════════════
 //  BADGES
@@ -1940,12 +2072,17 @@ function openSessionSummary(){
   document.getElementById('sessionOverlay').classList.add('open');
 }
 function closeSession(){document.getElementById('sessionOverlay').classList.remove('open');}
+function resetSessionCounters(){
+  sesCorrect=0;sesWrong=0;sesTimes=[];sesStart=Date.now();
+  const c=document.getElementById('sesC');
+  const w=document.getElementById('sesW');
+  const mini=document.getElementById('sessionMini');
+  if(c) c.textContent='✓0';
+  if(w) w.textContent='✗0';
+  if(mini) mini.style.display='none';
+}
 function restartSession(){
-  closeSession();sesCorrect=0;sesWrong=0;sesTimes=[];sesStart=Date.now();
-  document.getElementById('sesC').textContent='✓0';
-  document.getElementById('sesW').textContent='✗0';
-  document.getElementById('sessionMini').style.display='none';
-  pickCard();
+  closeSession();resetSessionCounters();pickCard();
 }
 </script>
 </body>
