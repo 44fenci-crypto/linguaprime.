@@ -113,6 +113,8 @@ body{
 .deck-row button{flex:1;padding:6px;border-radius:8px;border:none;background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;cursor:pointer;transition:background .15s}
 .deck-row button:hover{background:rgba(255,255,255,.12)}
 .deck-row button.danger:hover{background:#dc2626}
+.deck-toggle-btn{justify-content:center;gap:6px;color:#4f46e5;border-color:rgba(79,70,229,.2);background:rgba(79,70,229,.08);}
+.deck-toggle-btn:hover{background:rgba(79,70,229,.12);}
 
 /* Select */
 .sb-select{
@@ -315,13 +317,14 @@ body{
 .mcq-next{margin-top:4px;padding:8px 20px;border-radius:12px;border:none;background:#4f46e5;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
 
 /* ── ACTION BUTTONS ── */
-.action-area{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:520px}
+.action-area{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:520px;padding:0 8px}
 
-.flip-row{display:flex;gap:8px;width:100%}
+.flip-row{display:grid;grid-template-columns:1fr 140px;gap:8px;width:100%}
 .flip-btn{
-  flex:1;padding:12px;border-radius:18px;border:1px solid rgba(0,0,0,.08);
-  background:#fff;color:#333;font-size:13px;font-weight:600;cursor:pointer;
-  transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.06);
+  flex:1;padding:12px;border-radius:16px;border:1px solid rgba(0,0,0,.12);
+  background:#fff;color:#111;font-size:13px;font-weight:700;cursor:pointer;
+  transition:transform .15s,box-shadow .15s,background .15s;
+  box-shadow:0 6px 18px rgba(15,23,42,.08);
 }
 .flip-btn:active{transform:scale(.96);background:#f5f5f8}
 .next-btn-sm{
@@ -654,6 +657,7 @@ body.dark .chart-legend .legend-item{color:#555}
             <option value="test">✍️ Yazmalı Test</option>
             <option value="hint">💡 Harf Doldurma</option>
             <option value="mcq">🔘 Çoktan Seçmeli</option>
+            <option value="article">🧩 de/het Tahmini</option>
           </select>
           <button class="sb-btn" id="ttsToggleBtn" onclick="toggleTTS()">🔊 Sesli Okuma Açık</button>
         </div>
@@ -947,6 +951,11 @@ function defFilter(){return{categories:[],diffLabels:[],units:[],grammarTypes:[]
 function escapeHtml(str){return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function formatDutchArticle(text){return String(text).replace(/(^|\s)(de|het)(?=\s)/gi,'$1<span class="article-token">$2</span>');}
 function formatByLang(text,lang){return lang==='nl'?formatDutchArticle(escapeHtml(text)):escapeHtml(text);}
+function parseDutchArticle(text){
+  const raw=String(text||'').trim();
+  const match=raw.match(/^(de|het)\s+(.+)$/i);
+  return match?{article:match[1].toLowerCase(),noun:match[2].trim()||raw}: {article:null,noun:raw};
+}
 
 function sanitizeClassName(value){return String(value||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
 function getCardAccent(card){
@@ -1012,6 +1021,7 @@ let antonymTimer=null;
 let addDiffLabel='';
 let managerSort='word';
 let editingCell=null;
+let deckShowAll=false;
 
 // ═══════════════════════════════════════════════════
 //  TIMERS
@@ -1116,6 +1126,23 @@ function initCardSwipe(){const card=document.getElementById('card');if(!card)ret
 // ═══════════════════════════════════════════════════
 function updateDeckList(){
   const list=document.getElementById('deckList');list.innerHTML='';
+  if(app.decks.length===0){
+    list.innerHTML='<div style="font-size:12px;opacity:.55;padding:8px 0">Henüz deste yok</div>';
+    return;
+  }
+  if(!deckShowAll && app.decks.length>1){
+    const d=app.decks[app.currentDeck];
+    const b=document.createElement('button');
+    b.className='deck-item active';
+    b.innerHTML=`<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.name}</span><span class="deck-item-count">(${d.cards.length})</span>`;
+    list.appendChild(b);
+    const toggle=document.createElement('button');
+    toggle.className='deck-item deck-toggle-btn';
+    toggle.innerHTML=`Tüm desteleri göster <span class="deck-item-count">(${app.decks.length})</span>`;
+    toggle.onclick=()=>{deckShowAll=true;updateDeckList();};
+    list.appendChild(toggle);
+    return;
+  }
   app.decks.forEach((d,i)=>{
     const b=document.createElement('button');
     b.className='deck-item'+(i===app.currentDeck?' active':'');
@@ -1124,8 +1151,15 @@ function updateDeckList(){
     b.ondblclick=()=>{const n=prompt('Yeni isim:',d.name);if(n?.trim()){app.decks[i].name=n.trim();save();updateDeckList();}};
     list.appendChild(b);
   });
+  if(app.decks.length>1){
+    const toggle=document.createElement('button');
+    toggle.className='deck-item deck-toggle-btn';
+    toggle.innerHTML=`Dar görünüm`;
+    toggle.onclick=()=>{deckShowAll=false;updateDeckList();};
+    list.appendChild(toggle);
+  }
 }
-function createDeck(){const n=prompt('Deste adı:');if(!n?.trim())return;app.decks.push({name:n.trim(),cards:[]});app.currentDeck=app.decks.length-1;save();updateDeckList();updateCatList();pickCard();updateStats();showToast('✅ "'+n.trim()+'" oluşturuldu');}
+function createDeck(){const n=prompt('Deste adı:');if(!n?.trim())return;app.decks.push({name:n.trim(),cards:[]});app.currentDeck=app.decks.length-1;deckShowAll=false;save();updateDeckList();updateCatList();pickCard();updateStats();showToast('✅ "'+n.trim()+'" oluşturuldu');}
 function deleteDeck(){if(app.decks.length===1){showToast('❌ En az bir deste!','err');return;}if(!confirm('"'+deck().name+'" silinsin mi?'))return;app.decks.splice(app.currentDeck,1);app.currentDeck=0;save();updateDeckList();updateCatList();pickCard();updateStats();showToast('🗑️ Silindi');}
 
 // ═══════════════════════════════════════════════════
@@ -1321,7 +1355,7 @@ function renderCard(){
   front.innerHTML='';back.innerHTML='';
   document.getElementById('actionArea').innerHTML='';
 
-  const modeNames={normal:'🃏 Normal',test:'✍️ Yazmalı Test',hint:'💡 Harf Doldurma',mcq:'🔘 Çoktan Seçmeli'};
+  const modeNames={normal:'🃏 Normal',test:'✍️ Yazmalı Test',hint:'💡 Harf Doldurma',mcq:'🔘 Çoktan Seçmeli',article:'🧩 de/het'};
   const dirNames={nltr:'NL → TR',trnl:'TR → NL'};
   document.getElementById('modeBadge').textContent=modeNames[app.mode]+' · '+dirNames[app.direction];
 
@@ -1334,8 +1368,10 @@ function renderCard(){
   const card=deck().cards[currentRealIdx];
   const accentClass=getCardAccent(card);
   cardEl.classList.add(accentClass);
+  const articleInfo=parseDutchArticle(card.word);
   const q=getQ(card),a=getA(card);
-  const qHtml=formatByLang(q,qLang());
+  const qForDisplay=(app.mode==='article'&&qLang()==='nl'&&articleInfo.article)?articleInfo.noun:q;
+  const qHtml=formatByLang(qForDisplay,qLang());
   const aHtml=formatByLang(a,aLang());
   const metaBadge=`<span class="meta-badge">${escapeHtml(getCardMetaLabel(card))}</span>`;
   const tts=!!window.speechSynthesis;
@@ -1376,8 +1412,49 @@ function renderCard(){
   if(app.mode==='test')renderTest(a);
   else if(app.mode==='hint')renderHint(q,a);
   else if(app.mode==='mcq')renderMCQ(a);
+  else if(app.mode==='article')renderArticle(card);
 
   renderActions();
+}
+
+function renderArticle(card){
+  const area=document.getElementById('extraArea');
+  if(!area)return;
+  const info=parseDutchArticle(card.word);
+  if(!info.article){
+    area.innerHTML=`<div class="hint-display">Bu kartta de/het tahmini yapılabilir bir Hollandaca artikel bulunamadı.</div>`;
+    return;
+  }
+  const prompt=(qLang()==='nl')?
+    `Hangi artikel doğru? <strong>${escapeHtml(info.noun)}</strong>`:
+    `Hangi artikel doğru? <strong>${escapeHtml(info.noun)}</strong> (${escapeHtml(card.meaning)})`;
+  const grid=document.createElement('div');grid.className='mcq-grid';
+  ['de','het'].forEach(opt=>{
+    const btn=document.createElement('button');btn.className='mcq-btn';btn.textContent=opt;
+    btn.onclick=()=>handleArticleGuess(opt,info.article,card);
+    grid.appendChild(btn);
+  });
+  area.innerHTML=`<div class="hint-display">${prompt}</div>`;
+  area.appendChild(grid);
+}
+
+function handleArticleGuess(selected,expected,card){
+  const area=document.getElementById('extraArea');
+  if(!area)return;
+  const correct=selected===expected;
+  if(correct){
+    animCard('pop');
+    area.innerHTML=`<div class="hint-display">✅ Doğru! ${selected} ${escapeHtml(parseDutchArticle(card.word).noun)}</div>`;
+    const btn=document.createElement('button');btn.className='mcq-next';btn.textContent='Devam';
+    btn.onclick=()=>answer('good');
+    area.appendChild(btn);
+  } else {
+    animCard('shake');
+    area.innerHTML=`<div class="hint-display">❌ Yanlış. Doğrusu: <strong>${expected}</strong> ${escapeHtml(parseDutchArticle(card.word).noun)}</div>`;
+    const btn=document.createElement('button');btn.className='mcq-next';btn.textContent='Tekrar Et';
+    btn.onclick=()=>answer('again');
+    area.appendChild(btn);
+  }
 }
 
 function handleCardClick(){
