@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="LinguaPrime">
 <title>LinguaPrime v8</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
 html,body{height:100%;height:100dvh}
 
 body{
@@ -27,8 +27,14 @@ body{
 /* ── STREAK BAR ── */
 .streak-bar{
   display:flex;align-items:center;gap:10px;
-  padding:8px 16px;border-bottom:1px solid rgba(0,0,0,.07);
-  background:#fff;flex-shrink:0;
+  padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.07);
+  background:#fff;flex-shrink:0;flex-wrap:nowrap;position:relative;overflow:hidden;
+  transition:all .3s ease;z-index:1;
+}
+@media(max-width:767px){
+  .streak-bar{
+    padding:8px 12px;gap:8px;flex-wrap:wrap;min-height:auto;z-index:1;
+  }
 }
 .streak-pill{
   display:flex;align-items:center;gap:5px;
@@ -48,22 +54,22 @@ body{
 .set-goal-btn:hover{background:#f3f4f6;color:#6b7280}
 
 /* ── LAYOUT ── */
-.layout{display:flex;flex:1;overflow:hidden;position:relative}
+.layout{display:flex;flex:1;overflow:hidden;position:relative;width:100%}
 
 /* ── SIDEBAR ── */
 .sidebar-wrap{
-  position:fixed;top:0;left:0;height:100%;z-index:100;
-  transform:translateX(-100%);transition:transform .3s ease;
+  position:fixed;top:0;left:0;height:100%;z-index:105;
+  transform:translateX(-100%);transition:transform .3s ease;width:260px;
 }
 .sidebar-wrap.open{transform:translateX(0)}
 .sidebar-backdrop{
-  position:fixed;inset:0;z-index:99;
+  position:fixed;inset:0;z-index:104;
   background:rgba(0,0,0,.5);display:none;
 }
 .sidebar-backdrop.open{display:block}
 
 .sidebar{
-  width:260px;height:100%;
+  width:100%;height:100%;
   background:#171717;color:#f5f5f5;
   display:flex;flex-direction:column;
   border-right:1px solid #2a2a2a;
@@ -168,35 +174,58 @@ body{
 .top-bar{
   display:flex;align-items:center;gap:8px;
   padding:8px 12px;border-bottom:1px solid rgba(0,0,0,.06);
-  flex-shrink:0;flex-wrap:nowrap;
+  flex-shrink:0;flex-wrap:wrap;
   background:rgba(255,255,255,.3);backdrop-filter:blur(4px);
   z-index:101;position:relative;
+  min-height:44px;
+}
+@media(max-width:480px){
+  .top-bar{
+    gap:4px;padding:6px 8px;min-height:42px;
+  }
 }
 .menu-btn{
   width:36px;height:36px;border-radius:10px;border:none;
   background:rgba(0,0,0,.07);color:#333;cursor:pointer;
   font-size:18px;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:background .15s;
+  flex-shrink:0;transition:background .15s;display:none!important;
 }
 .menu-btn:active{background:rgba(0,0,0,.12)}
 .menu-btn-fixed{
-  position:fixed;top:12px;left:16px;z-index:102;
+  position:fixed;top:8px;left:8px;z-index:110;
   width:36px;height:36px;border-radius:10px;border:none;
   background:rgba(0,0,0,.07);color:#333;cursor:pointer;
   font-size:18px;display:flex;align-items:center;justify-content:center;
-  transition:background .15s;
+  transition:background .15s,transform .2s ease;touch-action:manipulation;
 }
-.menu-btn-fixed:active{background:rgba(0,0,0,.12)}
-.top-left{display:flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden}
-.top-right{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.menu-btn-fixed:active{background:rgba(0,0,0,.12);transform:scale(.92)}
+.menu-btn-fixed:hover{background:rgba(0,0,0,.12)}
+.menu-btn-fixed-inline{
+  width:32px;height:32px;border-radius:8px;border:none;
+  background:rgba(0,0,0,.07);color:#333;cursor:pointer;
+  font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,transform .2s ease;touch-action:manipulation;
+  flex-shrink:0;margin:0 4px;
+}
+.menu-btn-fixed-inline:active{background:rgba(0,0,0,.12);transform:scale(.92)}
+.menu-btn-fixed-inline:hover{background:rgba(0,0,0,.12)}
+.top-left{display:flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden;flex-wrap:wrap}
+.top-right{display:flex;align-items:center;gap:4px;flex-shrink:0;flex-wrap:wrap}
+@media(max-width:480px){
+  .top-left{gap:4px;padding-right:4px;}
+  .top-right{gap:2px;}
+}
 .info-label{font-size:11px;font-weight:600;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
 .filter-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:10px;border:1px solid;white-space:nowrap;flex-shrink:0}
 .session-mini{display:flex;align-items:center;gap:5px;flex-shrink:0}
 .session-mini .sm-box{font-size:11px;padding:4px 8px;border-radius:9px;border:1px solid rgba(0,0,0,.08);background:#fff;display:flex;gap:5px}
 .session-mini button{font-size:11px;font-weight:700;padding:4px 10px;border-radius:9px;border:none;background:#4f46e5;color:#fff;cursor:pointer}
-.pill{font-size:11px;font-weight:600;padding:4px 9px;border-radius:10px;border:1px solid rgba(0,0,0,.08);background:#fff;color:#444;white-space:nowrap}
+.pill{font-size:11px;font-weight:600;padding:4px 8px;border-radius:10px;border:1px solid rgba(0,0,0,.08);background:#fff;color:#444;white-space:nowrap;touch-action:manipulation;}
 .pill.due-active{border-color:#a5b4fc;color:#4f46e5}
 .timer-pill{font-family:monospace}
+@media(max-width:480px){
+  .pill{font-size:9px;padding:3px 6px;border-radius:8px;}
+}
 
 /* ── CARD AREA ── */
 .card-area{
@@ -208,13 +237,18 @@ body{
 /* Card wrapper */
 .card-wrapper{
   width:100%;max-width:520px;
-  perspective:1000px;
+  perspective:1000px;touch-action:none;
+  padding:0 8px;
+}
+@media(max-width:480px){
+  .card-wrapper{max-width:100%;padding:0 6px;}
 }
 .card{
   width:100%;position:relative;
   transform-style:preserve-3d;
   transition:transform .5s ease;cursor:pointer;
-  border-radius:24px;
+  border-radius:24px;touch-action:none;
+  -webkit-user-select:none;user-select:none;
 }
 .card.flipped{transform:rotateY(180deg)}
 .card.shake{animation:shake .4s ease}
@@ -315,7 +349,7 @@ body{
 .test-input:focus{outline:none;border-color:#6366f1}
 .test-input.correct{border-color:#22c55e;background:#f0fdf4;color:#15803d}
 .test-input.wrong{border-color:#ef4444;background:#fef2f2;color:#b91c1c}
-.check-btn{padding:8px 20px;border-radius:12px;border:none;background:#4f46e5;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
+.check-btn{padding:8px 20px;border-radius:12px;border:none;background:#4f46e5;color:#fff;font-size:13px;font-weight:600;cursor:pointer;touch-action:manipulation;}
 .check-btn:active{background:#4338ca;transform:scale(.96)}
 .wrong-msg{font-size:13px;color:#ef4444;font-weight:500}
 .continue-btn{padding:5px 14px;border-radius:10px;border:none;background:#fef2f2;color:#b91c1c;font-size:12px;cursor:pointer}
@@ -334,28 +368,41 @@ body{
 .mcq-next{margin-top:4px;padding:8px 20px;border-radius:12px;border:none;background:#4f46e5;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
 
 /* ── ACTION BUTTONS ── */
-.action-area{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:520px;padding:0 8px}
+.action-area{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:520px;padding:0 8px}
+@media(max-width:480px){
+  .action-area{gap:8px;padding:0 6px;width:100%;}
+}
 
-.flip-row{display:grid;grid-template-columns:1fr 140px;gap:8px;width:100%}
+.flip-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
 .flip-btn{
-  flex:1;padding:12px;border-radius:16px;border:1px solid rgba(0,0,0,.12);
-  background:#fff;color:#111;font-size:13px;font-weight:700;cursor:pointer;
+  flex:1;padding:11px 8px;border-radius:14px;border:1px solid rgba(0,0,0,.12);
+  background:#fff;color:#111;font-size:12px;font-weight:700;cursor:pointer;
   transition:transform .15s,box-shadow .15s,background .15s;
-  box-shadow:0 6px 18px rgba(15,23,42,.08);
+  box-shadow:0 4px 12px rgba(15,23,42,.08);
+  min-height:44px;display:flex;align-items:center;justify-content:center;
+  touch-action:manipulation;flex-wrap:wrap;
 }
 .flip-btn:active{transform:scale(.96);background:#f5f5f8}
 .next-btn-sm{
-  padding:12px 16px;border-radius:18px;border:1px solid rgba(0,0,0,.08);
-  background:#fff;color:#888;font-size:13px;font-weight:600;cursor:pointer;
+  padding:11px 12px;border-radius:14px;border:1px solid rgba(0,0,0,.08);
+  background:#fff;color:#888;font-size:12px;font-weight:600;cursor:pointer;
   transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.06);
+  min-height:44px;display:flex;align-items:center;justify-content:center;
+  touch-action:manipulation;
 }
 .next-btn-sm:active{transform:scale(.96)}
+@media(max-width:480px){
+  .flip-row{grid-template-columns:1fr 1fr;gap:5px}
+  .flip-btn{padding:9px 6px;font-size:11px;border-radius:12px;min-height:42px;}
+  .next-btn-sm{padding:9px 8px;font-size:11px;border-radius:12px;min-height:42px;}
+}
 
-.diff-row{display:flex;gap:6px;width:100%}
+.diff-row{display:flex;gap:5px;width:100%;flex-wrap:nowrap}
 .diff-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;
-  padding:10px 4px;border-radius:16px;border:1px solid;
-  font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:8px 2px;border-radius:14px;border:1px solid;
+  font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;
+  min-height:50px;touch-action:manipulation;
 }
 .diff-btn:active{transform:scale(.94)}
 .diff-btn .sub{font-size:9px;opacity:.55;font-weight:400;margin-top:1px}
@@ -363,13 +410,22 @@ body{
 .diff-hard {background:#fff7ed;border-color:#fed7aa;color:#ea580c}
 .diff-good {background:#f0fdf4;border-color:#bbf7d0;color:#16a34a}
 .diff-easy {background:#eef2ff;border-color:#c7d2fe;color:#4f46e5}
+@media(max-width:480px){
+  .diff-row{gap:4px;}
+  .diff-btn{padding:6px 2px;font-size:10px;min-height:48px;border-radius:12px;}
+  .diff-btn .sub{font-size:8px;margin-top:0px;}
+}
 
 .single-next{
-  padding:11px 28px;border-radius:18px;border:1px solid rgba(0,0,0,.08);
-  background:#fff;color:#555;font-size:13px;font-weight:600;cursor:pointer;
-  box-shadow:0 1px 4px rgba(0,0,0,.06);
+  padding:11px 24px;border-radius:14px;border:1px solid rgba(0,0,0,.08);
+  background:#fff;color:#555;font-size:12px;font-weight:600;cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);min-height:44px;display:flex;
+  align-items:center;justify-content:center;touch-action:manipulation;
 }
 .single-next:active{transform:scale(.96)}
+@media(max-width:480px){
+  .single-next{padding:9px 16px;font-size:11px;border-radius:12px;min-height:42px;}
+}
 
 .mode-badge{
   font-size:10px;padding:5px 12px;border-radius:20px;
@@ -628,46 +684,47 @@ body.dark .chart-legend .legend-item{color:#555}
     </div>
     <div class="goal-bar"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
   </div>
+  <button class="menu-btn-fixed-inline" onclick="toggleSidebar()">☰</button>
   <div class="best-badge">🏆 <span id="longestStreak">0</span></div>
 </div>
 
-<div class="layout">
-  <!-- HAMBURGER BUTTON -->
-  <button class="menu-btn-fixed" onclick="toggleSidebar()">☰</button>
-  <!-- SIDEBAR BACKDROP (mobile) -->
-  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+<!-- HAMBURGER BUTTON - Body direkt child'ı olmalı -->
+<!-- MOVED TO STREAK BAR -->
 
-  <!-- SIDEBAR -->
-  <div class="sidebar-wrap" id="sidebarWrap">
-    <div class="sidebar">
-      <div class="sb-header">
-        <span class="sb-logo">LinguaPrime</span>
-      </div>
-      <div class="sb-body">
+<!-- SIDEBAR BACKDROP (mobile) - Body direkt child'ı -->
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
-        <!-- DESTELER -->
-        <button class="acc-btn" onclick="toggleAcc('decks')">
-          <span class="acc-label">Desteler</span>
-          <span class="acc-arrow open" id="acc-arrow-decks">▾</span>
-        </button>
-        <div class="acc-body open" id="acc-body-decks">
-          <div class="deck-list" id="deckList"></div>
-          <div class="deck-row" id="deckControls">
-            <button onclick="createDeck()">➕ Yeni</button>
-            <button class="danger" onclick="deleteDeck()">🗑 Sil</button>
-          </div>
+<!-- SIDEBAR - Body direkt child'ı -->
+<div class="sidebar-wrap" id="sidebarWrap">
+  <div class="sidebar">
+    <div class="sb-header">
+      <span class="sb-logo">LinguaPrime</span>
+    </div>
+    <div class="sb-body">
+
+      <!-- DESTELER -->
+      <button class="acc-btn" onclick="toggleAcc('decks')">
+        <span class="acc-label">Desteler</span>
+        <span class="acc-arrow open" id="acc-arrow-decks">▾</span>
+      </button>
+      <div class="acc-body open" id="acc-body-decks">
+        <div class="deck-list" id="deckList"></div>
+        <div class="deck-row" id="deckControls">
+          <button onclick="createDeck()">➕ Yeni</button>
+          <button class="danger" onclick="deleteDeck()">🗑 Sil</button>
         </div>
-        <hr class="sb-divider">
+      </div>
+      <hr class="sb-divider">
 
-        <!-- AYARLAR -->
-        <button class="acc-btn" onclick="toggleAcc('settings')">
-          <span class="acc-label">Çalışma Ayarları</span>
-          <span class="acc-arrow open" id="acc-arrow-settings">▾</span>
-        </button>
-        <div class="acc-body open" id="acc-body-settings">
-          <select class="sb-select" id="directionSelect" onchange="changeDirection()">
-            <option value="nltr">🇳🇱 NL → TR 🇹🇷</option>
-            <option value="trnl">🇹🇷 TR → NL 🇳🇱</option>
+      <!-- AYARLAR -->
+      <button class="acc-btn" onclick="toggleAcc('settings')">
+        <span class="acc-label">Çalışma Ayarları</span>
+        <span class="acc-arrow open" id="acc-arrow-settings">▾</span>
+      </button>
+      <div class="acc-body open" id="acc-body-settings">
+        <select class="sb-select" id="directionSelect" onchange="changeDirection()">
+          <option value="nltr">🇳🇱 NL → TR 🇹🇷</option>
+          <option value="trnl">🇹🇷 TR → NL 🇳🇱</option>
           </select>
           <select class="sb-select" id="modeSelect" onchange="changeMode()">
             <option value="normal">🃏 Normal</option>
@@ -759,7 +816,9 @@ body.dark .chart-legend .legend-item{color:#555}
       </div>
     </div>
   </div>
+</div>
 
+<div class="layout">
   <!-- MAIN -->
   <div class="main">
     <!-- TOP BAR -->
@@ -798,6 +857,7 @@ body.dark .chart-legend .legend-item{color:#555}
       <div class="mode-badge" id="modeBadge"></div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- ANALYSIS MODAL -->
@@ -1170,7 +1230,62 @@ function toggleTTS(){app.ttsEnabled=!app.ttsEnabled;localStorage.setItem('lp_tts
 function toggleContinuousMode(){app.continuousMode=!app.continuousMode;save();updateContinuousToggle();pickCard();showToast(app.continuousMode?'🔄 Sürekli tekrar açık':'⏰ SM-2 tekrar açık');}
 function updateTTSToggle(){const btn=document.getElementById('ttsToggleBtn');if(btn){btn.textContent=app.ttsEnabled?'🔊 Sesli Okuma Açık':'🔈 Sesli Okuma Kapalı';}}
 function updateContinuousToggle(){const btn=document.getElementById('continuousToggleBtn');if(btn){btn.textContent=app.continuousMode?'🔄 Sürekli Tekrar Açık':'⏰ SM-2 Tekrar Açık';}}
-function initCardSwipe(){const card=document.getElementById('card');if(!card)return;card.addEventListener('touchstart',e=>{const t=e.touches[0];touchStartX=t.clientX;touchStartY=t.clientY;},{passive:true});card.addEventListener('touchend',e=>{const t=e.changedTouches[0];const dx=t.clientX-touchStartX;const dy=t.clientY-touchStartY;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){if(app.mode==='normal'){if(!flipped){handleCardClick();return;} if(dx>0)answer('good'); else answer('again');} else if(app.mode==='test'){if(dx>0){const inp=document.getElementById('testInp');if(inp)checkTest();} else answer('again');} else if(app.mode==='hint'){if(dx>0)answer('good');else answer('again');}}},{passive:true});}
+function initCardSwipe(){
+  const card=document.getElementById('card');
+  if(!card)return;
+  
+  let touchStartX=0,touchStartY=0,touchStartTime=0;
+  
+  card.addEventListener('touchstart',e=>{
+    const t=e.touches[0];
+    touchStartX=t.clientX;
+    touchStartY=t.clientY;
+    touchStartTime=Date.now();
+  },{passive:true});
+  
+  card.addEventListener('touchend',e=>{
+    if(!e.changedTouches.length)return;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-touchStartX;
+    const dy=t.clientY-touchStartY;
+    const dt=Date.now()-touchStartTime;
+    const distance=Math.sqrt(dx*dx+dy*dy);
+    const velocity=distance/(dt+1);
+    
+    // Require horizontal movement > 50px or velocity-based
+    const isSwipe=Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5 && velocity>0.3;
+    
+    if(!isSwipe)return;
+    
+    // Prevent default to avoid page navigation
+    e.preventDefault();
+    
+    if(currentRealIdx===null||currentRealIdx<0)return;
+    
+    if(app.mode==='normal'){
+      if(!flipped){
+        // Not flipped yet, tap to flip
+        handleCardClick();
+        return;
+      }
+      // Already flipped, swipe to answer
+      if(dx>0)answer('good');
+      else answer('again');
+    }else if(app.mode==='test'||app.mode==='hint'){
+      // Swipe right = submit/good
+      if(dx>0){
+        const inp=document.getElementById('testInp');
+        if(inp&&!inp.disabled){checkTest();}
+        else answer('good');
+      }else{
+        answer('again');
+      }
+    }else if(app.mode==='mcq'||app.mode==='article'){
+      if(dx>0)answer('good');
+      else answer('again');
+    }
+  },{passive:false});
+}
 
 // ═══════════════════════════════════════════════════
 //  DECK
