@@ -729,6 +729,42 @@ body.dark .chart-legend .legend-item{color:#555}
 @media(min-width:768px){
   .sidebar-backdrop{display:none!important}
 }
+
+/* iPhone Alt Bar Düzeltmesi ve Animasyon Hazırlığı */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+.main-content {
+  padding-bottom: calc(80px + var(--safe-bottom)) !important; /* Butonların üstte kalmasını sağlar */
+}
+
+.flashcard-container {
+  perspective: 1000px;
+  overflow: visible !important;
+}
+
+.flashcard {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s !important;
+  z-index: 10;
+}
+
+/* Kaydırma Efektleri */
+.card-swipe-right {
+  border: 4px solid #16a34a !important;
+  box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
+}
+
+.card-swipe-left {
+  border: 4px solid #dc2626 !important;
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+.controls {
+  padding-bottom: calc(15px + var(--safe-bottom)) !important;
+  background: linear-gradient(transparent, #e8e8ed 20%);
+  z-index: 100;
+}
 </style>
 </head>
 <body>
@@ -882,7 +918,7 @@ body.dark .chart-legend .legend-item{color:#555}
 
 <div class="layout">
   <!-- MAIN -->
-  <div class="main">
+  <div class="main main-content">
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="top-left">
@@ -906,8 +942,8 @@ body.dark .chart-legend .legend-item{color:#555}
 
     <!-- CARD AREA -->
     <div class="card-area">
-      <div class="card-wrapper">
-        <div class="card" id="card" onclick="handleCardClick()">
+      <div class="card-wrapper flashcard-container">
+        <div class="card flashcard" id="card" onclick="handleCardClick()">
           <div class="card-face" id="cardFront"></div>
           <div class="card-face card-back-face" id="cardBack"
                style="min-height:clamp(200px,38vw,300px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(20px,5vw,40px) clamp(16px,4vw,36px)">
@@ -915,7 +951,7 @@ body.dark .chart-legend .legend-item{color:#555}
         </div>
       </div>
 
-      <div class="action-area" id="actionArea"></div>
+      <div class="action-area controls" id="actionArea"></div>
       <div class="mode-badge" id="modeBadge"></div>
     </div>
   </div>
@@ -1293,16 +1329,37 @@ function initCardSwipe(){
   if(!card)return;
   
   let touchStartX=0,touchStartY=0,touchStartTime=0;
+  let activeCard=null;
   
   card.addEventListener('touchstart',e=>{
     const t=e.touches[0];
     touchStartX=t.clientX;
     touchStartY=t.clientY;
     touchStartTime=Date.now();
+    activeCard=card;
+    card.style.transition='none';
+  },{passive:true});
+  
+  card.addEventListener('touchmove',e=>{
+    if(!activeCard||!e.touches.length)return;
+    const currentX=e.touches[0].clientX;
+    const diffX=currentX-touchStartX;
+    const rotation=diffX/10;
+    activeCard.style.transform=`translateX(${diffX}px) rotate(${rotation}deg)`;
+
+    if(diffX>50){
+      activeCard.classList.add('card-swipe-right');
+      activeCard.classList.remove('card-swipe-left');
+    } else if(diffX<-50){
+      activeCard.classList.add('card-swipe-left');
+      activeCard.classList.remove('card-swipe-right');
+    } else {
+      activeCard.classList.remove('card-swipe-right','card-swipe-left');
+    }
   },{passive:true});
   
   card.addEventListener('touchend',e=>{
-    if(!e.changedTouches.length)return;
+    if(!activeCard||!e.changedTouches.length)return;
     const t=e.changedTouches[0];
     const dx=t.clientX-touchStartX;
     const dy=t.clientY-touchStartY;
@@ -1311,32 +1368,38 @@ function initCardSwipe(){
     const velocity=distance/(dt+1);
     
     const isSwipe=Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5 && velocity>0.3;
+    const threshold=100;
     
-    if(!isSwipe)return;
+    activeCard.classList.remove('card-swipe-right','card-swipe-left');
+    activeCard.style.transition='transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s';
+
+    if(!isSwipe){
+      activeCard.style.transform='translateX(0) rotate(0)';
+      activeCard=null;
+      touchStartX=0;
+      return;
+    }
     
     e.preventDefault();
     
-    if(currentRealIdx===null||currentRealIdx<0)return;
-    
-    if(app.mode==='normal'){
-      if(!flipped){
-        handleCardClick();
-        return;
-      }
-      if(dx>0)answer('good');
-      else answer('again');
-    }else if(app.mode==='test'||app.mode==='hint'){
-      if(dx>0){
-        const inp=document.getElementById('testInp');
-        if(inp&&!inp.disabled){checkTest();}
-        else answer('good');
-      }else{
-        answer('again');
-      }
-    }else if(app.mode==='mcq'||app.mode==='article'){
-      if(dx>0)answer('good');
-      else answer('again');
+    if(currentRealIdx===null||currentRealIdx<0){
+      activeCard.style.transform='translateX(0) rotate(0)';
+      activeCard=null;
+      touchStartX=0;
+      return;
     }
+    
+    if(dx>threshold){
+      activeCard.style.transform='translateX(150%) rotate(30deg)';
+      setTimeout(()=>{ answer('good'); activeCard=null; },200);
+    } else if(dx<-threshold){
+      activeCard.style.transform='translateX(-150%) rotate(-30deg)';
+      setTimeout(()=>{ answer('again'); activeCard=null; },200);
+    } else {
+      activeCard.style.transform='translateX(0) rotate(0)';
+      activeCard=null;
+    }
+    touchStartX=0;
   },{passive:false});
 }
 
