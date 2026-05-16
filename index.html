@@ -12,257 +12,293 @@
 body{font-family:system-ui,'Segoe UI',Roboto,sans-serif;background:#0A0A0F;color:#F1F3F5;height:100dvh;overflow:hidden;transition:background 0.3s;}
 body.light{background:#F3F4F6;color:#1F2937;}
 
-.menu-btn{position:fixed;top:calc(12px + env(safe-area-inset-top));left:16px;z-index:1100;width:44px;height:44px;border-radius:14px;background:rgba(26,26,36,0.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);color:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-body.light .menu-btn{background:rgba(255,255,255,0.9);color:#1F2937;border-color:#E5E7EB;}
+/* MENU BTN */
+.menu-btn{position:fixed;top:calc(12px + env(safe-area-inset-top));left:16px;z-index:1100;width:44px;height:44px;border-radius:14px;background:rgba(26,26,36,0.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);color:white;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+body.light .menu-btn{background:rgba(255,255,255,0.9);color:#1F2937;border:1px solid #E5E7EB;}
 
-.quick-add-btn{position:fixed;top:calc(12px + env(safe-area-inset-top));right:16px;z-index:1100;width:44px;height:44px;border-radius:14px;background:rgba(249,115,22,0.95);border:none;color:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(249,115,22,0.4);}
+/* QUICK ADD BTN */
+.quick-add-btn{position:fixed;top:calc(12px + env(safe-area-inset-top));right:16px;z-index:1100;width:44px;height:44px;border-radius:14px;background:rgba(249,115,22,0.9);backdrop-filter:blur(12px);border:none;color:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
-.streak-badge{position:fixed;top:calc(12px + env(safe-area-inset-top));left:68px;z-index:1100;height:44px;padding:0 12px;border-radius:14px;background:rgba(26,26,36,0.9);backdrop-filter:blur(12px);border:1px solid rgba(255,165,0,0.3);color:#FFA500;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;}
-body.light .streak-badge{background:rgba(255,255,255,0.9);border-color:#FDE68A;color:#D97706;}
+/* STREAK BADGE */
+.streak-badge{position:fixed;top:calc(12px + env(safe-area-inset-top));left:70px;z-index:1100;height:44px;padding:0 12px;border-radius:14px;background:rgba(26,26,36,0.9);backdrop-filter:blur(12px);border:1px solid rgba(255,165,0,0.3);color:#FFA500;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;}
+body.light .streak-badge{background:rgba(255,255,255,0.9);border:1px solid #FDE68A;color:#D97706;}
 
-.sidebar{position:fixed;top:0;left:0;bottom:0;width:290px;background:#0F0F14;border-right:1px solid rgba(255,255,255,0.06);transform:translateX(-100%);transition:transform 0.25s ease;z-index:1300;display:flex;flex-direction:column;padding-top:calc(16px + env(safe-area-inset-top));}
-body.light .sidebar{background:#FFFFFF;border-right-color:#E5E7EB;}
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:290px;background:#0F0F14;border-right:1px solid rgba(255,255,255,0.06);transform:translateX(-100%);transition:transform 0.25s ease;z-index:1300;display:flex;flex-direction:column;padding-top:calc(16px + env(safe-area-inset-top));overflow:hidden;}
+body.light .sidebar{background:#FFFFFF;border-right:1px solid #E5E7EB;}
 .sidebar.open{transform:translateX(0);}
-.sidebar-header{padding:14px 16px;font-size:17px;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
-body.light .sidebar-header{border-bottom-color:#E5E7EB;}
-.toggle-deck-btn{background:#2A2A36;border:none;color:white;padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer;}
+.sidebar-header{padding:16px;font-size:18px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+body.light .sidebar-header{border-bottom:1px solid #E5E7EB;}
+.toggle-deck-btn{background:#2A2A36;border:none;color:white;padding:4px 10px;border-radius:20px;font-size:11px;cursor:pointer;min-height:34px;}
 body.light .toggle-deck-btn{background:#E5E7EB;color:#1F2937;}
 .deck-list-container{flex:1;overflow-y:auto;min-height:0;}
-.sidebar-item{padding:11px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;}
-body.light .sidebar-item{border-bottom-color:#F3F4F6;color:#374151;}
-.sidebar-item:hover{background:rgba(255,255,255,0.04);}
-body.light .sidebar-item:hover{background:#F9FAFB;}
+.sidebar-item{padding:12px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+body.light .sidebar-item{border-bottom:1px solid #F3F4F6;color:#374151;}
 .sidebar-item.active{background:#F97316;color:#0A0A0F;font-weight:600;}
 .sidebar-item-actions{display:flex;gap:4px;flex-shrink:0;}
-.edit-deck-btn,.delete-deck-btn{background:none;border:none;color:inherit;cursor:pointer;font-size:13px;padding:5px 7px;border-radius:7px;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;}
-.edit-deck-btn:hover{background:rgba(255,255,255,0.12);}
+.edit-deck-btn,.delete-deck-btn{background:none;border:none;color:inherit;cursor:pointer;font-size:14px;padding:6px 8px;border-radius:8px;min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;}
+.edit-deck-btn:hover{background:rgba(255,255,255,0.15);}
 .delete-deck-btn:hover{background:#EF4444;color:white;}
 .sidebar-footer{flex-shrink:0;border-top:1px solid rgba(255,255,255,0.06);}
-body.light .sidebar-footer{border-top-color:#E5E7EB;}
+body.light .sidebar-footer{border-top:1px solid #E5E7EB;}
 
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:1200;display:none;backdrop-filter:blur(3px);}
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1200;display:none;backdrop-filter:blur(4px);}
 .overlay.show{display:block;}
 
-.main{height:100%;display:flex;flex-direction:column;overflow:hidden;}
-.progress-wrap{padding:calc(env(safe-area-inset-top) + 58px) 16px 0;flex-shrink:0;}
-.progress-text{text-align:center;color:#9CA3AF;font-size:12px;font-weight:600;margin-bottom:4px;}
-.progress-bar-bg{background:rgba(255,255,255,0.07);border-radius:8px;height:5px;overflow:hidden;}
-body.light .progress-bar-bg{background:#E5E7EB;}
-.progress-bar-fill{height:100%;background:linear-gradient(90deg,#F97316,#22C55E);border-radius:8px;transition:width 0.5s ease;}
+/* MAIN */
+.main{margin-left:0;height:100%;display:flex;flex-direction:column;overflow:hidden;}
+.card-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 20px 8px;position:relative;min-height:0;}
+.card-container{width:100%;max-width:560px;perspective:1200px;}
 
-.card-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 16px 4px;min-height:0;}
-.card-container{width:100%;max-width:540px;perspective:1200px;}
-.card{width:100%;position:relative;transform-style:preserve-3d;transition:transform 0.4s ease;cursor:pointer;border-radius:26px;}
+/* CARD */
+.card{width:100%;position:relative;transform-style:preserve-3d;transition:transform 0.4s ease;cursor:pointer;border-radius:28px;}
 .card.flipped{transform:rotateY(180deg);}
-.card-face{backface-visibility:hidden;background:rgba(22,22,32,0.97);border:1px solid rgba(255,255,255,0.07);border-radius:26px;padding:22px 18px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-body.light .card-face{background:#FFFFFF;border-color:#E5E7EB;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.card-face{backface-visibility:hidden;background:rgba(26,26,36,0.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);border-radius:28px;padding:24px 20px;min-height:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;}
+body.light .card-face{background:rgba(255,255,255,0.97);border:1px solid #E5E7EB;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
 .card-front{transform:rotateY(0);}
-.card-back{transform:rotateY(180deg);position:absolute;inset:0;}
-.word{font-size:28px;font-weight:700;margin:10px 0;line-height:1.35;}
-.badge{background:rgba(255,255,255,0.06);padding:3px 10px;border-radius:20px;font-size:11px;color:#9CA3AF;}
+.card-back{transform:rotateY(180deg);position:absolute;top:0;left:0;right:0;bottom:0;}
+.word{font-size:30px;font-weight:700;margin:12px 0;line-height:1.3;}
+.badge{background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:24px;font-size:11px;color:#9CA3AF;}
 body.light .badge{background:#F3F4F6;color:#6B7280;}
-.swipe-icon{position:absolute;top:18px;font-size:34px;font-weight:800;opacity:0;transition:opacity 0.05s;pointer-events:none;z-index:15;}
-.swipe-icon.right{right:18px;color:#22C55E;}
-.swipe-icon.left{left:18px;color:#EF4444;}
+.card-meta{font-size:11px;color:#6B7280;margin-top:4px;}
+.swipe-icon{position:absolute;top:20px;font-size:36px;font-weight:bold;opacity:0;transition:opacity 0.05s;pointer-events:none;z-index:15;}
+.swipe-icon.right{right:20px;color:#22C55E;}
+.swipe-icon.left{left:20px;color:#EF4444;}
 
-.mode-selector{display:flex;gap:5px;justify-content:center;padding:6px 10px 0;flex-wrap:wrap;flex-shrink:0;}
-.mode-btn{padding:6px 10px;border-radius:18px;background:#2A2A36;border:none;color:white;font-size:11px;cursor:pointer;transition:background 0.15s;}
-body.light .mode-btn{background:#E5E7EB;color:#374151;}
-.mode-btn.active{background:#F97316;color:white;}
-
-.action-bar{display:flex;gap:8px;padding:10px 12px;max-width:540px;margin:0 auto;width:100%;flex-shrink:0;}
-.action-btn{flex:1;padding:11px 4px;border-radius:26px;background:#1A1A24;border:none;color:white;font-weight:600;cursor:pointer;transition:transform 0.1s;font-size:12px;}
+/* ACTION BAR */
+.action-bar{display:flex;gap:10px;padding:12px 16px;max-width:560px;margin:0 auto;width:100%;flex-shrink:0;}
+.action-btn{flex:1;padding:11px 6px;border-radius:28px;background:#1A1A24;border:none;color:white;font-weight:600;cursor:pointer;transition:transform 0.1s,background 0.1s;font-size:13px;}
 body.light .action-btn{background:#F3F4F6;color:#1F2937;border:1px solid #E5E7EB;}
-.action-btn:active{transform:scale(0.93);}
+.action-btn:active{transform:scale(0.94);}
 .action-btn.again{border-left:4px solid #EF4444;}
 .action-btn.hard{border-left:4px solid #F97316;}
 .action-btn.good{border-left:4px solid #22C55E;}
 .action-btn.easy{border-left:4px solid #3B82F6;}
-.action-btn.undo-btn{border-left:4px solid #8B5CF6;flex:0.55;}
+.action-btn.undo-btn{border-left:4px solid #8B5CF6;flex:0.6;}
 
-.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#161620;border-radius:26px;padding:22px;width:92%;max-width:520px;z-index:1400;display:none;flex-direction:column;gap:13px;border:1px solid rgba(255,255,255,0.09);max-height:93vh;overflow-y:auto;}
-body.light .modal{background:#FFFFFF;border-color:#E5E7EB;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
+/* MODE SELECTOR */
+.mode-selector{display:flex;gap:6px;justify-content:center;padding:8px 12px 0;flex-wrap:wrap;flex-shrink:0;}
+.mode-btn{padding:7px 11px;border-radius:20px;background:#2A2A36;border:none;color:white;font-size:11px;cursor:pointer;min-width:44px;transition:background 0.15s;}
+body.light .mode-btn{background:#E5E7EB;color:#374151;}
+.mode-btn.active{background:#F97316;color:white;}
+
+/* PROGRESS BAR */
+.progress-bar-container{width:100%;max-width:560px;margin:0 auto;padding:0 16px;flex-shrink:0;}
+.progress-bar-bg{background:rgba(255,255,255,0.08);border-radius:8px;height:5px;margin-bottom:6px;overflow:hidden;}
+body.light .progress-bar-bg{background:#E5E7EB;}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#F97316,#22C55E);border-radius:8px;transition:width 0.4s ease;}
+.progress-text{text-align:center;color:#9CA3AF;font-size:12px;font-weight:600;padding:0 0 4px;}
+
+/* MODAL */
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1A1A24;border-radius:28px;padding:24px;width:92%;max-width:520px;z-index:1400;display:none;flex-direction:column;gap:14px;border:1px solid rgba(255,255,255,0.1);max-height:92vh;overflow-y:auto;}
+body.light .modal{background:#FFFFFF;border:1px solid #E5E7EB;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
 .modal.open{display:flex;}
-.modal h3{font-size:16px;font-weight:700;flex-shrink:0;}
-.modal input,.modal select,.modal textarea{background:#0D0D16;border:1px solid #252535;padding:9px 13px;border-radius:13px;color:white;font-size:13px;width:100%;}
-body.light .modal input,body.light .modal select,body.light .modal textarea{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937;}
-.modal input:focus,.modal select:focus{outline:none;border-color:#F97316;}
-.modal-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:2px;flex-shrink:0;}
-.btn-primary{background:#F97316;color:#000;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-weight:600;font-size:13px;}
-.btn-secondary{background:#252535;color:white;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:13px;}
+.modal h3{font-size:17px;font-weight:700;}
+.modal input,.modal select,.modal textarea{background:#0F0F14;border:1px solid #2A2A36;padding:10px 14px;border-radius:14px;color:white;font-size:14px;width:100%;}
+body.light .modal input,body.light .modal select,body.light .modal textarea{background:#F9FAFB;border:1px solid #D1D5DB;color:#1F2937;}
+.modal input:focus,.modal select:focus,.modal textarea:focus{outline:none;border-color:#F97316;}
+.modal-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:4px;}
+.btn-primary{background:#F97316;color:#0A0A0F;border:none;padding:9px 18px;border-radius:22px;cursor:pointer;font-weight:600;font-size:14px;}
+.btn-secondary{background:#2A2A36;color:white;border:none;padding:9px 18px;border-radius:22px;cursor:pointer;font-size:14px;}
 body.light .btn-secondary{background:#F3F4F6;color:#1F2937;border:1px solid #E5E7EB;}
-.btn-danger{background:#EF4444;color:white;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-size:13px;}
+.btn-danger{background:#EF4444;color:white;border:none;padding:9px 18px;border-radius:22px;cursor:pointer;font-size:14px;}
 
-.table-container{overflow-y:auto;max-height:42vh;border-radius:12px;border:1px solid rgba(255,255,255,0.06);}
-body.light .table-container{border-color:#E5E7EB;}
+/* TABLE */
+.table-container{overflow-y:auto;max-height:45vh;border-radius:12px;border:1px solid rgba(255,255,255,0.06);}
+body.light .table-container{border:1px solid #E5E7EB;}
 table{width:100%;border-collapse:collapse;font-size:12px;}
-th{padding:9px 7px;text-align:left;border-bottom:2px solid #252535;background:#0D0D16;position:sticky;top:0;z-index:2;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;cursor:pointer;white-space:nowrap;}
-body.light th{border-bottom-color:#E5E7EB;background:#F9FAFB;color:#6B7280;}
+th{padding:10px 8px;text-align:left;border-bottom:2px solid #2A2A36;background:#0F0F14;position:sticky;top:0;z-index:1;font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.5px;cursor:pointer;}
+body.light th{border-bottom:2px solid #E5E7EB;background:#F9FAFB;color:#6B7280;}
 th:hover{color:#F97316;}
-td{padding:7px;border-bottom:1px solid rgba(255,255,255,0.04);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-body.light td{border-bottom-color:#F3F4F6;}
-.edit-btn,.delete-btn,.detail-btn{background:none;border:none;cursor:pointer;padding:5px 7px;border-radius:7px;min-width:30px;font-size:13px;}
-.edit-btn{color:#F97316;}.delete-btn{color:#EF4444;}.detail-btn{color:#3B82F6;}
-.edit-btn:hover{background:rgba(249,115,22,0.12);}
-.delete-btn:hover{background:rgba(239,68,68,0.12);}
-.detail-btn:hover{background:rgba(59,130,246,0.12);}
+td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.04);}
+body.light td{border-bottom:1px solid #F3F4F6;}
+tr:hover td{background:rgba(255,255,255,0.03);}
+body.light tr:hover td{background:#F9FAFB;}
+.edit-btn,.delete-btn{background:none;border:none;color:#F97316;cursor:pointer;padding:6px 8px;border-radius:8px;min-width:36px;}
+.delete-btn{color:#EF4444;}
+.edit-btn:hover{background:rgba(249,115,22,0.15);}
+.delete-btn:hover{background:rgba(239,68,68,0.15);}
 
-.search-row{display:flex;gap:8px;align-items:center;flex-shrink:0;}
-.search-input{flex:1;background:#0D0D16;border:1px solid #252535;padding:8px 12px;border-radius:13px;color:white;font-size:12px;}
-body.light .search-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937;}
+/* SEARCH BOX */
+.search-box{display:flex;gap:8px;align-items:center;}
+.search-input{flex:1;background:#0F0F14;border:1px solid #2A2A36;padding:8px 14px;border-radius:14px;color:white;font-size:13px;}
+body.light .search-input{background:#F9FAFB;border:1px solid #D1D5DB;color:#1F2937;}
 .search-input:focus{outline:none;border-color:#F97316;}
-.filter-select{background:#0D0D16;border:1px solid #252535;padding:8px 10px;border-radius:13px;color:white;font-size:11px;cursor:pointer;}
-body.light .filter-select{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937;}
 
-.card-checkbox{accent-color:#F97316;width:15px;height:15px;cursor:pointer;}
-.bulk-bar{display:none;gap:8px;align-items:center;padding:8px 10px;background:#252535;border-radius:12px;flex-shrink:0;}
+/* CHECKBOX */
+.card-checkbox{width:16px;height:16px;cursor:pointer;accent-color:#F97316;}
+.bulk-bar{display:none;gap:8px;align-items:center;padding:8px;background:#2A2A36;border-radius:12px;margin-top:8px;}
 .bulk-bar.show{display:flex;}
+body.light .bulk-bar{background:#F3F4F6;}
 
-.speed-selector{display:flex;gap:7px;flex-wrap:wrap;margin-top:3px;}
-.speed-btn{padding:5px 11px;border-radius:13px;background:#252535;border:none;color:white;font-size:11px;cursor:pointer;}
+/* SPEED SELECTOR */
+.speed-selector{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;}
+.speed-btn{padding:5px 12px;border-radius:14px;background:#2A2A36;border:none;color:white;font-size:11px;cursor:pointer;}
 body.light .speed-btn{background:#E5E7EB;color:#374151;}
 .speed-btn.active{background:#3B82F6;color:white;}
 
-.tts-btn{display:inline-flex;align-items:center;gap:5px;margin-top:9px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);padding:5px 14px;border-radius:13px;color:inherit;cursor:pointer;font-size:12px;transition:background 0.2s;}
-.tts-btn:hover{background:rgba(255,255,255,0.13);}
+/* TTS */
+.tts-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:6px 16px;border-radius:14px;color:inherit;cursor:pointer;font-size:12px;transition:background 0.2s;}
+.tts-btn:hover{background:rgba(255,255,255,0.15);}
 body.light .tts-btn{background:rgba(0,0,0,0.04);border-color:#D1D5DB;}
-.tts-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px;}
 
-.drag-container{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px;}
-.drag-word{background:#3B82F6;color:white;padding:7px 13px;border-radius:18px;cursor:pointer;user-select:none;font-size:13px;}
-.drag-word:active{transform:scale(0.94);}
-.drag-word.placed{background:#22C55E;}
-.drop-zone{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;min-height:50px;background:rgba(255,255,255,0.05);border-radius:18px;padding:9px;margin-top:9px;border:2px dashed rgba(255,255,255,0.1);}
+/* DRAG */
+.drag-container{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;}
+.drag-word{background:#3B82F6;color:white;padding:8px 14px;border-radius:20px;cursor:pointer;user-select:none;font-size:13px;}
+.drag-word:active{transform:scale(0.95);}
+.drop-zone{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:52px;background:rgba(255,255,255,0.06);border-radius:20px;padding:10px;margin-top:10px;border:2px dashed rgba(255,255,255,0.1);}
 body.light .drop-zone{background:rgba(0,0,0,0.03);border-color:#D1D5DB;}
 
+/* ANTONYM */
 .antonym-hidden{opacity:0;transform:translateY(8px);transition:opacity 0.5s,transform 0.5s;}
 .antonym-visible{opacity:1;transform:translateY(0);}
 
-.kesfet-buttons{display:flex;gap:14px;justify-content:center;margin:14px 0 0;flex-shrink:0;}
-.kesfet-btn{padding:11px 26px;border-radius:36px;font-size:15px;font-weight:700;border:none;cursor:pointer;}
+/* KESFET */
+.kesfet-buttons{display:flex;gap:16px;justify-content:center;margin-top:16px;flex-shrink:0;}
+.kesfet-btn{padding:12px 28px;border-radius:40px;font-size:16px;font-weight:bold;border:none;cursor:pointer;}
 .kesfet-btn.bilmiyorum{background:#EF4444;color:white;}
 .kesfet-btn.biliyorum{background:#22C55E;color:white;}
-.kalan-sayac{font-size:12px;color:#9CA3AF;text-align:center;margin-top:6px;flex-shrink:0;}
+.kalan-sayac{font-size:12px;color:#9CA3AF;text-align:center;margin-top:8px;flex-shrink:0;}
+.kesfet-flip-hint{font-size:11px;color:#6B7280;text-align:center;margin-top:4px;}
 
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stat-card{background:#0D0D16;border-radius:14px;padding:13px;text-align:center;}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.stat-card{background:#0F0F14;border-radius:16px;padding:14px;text-align:center;}
 body.light .stat-card{background:#F9FAFB;border:1px solid #E5E7EB;}
-.stat-number{font-size:24px;font-weight:700;}
-.stat-label{font-size:10px;color:#9CA3AF;margin-top:2px;}
+.stat-number{font-size:26px;font-weight:700;color:#F97316;}
+.stat-label{font-size:11px;color:#9CA3AF;margin-top:2px;}
+.stat-card.green .stat-number{color:#22C55E;}
+.stat-card.blue .stat-number{color:#3B82F6;}
+.stat-card.red .stat-number{color:#EF4444;}
+.stat-card.purple .stat-number{color:#8B5CF6;}
+.stat-card.orange .stat-number{color:#F97316;}
 
-.chart-wrap{background:#0D0D16;border-radius:14px;padding:13px;margin-top:4px;}
-body.light .chart-wrap{background:#F9FAFB;border:1px solid #E5E7EB;}
-.chart-title{font-size:11px;color:#9CA3AF;margin-bottom:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
-.bar-chart{display:flex;align-items:flex-end;gap:3px;height:72px;}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
-.bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;transition:height 0.4s;}
-.bar-lbl{font-size:9px;color:#6B7280;}
-.hard-list{max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;}
-.hard-item{display:flex;justify-content:space-between;align-items:center;padding:7px 11px;background:#0D0D16;border-radius:9px;font-size:12px;}
-body.light .hard-item{background:#F9FAFB;border:1px solid #E5E7EB;}
-.hard-stat{font-size:11px;color:#EF4444;font-weight:600;}
+/* CHART */
+.chart-container{background:#0F0F14;border-radius:16px;padding:14px;margin-top:4px;}
+body.light .chart-container{background:#F9FAFB;border:1px solid #E5E7EB;}
+.chart-title{font-size:12px;color:#9CA3AF;margin-bottom:10px;font-weight:600;}
+.bar-chart{display:flex;align-items:flex-end;gap:4px;height:80px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bar{width:100%;background:#F97316;border-radius:4px 4px 0 0;min-height:4px;transition:height 0.4s;}
+.bar-label{font-size:9px;color:#6B7280;}
+.hard-cards-list{max-height:180px;overflow-y:auto;}
+.hard-card-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0F0F14;border-radius:10px;margin-bottom:6px;font-size:13px;}
+body.light .hard-card-item{background:#F9FAFB;border:1px solid #E5E7EB;}
+.hard-card-stat{font-size:11px;color:#EF4444;font-weight:600;}
 
-.streak-display{text-align:center;padding:14px 0;}
-.streak-fire{font-size:56px;line-height:1;}
-.streak-num{font-size:44px;font-weight:800;color:#F97316;}
-.streak-lbl{font-size:13px;color:#9CA3AF;margin-top:3px;}
-.streak-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:14px;}
-.streak-day{height:26px;border-radius:5px;background:#1A1A24;display:flex;align-items:center;justify-content:center;font-size:9px;color:#6B7280;}
-body.light .streak-day{background:#F3F4F6;}
+/* STREAK MODAL */
+.streak-display{text-align:center;padding:20px 0;}
+.streak-fire{font-size:64px;line-height:1;}
+.streak-number{font-size:48px;font-weight:800;color:#F97316;}
+.streak-label{font-size:14px;color:#9CA3AF;margin-top:4px;}
+.streak-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px;}
+.streak-day{height:28px;border-radius:6px;background:#1A1A24;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6B7280;}
+body.light .streak-day{background:#F3F4F6;color:#9CA3AF;}
 .streak-day.active{background:#F97316;color:white;}
-.streak-day.today{box-shadow:0 0 0 2px #F97316;}
+.streak-day.today{border:2px solid #F97316;}
 
-.session-summary{text-align:center;padding:8px 0;}
-.summary-big{font-size:48px;font-weight:800;}
-.summary-label{font-size:12px;color:#9CA3AF;}
-.summary-stats{display:flex;justify-content:center;gap:22px;margin:14px 0;}
-.summary-stat-num{font-size:22px;font-weight:700;}
-.summary-stat-lbl{font-size:10px;color:#9CA3AF;}
+/* SESSION SUMMARY */
+.session-summary{text-align:center;padding:10px 0;}
+.summary-big{font-size:52px;font-weight:800;color:#22C55E;}
+.summary-label{font-size:13px;color:#9CA3AF;}
+.summary-stats{display:flex;justify-content:center;gap:24px;margin:16px 0;}
+.summary-stat{text-align:center;}
+.summary-stat-num{font-size:24px;font-weight:700;}
+.summary-stat-lbl{font-size:11px;color:#9CA3AF;}
 
-.achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.achievement{background:#0D0D16;border-radius:13px;padding:11px 6px;text-align:center;border:2px solid transparent;cursor:default;}
+/* BADGE/ACHIEVEMENT */
+.achievements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.achievement{background:#0F0F14;border-radius:14px;padding:12px 8px;text-align:center;border:2px solid transparent;}
 body.light .achievement{background:#F9FAFB;}
 .achievement.earned{border-color:#F97316;}
-.achievement-icon{font-size:26px;}
-.achievement-name{font-size:10px;color:#9CA3AF;margin-top:3px;}
+.achievement-icon{font-size:28px;}
+.achievement-name{font-size:10px;color:#9CA3AF;margin-top:4px;}
 .achievement.earned .achievement-name{color:#F97316;font-weight:600;}
 
-.goal-bar{background:#1A1A24;border-radius:12px;padding:11px;}
-body.light .goal-bar{background:#F3F4F6;}
-.goal-bg{background:rgba(255,255,255,0.07);border-radius:7px;height:7px;margin-top:7px;overflow:hidden;}
-body.light .goal-bg{background:#E5E7EB;}
-.goal-fill{height:100%;background:linear-gradient(90deg,#3B82F6,#22C55E);border-radius:7px;transition:width 0.5s;}
+/* DAILY GOAL */
+.daily-goal-bar{background:#1A1A24;border-radius:12px;padding:12px;margin-top:8px;}
+body.light .daily-goal-bar{background:#F3F4F6;}
+.goal-progress-bg{background:rgba(255,255,255,0.08);border-radius:8px;height:8px;margin-top:8px;overflow:hidden;}
+body.light .goal-progress-bg{background:#E5E7EB;}
+.goal-progress-fill{height:100%;background:linear-gradient(90deg,#3B82F6,#22C55E);border-radius:8px;transition:width 0.5s;}
 
-.onboarding-step{text-align:center;padding:10px 0;}
-.onboarding-icon{font-size:52px;margin-bottom:10px;}
-.onboarding-title{font-size:19px;font-weight:700;margin-bottom:7px;}
-.onboarding-desc{font-size:13px;color:#9CA3AF;line-height:1.65;}
-.onboarding-dots{display:flex;justify-content:center;gap:7px;margin-top:14px;}
-.onboarding-dot{width:7px;height:7px;border-radius:50%;background:#252535;cursor:pointer;transition:background 0.2s;}
+/* ONBOARDING */
+.onboarding-step{text-align:center;padding:16px 0;}
+.onboarding-icon{font-size:56px;margin-bottom:12px;}
+.onboarding-title{font-size:20px;font-weight:700;margin-bottom:8px;}
+.onboarding-desc{font-size:14px;color:#9CA3AF;line-height:1.6;}
+.onboarding-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+.onboarding-dot{width:8px;height:8px;border-radius:50%;background:#2A2A36;cursor:pointer;}
 .onboarding-dot.active{background:#F97316;}
 
-.context-menu{position:fixed;background:#161620;border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:6px;z-index:2000;display:none;flex-direction:column;gap:2px;min-width:155px;box-shadow:0 8px 30px rgba(0,0,0,0.5);}
-body.light .context-menu{background:#FFFFFF;border-color:#E5E7EB;}
+/* LONG PRESS MENU */
+.context-menu{position:fixed;background:#1A1A24;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:8px;z-index:2000;display:none;flex-direction:column;gap:2px;min-width:160px;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+body.light .context-menu{background:#FFFFFF;border:1px solid #E5E7EB;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
 .context-menu.show{display:flex;}
-.context-item{padding:9px 13px;border-radius:9px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:9px;}
+.context-item{padding:10px 14px;border-radius:10px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:10px;}
 .context-item:hover{background:rgba(255,255,255,0.06);}
 body.light .context-item:hover{background:#F3F4F6;}
 .context-item.danger{color:#EF4444;}
 
-.notif-dot{width:7px;height:7px;border-radius:50%;background:#22C55E;display:inline-block;margin-left:5px;}
+/* NOTIF INDICATOR */
+.notif-indicator{width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;margin-left:6px;}
 
-.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:18px;font-size:10px;font-weight:600;}
-.tag.kolay{background:rgba(34,197,94,0.14);color:#22C55E;}
-.tag.orta{background:rgba(249,115,22,0.14);color:#F97316;}
-.tag.zor{background:rgba(239,68,68,0.14);color:#EF4444;}
-
-.storage-warn{background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.28);border-radius:11px;padding:8px 13px;font-size:11px;color:#EF4444;display:none;margin:0 12px;flex-shrink:0;}
-.storage-warn.show{display:block;}
-
-.timer-display{font-size:34px;font-weight:800;color:#F97316;font-variant-numeric:tabular-nums;}
-.timer-bar-bg{width:100%;height:5px;background:rgba(255,255,255,0.09);border-radius:5px;margin-top:7px;overflow:hidden;}
-.timer-bar-fill{height:100%;background:#F97316;border-radius:5px;transition:width 0.1s linear;}
-
-.fill-input{background:#1A1A24;border:2px solid #3B82F6;border-radius:11px;padding:8px 13px;color:white;font-size:15px;text-align:center;width:130px;}
-body.light .fill-input{background:#F9FAFB;color:#1F2937;}
-
-.card-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.cd-item{background:#0D0D16;border-radius:10px;padding:9px;text-align:center;}
-body.light .cd-item{background:#F9FAFB;border:1px solid #E5E7EB;}
-.cd-val{font-size:17px;font-weight:700;color:#F97316;}
-.cd-lbl{font-size:10px;color:#9CA3AF;margin-top:1px;}
-
-.multi-deck-item{display:flex;align-items:center;gap:9px;padding:9px 11px;background:#0D0D16;border-radius:11px;}
-body.light .multi-deck-item{background:#F9FAFB;border:1px solid #E5E7EB;}
+/* MULTI-DECK */
 .deck-checkbox{accent-color:#F97316;width:16px;height:16px;cursor:pointer;}
 
-.settings-row{display:flex;flex-direction:column;gap:4px;}
-.settings-label{font-size:12px;color:#9CA3AF;}
-.settings-select{background:#0D0D16;border:1px solid #252535;padding:8px 12px;border-radius:12px;color:white;font-size:13px;width:100%;}
-body.light .settings-select{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937;}
-.settings-input{background:#0D0D16;border:1px solid #252535;padding:8px 12px;border-radius:12px;color:white;font-size:13px;width:100%;}
-body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937;}
+/* CARD DETAIL */
+.card-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.card-detail-item{background:#0F0F14;border-radius:10px;padding:10px;text-align:center;}
+body.light .card-detail-item{background:#F9FAFB;border:1px solid #E5E7EB;}
+.card-detail-val{font-size:18px;font-weight:700;color:#F97316;}
+.card-detail-lbl{font-size:10px;color:#9CA3AF;margin-top:2px;}
 
-.toast{position:fixed;z-index:3000;left:50%;transform:translateX(-50%);border-radius:18px;padding:10px 20px;font-size:13px;font-weight:600;pointer-events:none;opacity:0;transition:opacity 0.3s,transform 0.3s;white-space:nowrap;}
-.toast.show{opacity:1;}
+/* SENTENCE FILL */
+.fill-blank-input{background:#2A2A36;border:2px solid #3B82F6;border-radius:12px;padding:8px 14px;color:white;font-size:16px;text-align:center;width:140px;}
+body.light .fill-blank-input{background:#F9FAFB;border-color:#3B82F6;color:#1F2937;}
 
-@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-@keyframes slideDown{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(-14px)}}
+/* TIMER MODE */
+.timer-display{font-size:36px;font-weight:800;color:#F97316;font-variant-numeric:tabular-nums;}
+.timer-bar{width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:6px;margin-top:8px;overflow:hidden;}
+body.light .timer-bar{background:#E5E7EB;}
+.timer-fill{height:100%;background:#F97316;border-radius:6px;transition:width 0.1s linear;}
 
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-thumb{background:#252535;border-radius:3px;}
+/* CANVAS */
+canvas{border-radius:12px;display:block;margin:0 auto;}
 
-@media(max-width:380px){.word{font-size:22px;}.action-btn{font-size:11px;padding:10px 2px;}.mode-btn{font-size:10px;padding:5px 7px;}}
+/* LABEL/TAG */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.tag.kolay{background:rgba(34,197,94,0.15);color:#22C55E;}
+.tag.orta{background:rgba(249,115,22,0.15);color:#F97316;}
+.tag.zor{background:rgba(239,68,68,0.15);color:#EF4444;}
+
+/* STORAGE WARNING */
+.storage-warning{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:10px 14px;font-size:12px;color:#EF4444;display:none;}
+.storage-warning.show{display:block;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#2A2A36;border-radius:4px;}
+
+/* RESPONSIVE */
+@media(max-width:380px){
+  .word{font-size:24px;}
+  .action-btn{font-size:11px;padding:10px 4px;}
+  .mode-btn{font-size:10px;padding:6px 8px;}
+}
 </style>
 </head>
 <body>
 
 <button class="menu-btn" id="menuBtn">☰</button>
 <button class="quick-add-btn" id="quickAddBtn" title="Hızlı Kart Ekle">＋</button>
-<div class="streak-badge" id="streakBadge">🔥<span id="streakCount">0</span></div>
+<div class="streak-badge" id="streakBadge">🔥 <span id="streakCount">0</span></div>
 
 <div class="overlay" id="overlay"></div>
 
+<!-- CONTEXT MENU -->
 <div class="context-menu" id="contextMenu">
   <div class="context-item" id="ctxDetail">📊 Kart Detayı</div>
   <div class="context-item" id="ctxEdit">✏️ Düzenle</div>
@@ -270,6 +306,7 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   <div class="context-item danger" id="ctxDelete">🗑 Sil</div>
 </div>
 
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     LinguaPrime
@@ -278,8 +315,9 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   <div style="padding:8px 12px;flex-shrink:0;">
     <input class="search-input" id="deckSearch" placeholder="🔍 Deste ara..." style="width:100%;font-size:12px;">
   </div>
-  <div style="padding:0 12px 8px;flex-shrink:0;">
-    <button id="multiDeckStudyBtn" class="btn-primary" style="width:100%;font-size:12px;padding:7px 0;border-radius:11px;">🎯 Çoklu Deste Çalış</button>
+  <!-- Multi-deck çalışma -->
+  <div style="padding:4px 12px 8px;flex-shrink:0;">
+    <button id="multiDeckStudyBtn" class="btn-primary" style="width:100%;font-size:12px;padding:7px;">🎯 Çoklu Deste Çalış</button>
   </div>
   <div class="deck-list-container" id="deckListSidebar"></div>
   <div class="sidebar-footer">
@@ -292,10 +330,11 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
+<!-- MAIN -->
 <div class="main" id="main">
-  <div class="progress-wrap">
+  <div class="progress-bar-container" style="padding-top:calc(8px + env(safe-area-inset-top));margin-top:44px;">
     <div class="progress-text" id="progressText"></div>
-    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBarFill" style="width:0%"></div></div>
   </div>
   <div class="card-area">
     <div class="card-container">
@@ -305,11 +344,10 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
         <div class="card-face card-front">
           <div class="badge" id="frontCat"></div>
           <div class="word" id="frontWord">Kelime</div>
-          <div id="frontSentence" style="font-size:12px;color:#9CA3AF;margin-top:3px;line-height:1.5;"></div>
+          <div id="frontSentence" style="font-size:13px;color:#9CA3AF;margin-top:4px;"></div>
           <div id="testArea"></div>
           <div id="dragArea"></div>
-          <div id="timerArea"></div>
-          <div class="tts-row">
+          <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;justify-content:center;">
             <button class="tts-btn" id="frontTtsBtn">🔊 Dinle</button>
             <button class="tts-btn" id="recordBtn">🎤 Kaydet</button>
           </div>
@@ -317,12 +355,13 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
         <div class="card-face card-back">
           <div class="badge" id="backCat"></div>
           <div class="word" id="backWord">Anlam</div>
-          <div id="backSentence" style="font-size:12px;color:#9CA3AF;margin-top:3px;line-height:1.5;"></div>
-          <div id="antonymArea" class="antonym-hidden" style="font-size:12px;color:#8B5CF6;margin-top:5px;"></div>
+          <div id="backSentence" style="font-size:13px;color:#9CA3AF;margin-top:4px;"></div>
+          <div id="antonymArea" class="antonym-hidden" style="font-size:13px;color:#8B5CF6;margin-top:6px;"></div>
           <button class="tts-btn" id="backTtsBtn">🔊 Dinle</button>
         </div>
       </div>
     </div>
+    <div id="timerArea" style="margin-top:8px;"></div>
   </div>
   <div class="mode-selector" id="modeSelector">
     <button class="mode-btn" data-mode="normal">📖 Normal</button>
@@ -339,13 +378,13 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
     <button class="action-btn hard" id="hardBtn">😓 Zor</button>
     <button class="action-btn good" id="goodBtn">✓ Biliyor</button>
     <button class="action-btn easy" id="easyBtn">⚡ Kolay</button>
-    <button class="action-btn undo-btn" id="undoBtn" title="Geri Al (Z)">↺</button>
+    <button class="action-btn undo-btn" id="undoBtn">↺</button>
   </div>
-  <div class="storage-warn" id="storageWarn">⚠️ Depolama dolmak üzere! JSON yedek alın.</div>
+  <div class="storage-warning" id="storageWarning">⚠️ Depolama alanı dolmak üzere! Lütfen JSON yedek alın.</div>
 </div>
 
-<!-- KEŞFET -->
-<div id="kesfetScreen" style="display:none;flex-direction:column;height:100%;padding-top:calc(env(safe-area-inset-top) + 8px);">
+<!-- KESFET SCREEN -->
+<div id="kesfetScreen" style="display:none;flex-direction:column;height:100%;padding-top:calc(env(safe-area-inset-top));">
   <div class="card-area" style="flex:1;">
     <div class="card-container">
       <div class="card" id="kesfetCard">
@@ -363,18 +402,20 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
         </div>
       </div>
     </div>
-    <div style="font-size:11px;color:#6B7280;text-align:center;margin-top:5px;">Kartı çevirmek için dokun</div>
+    <div class="kesfet-flip-hint">Kartı çevirmek için dokun</div>
   </div>
   <div class="kesfet-buttons">
     <button class="kesfet-btn bilmiyorum" id="kesfetNoBtn">← Bilmiyorum</button>
     <button class="kesfet-btn biliyorum" id="kesfetYesBtn">Biliyorum →</button>
   </div>
   <div id="kesfetKalan" class="kalan-sayac"></div>
-  <button id="kesfetCloseBtn" style="margin:10px auto 18px;background:none;border:none;color:#9CA3AF;cursor:pointer;font-size:14px;display:block;">✕ Keşfet'ten Çık</button>
+  <button id="kesfetCloseBtn" style="margin:10px auto 20px;background:none;border:none;color:#9CA3AF;cursor:pointer;font-size:15px;">✕ Keşfet'ten Çık</button>
 </div>
 
+<!-- ═══════════════ MODALS ═══════════════ -->
+
 <!-- ONBOARDING -->
-<div class="modal" id="onboardingModal" style="max-width:390px;">
+<div class="modal" id="onboardingModal" style="max-width:400px;">
   <div class="onboarding-step" id="onboardingContent"></div>
   <div class="onboarding-dots" id="onboardingDots"></div>
   <div class="modal-buttons">
@@ -383,13 +424,13 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
-<!-- DESTE EKLE -->
+<!-- DECK MODAL -->
 <div class="modal" id="deckModal">
   <h3>➕ Yeni Deste</h3>
   <input type="text" id="deckName" placeholder="Deste adı">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <label class="settings-label">Renk:</label>
-    <input type="color" id="deckColor" value="#F97316" style="width:40px;height:32px;border-radius:8px;border:none;cursor:pointer;padding:0;background:none;">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <label style="font-size:12px;color:#9CA3AF;">Renk:</label>
+    <input type="color" id="deckColor" value="#F97316" style="width:44px;height:32px;border-radius:8px;border:none;cursor:pointer;background:none;padding:0;">
   </div>
   <div class="modal-buttons">
     <button class="btn-secondary" id="cancelDeckBtn">İptal</button>
@@ -397,13 +438,13 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
-<!-- DESTE DÜZENLE -->
+<!-- EDIT DECK MODAL -->
 <div class="modal" id="editDeckModal">
   <h3>✏️ Deste Düzenle</h3>
   <input type="text" id="editDeckName" placeholder="Yeni ad">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <label class="settings-label">Renk:</label>
-    <input type="color" id="editDeckColor" value="#F97316" style="width:40px;height:32px;border-radius:8px;border:none;cursor:pointer;padding:0;background:none;">
+  <div style="display:flex;gap:8px;align-items:center;">
+    <label style="font-size:12px;color:#9CA3AF;">Renk:</label>
+    <input type="color" id="editDeckColor" value="#F97316" style="width:44px;height:32px;border-radius:8px;border:none;cursor:pointer;background:none;padding:0;">
   </div>
   <div class="modal-buttons">
     <button class="btn-secondary" id="cancelEditDeckBtn">İptal</button>
@@ -411,7 +452,7 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
-<!-- KART EKLE/DÜZENLE -->
+<!-- CARD MODAL -->
 <div class="modal" id="cardModal">
   <h3 id="cardModalTitle">Kart Ekle</h3>
   <select id="cardTypeSelect">
@@ -423,7 +464,7 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </select>
   <input type="text" id="cardWord" placeholder="Kelime / Mastar / Kalıp">
   <input type="text" id="cardMeaning" placeholder="Anlam">
-  <input type="text" id="cardSentence" placeholder="Örnek cümle (Boşluk modu için ___ kullan)">
+  <input type="text" id="cardSentence" placeholder="Örnek cümle">
   <input type="text" id="cardAntonym" placeholder="Zıt anlam (opsiyonel)">
   <input type="text" id="cardImageUrl" placeholder="Resim URL (opsiyonel)">
   <select id="cardCategory">
@@ -431,20 +472,22 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </select>
   <select id="cardDifficulty">
     <option value="">Seviye yok</option>
-    <option value="kolay">Kolay</option><option value="orta">Orta</option><option value="zor">Zor</option>
+    <option value="kolay">Kolay</option>
+    <option value="orta">Orta</option>
+    <option value="zor">Zor</option>
   </select>
   <input type="text" id="cardTags" placeholder="Etiketler (virgülle, örn: fiil,günlük)">
-  <div id="verbFields" style="display:none;flex-direction:column;gap:8px;">
+  <div id="verbFields" style="display:none;gap:8px;flex-direction:column;">
     <input type="text" id="verbPresent" placeholder="ik,jij,hij,wij,jullie,zij (virgülle)">
     <input type="text" id="verbPastSingular" placeholder="Geçmiş tekil (ik liep)">
     <input type="text" id="verbPastPlural" placeholder="Geçmiş çoğul (wij liepen)">
     <input type="text" id="verbPerfect" placeholder="Perfectum (gelopen)">
     <select id="verbAuxiliary"><option value="hebben">hebben</option><option value="zijn">zijn</option></select>
   </div>
-  <div id="separableFields" style="display:none;flex-direction:column;gap:8px;">
+  <div id="separableFields" style="display:none;gap:8px;flex-direction:column;">
     <input type="text" id="sepPrefix" placeholder="Önek (op)">
     <input type="text" id="sepBase" placeholder="Kök (bellen)">
-    <input type="text" id="sepExample" placeholder="Ayrılmış cümle (Ik ___ je morgen ___)">
+    <input type="text" id="sepExample" placeholder="Ayrılmış cümle">
   </div>
   <div id="modalFields" style="display:none;">
     <input type="text" id="modalConjugation" placeholder="ik,jij,hij,wij,jullie,zij (virgülle)">
@@ -458,112 +501,114 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
-<!-- MANAGER -->
-<div class="modal" id="managerModal" style="max-width:600px;">
+<!-- MANAGER MODAL -->
+<div class="modal large" id="managerModal" style="max-width:600px;">
   <h3>📋 Kart Yönetimi — <span id="managerDeckName"></span></h3>
-  <div style="display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0;">
-    <button id="addCardFromManagerBtn" class="btn-primary">+ Yeni</button>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button id="addCardFromManagerBtn" class="btn-primary">+ Yeni Kart</button>
     <button id="importCsvBtn" class="btn-secondary">📂 CSV</button>
     <button id="exportCsvBtn" class="btn-secondary">📥 CSV İndir</button>
     <button id="exportJsonBackupBtn" class="btn-secondary">💾 JSON</button>
     <button id="importJsonBackupBtn" class="btn-secondary">🔄 JSON Yükle</button>
-    <button id="closeManagerBtn" class="btn-secondary" style="margin-left:auto;">✕</button>
+    <button id="closeManagerBtn" class="btn-secondary">✕ Kapat</button>
   </div>
   <input type="file" id="csvFileInput" accept=".csv" style="display:none">
   <input type="file" id="jsonFileInput" accept=".json" style="display:none">
-  <div class="search-row">
+  <div class="search-box">
     <input class="search-input" id="managerSearch" placeholder="🔍 Kart ara...">
-    <select class="filter-select" id="managerFilter">
+    <select id="managerFilter" style="background:#0F0F14;border:1px solid #2A2A36;border-radius:14px;padding:8px;color:white;font-size:12px;">
       <option value="">Tümü</option>
       <option value="kolay">Kolay</option>
       <option value="orta">Orta</option>
       <option value="zor">Zor</option>
-      <option value="starred">⭐ Zorlu</option>
+      <option value="hard">⭐ Zorlu</option>
     </select>
   </div>
   <div class="bulk-bar" id="bulkBar">
     <span id="bulkCount" style="font-size:12px;flex:1;">0 seçili</span>
-    <button id="bulkDeleteBtn" class="btn-danger" style="font-size:12px;padding:5px 11px;">Sil</button>
-    <button id="bulkMoveBtn" class="btn-secondary" style="font-size:12px;padding:5px 11px;">Taşı</button>
+    <button id="bulkDeleteBtn" class="btn-danger" style="font-size:12px;padding:6px 12px;">Sil</button>
+    <button id="bulkMoveBtn" class="btn-secondary" style="font-size:12px;padding:6px 12px;">Taşı</button>
   </div>
   <div class="table-container">
     <table>
-      <thead><tr>
-        <th style="width:28px;"><input type="checkbox" id="selectAllCards" class="card-checkbox"></th>
-        <th data-sort="word">Kelime</th>
-        <th data-sort="meaning">Anlam</th>
-        <th data-sort="cardType">Tip</th>
-        <th data-sort="wrong">✗</th>
-        <th>İşlem</th>
-      </tr></thead>
+      <thead>
+        <tr>
+          <th style="width:32px;"><input type="checkbox" id="selectAllCards" class="card-checkbox"></th>
+          <th data-sort="word">Kelime ↕</th>
+          <th data-sort="meaning">Anlam ↕</th>
+          <th data-sort="cardType">Tip ↕</th>
+          <th data-sort="wrong">❌ ↕</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
       <tbody id="cardsTableBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- KART DETAY -->
+<!-- CARD DETAIL MODAL -->
 <div class="modal" id="cardDetailModal">
   <h3>📊 Kart Detayı</h3>
-  <div style="text-align:center;margin-bottom:6px;">
-    <div class="word" id="detailWord" style="font-size:20px;"></div>
-    <div style="font-size:13px;color:#9CA3AF;" id="detailMeaning"></div>
+  <div style="text-align:center;margin-bottom:8px;">
+    <div class="word" id="detailWord" style="font-size:22px;"></div>
+    <div style="font-size:14px;color:#9CA3AF;" id="detailMeaning"></div>
   </div>
   <div class="card-detail-grid" id="cardDetailGrid"></div>
-  <div style="font-size:12px;color:#9CA3AF;margin-top:6px;text-align:center;" id="detailNextReview"></div>
+  <div style="margin-top:8px;font-size:12px;color:#9CA3AF;" id="detailNextReview"></div>
   <div class="modal-buttons"><button class="btn-secondary" id="closeCardDetailBtn">Kapat</button></div>
 </div>
 
-<!-- İSTATİSTİK -->
+<!-- STATS MODAL -->
 <div class="modal" id="statsModal" style="max-width:560px;">
   <h3>📊 İstatistikler</h3>
-  <div style="display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0;">
-    <button class="speed-btn active" id="statCurrent">Bu Deste</button>
-    <button class="speed-btn" id="statAll">Tüm Desteler</button>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+    <button class="speed-btn active" data-deck-filter="current" id="statFilterCurrent">Bu Deste</button>
+    <button class="speed-btn" data-deck-filter="all" id="statFilterAll">Tüm Desteler</button>
   </div>
   <div class="stats-grid" id="statsGrid"></div>
-  <div class="chart-wrap">
-    <div class="chart-title">📅 Son 7 Gün</div>
+  <div class="chart-container">
+    <div class="chart-title">📅 Son 7 Gün Çalışma</div>
     <div class="bar-chart" id="weeklyChart"></div>
   </div>
-  <div class="chart-wrap">
+  <div class="chart-container">
     <div class="chart-title">📂 Kategori Dağılımı</div>
-    <canvas id="catCanvas" width="280" height="90" style="width:280px;height:90px;"></canvas>
+    <canvas id="categoryCanvas" width="280" height="100" style="width:280px;height:100px;"></canvas>
   </div>
-  <div class="chart-wrap">
+  <div class="chart-container">
     <div class="chart-title">💀 En Zor 5 Kart</div>
-    <div class="hard-list" id="hardList"></div>
+    <div class="hard-cards-list" id="hardCardsList"></div>
   </div>
-  <div class="chart-wrap">
+  <div class="chart-container">
     <div class="chart-title">🌳 Öğrenme Ağacı</div>
-    <canvas id="treeCanvas" width="280" height="150" style="width:280px;height:150px;"></canvas>
-  </div>
-  <div class="chart-wrap">
-    <div class="chart-title">📈 Tahmini Tamamlanma</div>
-    <div id="estimateText" style="font-size:13px;color:#9CA3AF;"></div>
+    <canvas id="treeCanvas" width="280" height="160" style="width:280px;height:160px;"></canvas>
   </div>
   <div class="modal-buttons"><button class="btn-secondary" id="closeStatsBtn">Kapat</button></div>
 </div>
 
-<!-- STREAK -->
-<div class="modal" id="streakModal" style="max-width:370px;">
+<!-- STREAK MODAL -->
+<div class="modal" id="streakModal" style="max-width:380px;">
   <div class="streak-display">
     <div class="streak-fire">🔥</div>
-    <div class="streak-num" id="streakModalNum">0</div>
-    <div class="streak-lbl">Günlük Seri</div>
-    <div style="font-size:12px;color:#9CA3AF;margin-top:3px;" id="streakSub"></div>
+    <div class="streak-number" id="streakModalNum">0</div>
+    <div class="streak-label">Günlük Seri</div>
+    <div style="margin-top:8px;font-size:12px;color:#9CA3AF;" id="streakSubtext"></div>
   </div>
-  <div style="font-size:11px;color:#9CA3AF;text-align:center;">Son 28 gün</div>
-  <div class="streak-calendar" id="streakCal"></div>
-  <div style="background:#0D0D16;border-radius:13px;padding:11px;margin-top:4px;">
-    <div style="font-size:11px;color:#9CA3AF;margin-bottom:5px;">🏆 Rekorlar</div>
-    <div style="display:flex;justify-content:space-between;font-size:12px;"><span>En uzun seri:</span><strong style="color:#F97316;" id="bestStreakNum"></strong></div>
-    <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:3px;"><span>Toplam aktif gün:</span><strong style="color:#3B82F6;" id="totalDaysNum"></strong></div>
+  <div style="font-size:12px;color:#9CA3AF;text-align:center;margin-bottom:4px;">Son 28 gün</div>
+  <div class="streak-calendar" id="streakCalendar"></div>
+  <div style="margin-top:12px;background:#0F0F14;border-radius:14px;padding:12px;">
+    <div style="font-size:12px;color:#9CA3AF;margin-bottom:6px;">🏆 Rekorlar</div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;">
+      <span>En uzun seri:</span><strong id="bestStreakNum" style="color:#F97316;"></strong>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:4px;">
+      <span>Toplam gün:</span><strong id="totalStudyDays" style="color:#3B82F6;"></strong>
+    </div>
   </div>
   <div class="modal-buttons"><button class="btn-secondary" id="closeStreakBtn">Kapat</button></div>
 </div>
 
-<!-- OTURUM ÖZETİ -->
-<div class="modal" id="sessionModal" style="max-width:370px;">
+<!-- SESSION SUMMARY MODAL -->
+<div class="modal" id="sessionModal" style="max-width:380px;">
   <h3 style="text-align:center;">🎉 Oturum Tamamlandı!</h3>
   <div class="session-summary">
     <div class="summary-big" id="summaryRate">0%</div>
@@ -573,12 +618,12 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
       <div class="summary-stat"><div class="summary-stat-num" style="color:#EF4444;" id="summaryWrong">0</div><div class="summary-stat-lbl">Yanlış</div></div>
       <div class="summary-stat"><div class="summary-stat-num" style="color:#3B82F6;" id="summaryTime">0dk</div><div class="summary-stat-lbl">Süre</div></div>
     </div>
-    <div id="summaryXP" style="font-size:13px;color:#F97316;font-weight:700;"></div>
-    <div id="summaryBadges" style="margin-top:7px;font-size:22px;"></div>
+    <div id="summaryXP" style="font-size:14px;color:#F97316;font-weight:700;"></div>
+    <div id="summaryBadgeEarned" style="margin-top:8px;"></div>
   </div>
-  <div class="goal-bar">
-    <div style="display:flex;justify-content:space-between;font-size:12px;"><span>🎯 Günlük Hedef</span><span id="goalText">0/20</span></div>
-    <div class="goal-bg"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+  <div class="daily-goal-bar">
+    <div style="display:flex;justify-content:space-between;font-size:12px;"><span>🎯 Günlük Hedef</span><span id="goalProgress">0/20</span></div>
+    <div class="goal-progress-bg"><div class="goal-progress-fill" id="goalProgressFill" style="width:0%"></div></div>
   </div>
   <div class="modal-buttons">
     <button class="btn-secondary" id="closeSessionBtn">Kapat</button>
@@ -586,965 +631,975 @@ body.light .settings-input{background:#F9FAFB;border-color:#D1D5DB;color:#1F2937
   </div>
 </div>
 
-<!-- BAŞARIMLAR -->
+<!-- ACHIEVEMENTS MODAL -->
 <div class="modal" id="achievementsModal">
   <h3>🏅 Başarımlar</h3>
-  <div style="font-size:12px;color:#9CA3AF;">XP: <strong style="color:#F97316;" id="totalXP">0</strong> — Seviye: <strong style="color:#3B82F6;" id="userLevel">1</strong></div>
-  <div class="goal-bg"><div class="goal-fill" id="xpBar" style="width:0%;background:linear-gradient(90deg,#F97316,#EF4444);"></div></div>
+  <div style="margin-bottom:8px;">
+    <div style="font-size:13px;color:#9CA3AF;">XP: <strong style="color:#F97316;" id="totalXP">0</strong> — Seviye: <strong style="color:#3B82F6;" id="userLevel">1</strong></div>
+    <div class="goal-progress-bg" style="margin-top:6px;"><div class="goal-progress-fill" id="xpBar" style="width:0%;background:linear-gradient(90deg,#F97316,#EF4444);"></div></div>
+  </div>
   <div class="achievements-grid" id="achievementsGrid"></div>
   <div class="modal-buttons"><button class="btn-secondary" id="closeAchievementsBtn">Kapat</button></div>
 </div>
 
-<!-- ÇOKLU DESTE -->
+<!-- MULTI DECK MODAL -->
 <div class="modal" id="multiDeckModal">
   <h3>🎯 Çoklu Deste Çalışma</h3>
-  <div style="font-size:12px;color:#9CA3AF;">Birden fazla deste seç:</div>
-  <div id="multiDeckList" style="display:flex;flex-direction:column;gap:7px;max-height:38vh;overflow-y:auto;"></div>
+  <div style="font-size:12px;color:#9CA3AF;margin-bottom:4px;">Birden fazla deste seçerek çalışabilirsin:</div>
+  <div id="multiDeckList" style="display:flex;flex-direction:column;gap:8px;max-height:40vh;overflow-y:auto;"></div>
   <div class="modal-buttons">
-    <button class="btn-secondary" id="cancelMultiBtn">İptal</button>
-    <button class="btn-primary" id="startMultiBtn">Başlat</button>
+    <button class="btn-secondary" id="cancelMultiDeckBtn">İptal</button>
+    <button class="btn-primary" id="startMultiDeckBtn">Başlat</button>
   </div>
 </div>
 
-<!-- TOPLU TAŞI -->
+<!-- BULK MOVE MODAL -->
 <div class="modal" id="bulkMoveModal">
   <h3>📦 Kartları Taşı</h3>
-  <select id="bulkMoveTarget" class="settings-select"></select>
+  <select id="bulkMoveTarget" style="background:#0F0F14;border:1px solid #2A2A36;padding:10px;border-radius:14px;color:white;width:100%;">
+  </select>
   <div class="modal-buttons">
     <button class="btn-secondary" id="cancelBulkMoveBtn">İptal</button>
     <button class="btn-primary" id="confirmBulkMoveBtn">Taşı</button>
   </div>
 </div>
 
-<!-- AYARLAR -->
+<!-- SETTINGS MODAL -->
 <div class="modal" id="settingsModal">
   <h3>⚙️ Ayarlar</h3>
-  <div class="settings-row"><label class="settings-label">🔊 Sesli Okuma</label><select id="ttsToggle" class="settings-select"><option value="on">Açık</option><option value="off">Kapalı</option></select></div>
-  <div class="settings-row"><label class="settings-label">⚡ TTS Hızı</label><div class="speed-selector" id="speedSelector"><button class="speed-btn" data-speed="0.7">0.7x</button><button class="speed-btn" data-speed="0.9">0.9x</button><button class="speed-btn" data-speed="1.0">1.0x</button><button class="speed-btn" data-speed="1.2">1.2x</button></div></div>
-  <div class="settings-row"><label class="settings-label">🔄 Çalışma Yönü</label><select id="directionSelect" class="settings-select"><option value="nltr">NL → TR</option><option value="trnl">TR → NL</option></select></div>
-  <div class="settings-row"><label class="settings-label">🌓 Tema</label><select id="themeSelect" class="settings-select"><option value="dark">Koyu</option><option value="light">Açık</option><option value="auto">Sistem</option></select></div>
-  <div class="settings-row"><label class="settings-label">🎯 Günlük Hedef (kart)</label><input type="number" id="dailyGoalInput" class="settings-input" min="5" max="500"></div>
-  <div class="settings-row"><label class="settings-label">⏱ Hızlı Mod Süresi (saniye)</label><input type="number" id="timedInput" class="settings-input" min="5" max="60"></div>
-  <div class="settings-row">
-    <label class="settings-label">🔔 Bildirim Saatleri <span id="notifIndicator"></span></label>
-    <div style="display:flex;gap:7px;align-items:center;">
-      <input type="time" id="notifTime1" class="settings-input" style="flex:1;">
-      <input type="time" id="notifTime2" class="settings-input" style="flex:1;">
-      <button id="saveNotifBtn" class="btn-primary" style="padding:8px 11px;white-space:nowrap;">Kaydet</button>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">🔊 Sesli Okuma</label><select id="ttsToggle" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"><option value="on">Açık</option><option value="off">Kapalı</option></select></div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">⚡ TTS Hızı</label><div class="speed-selector" id="speedSelector"><button class="speed-btn" data-speed="0.7">0.7x</button><button class="speed-btn" data-speed="0.9">0.9x</button><button class="speed-btn" data-speed="1.0">1.0x</button><button class="speed-btn" data-speed="1.2">1.2x</button></div></div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">🔄 Çalışma Yönü</label><select id="directionSelect" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"><option value="nltr">NL → TR</option><option value="trnl">TR → NL</option></select></div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">🌓 Tema</label><select id="themeSelect" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"><option value="dark">Koyu</option><option value="light">Açık</option><option value="auto">Sistem</option></select></div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">🎯 Günlük Hedef (kart)</label><input type="number" id="dailyGoalInput" min="5" max="200" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"></div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">⏱ Hızlı Mod Süresi (sn)</label><input type="number" id="timedModeInput" min="5" max="60" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"></div>
+    <div>
+      <label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">🔔 Bildirim Saatleri <span id="notifActiveIndicator"></span></label>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="time" id="notifTime1" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;flex:1;">
+        <input type="time" id="notifTime2" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;flex:1;">
+        <button id="saveNotifBtn" class="btn-primary" style="padding:8px 12px;white-space:nowrap;">Kaydet</button>
+      </div>
     </div>
+    <div><label style="font-size:13px;color:#9CA3AF;display:block;margin-bottom:4px;">💾 Otomatik Yedek</label><select id="autoBackupSelect" style="background:#0F0F14;border:1px solid #2A2A36;padding:8px;border-radius:12px;color:white;width:100%;"><option value="off">Kapalı</option><option value="daily">Günlük</option><option value="weekly">Haftalık</option></select></div>
   </div>
-  <div class="settings-row"><label class="settings-label">💾 Otomatik Yedek</label><select id="autoBackupSel" class="settings-select"><option value="off">Kapalı</option><option value="daily">Günlük</option><option value="weekly">Haftalık</option></select></div>
-  <div class="modal-buttons"><button class="btn-secondary" id="closeSettingsBtn">Kapat</button></div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closeSettingsBtn">Kapat</button>
+  </div>
 </div>
 
 <script>
-'use strict';
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // VERİ YAPISI
-// ═══════════════════════════════════════════
-const SK = 'lp_v8';
+// ═══════════════════════════════════════════════
+const STORAGE_KEY = 'lp_ultimate_v8';
 let notifTimers = [];
 let appData = {
-  version:8, decks:[], currentDeckId:null, multiDeckIds:[],
-  cards:[],
-  settings:{
-    mode:'normal', tts:'on', ttsSpeed:1.0, direction:'nltr',
-    theme:'dark', notifTimes:[], showOnlyActiveDeck:false,
-    dailyGoal:20, timedSeconds:15, autoBackup:'off', onboardingDone:false
+  version: 8,
+  decks: [],
+  currentDeckId: null,
+  multiDeckIds: [],
+  cards: [],
+  settings: {
+    mode: 'normal', tts: 'on', ttsSpeed: 1.0,
+    direction: 'nltr', theme: 'dark',
+    notifTimes: [], showOnlyActiveDeck: false,
+    dailyGoal: 20, timedSeconds: 15,
+    autoBackup: 'off', onboardingDone: false
   },
-  stats:{
-    streak:0, bestStreak:0, lastStudyDate:null,
-    studyDays:{}, xp:0, level:1, achievements:{}
+  stats: {
+    streak: 0, bestStreak: 0, lastStudyDate: null,
+    studyDays: {}, // "YYYY-MM-DD": {correct, wrong, cards}
+    xp: 0, level: 1,
+    achievements: {} // achievementId: timestamp
   }
 };
 
-// ═══════════════════════════════════════════
-// OVERLAY STACK
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
+// OVERLAY / MODAL STACK
+// ═══════════════════════════════════════════════
 let overlayStack = [];
-function showOverlay(src){ if(!overlayStack.includes(src)) overlayStack.push(src); document.getElementById('overlay').classList.add('show'); }
-function hideOverlay(src){ overlayStack=overlayStack.filter(s=>s!==src); if(!overlayStack.length) document.getElementById('overlay').classList.remove('show'); }
-function openModal(id){ document.getElementById(id).classList.add('open'); showOverlay('m:'+id); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); hideOverlay('m:'+id); }
-function toggleSidebar(){ const sb=document.getElementById('sidebar'); if(sb.classList.contains('open')) closeSidebar(); else{sb.classList.add('open');showOverlay('sidebar');} }
-function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); hideOverlay('sidebar'); }
+function showOverlay(source) {
+  if (!overlayStack.includes(source)) overlayStack.push(source);
+  document.getElementById('overlay').classList.add('show');
+}
+function hideOverlay(source) {
+  overlayStack = overlayStack.filter(s => s !== source);
+  if (!overlayStack.length) document.getElementById('overlay').classList.remove('show');
+}
+function openModal(id) { document.getElementById(id).classList.add('open'); showOverlay('modal:'+id); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); hideOverlay('modal:'+id); }
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  if (sb.classList.contains('open')) closeSidebar();
+  else { sb.classList.add('open'); showOverlay('sidebar'); }
+}
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); hideOverlay('sidebar'); }
 
-document.getElementById('overlay').onclick=()=>{
-  if(!overlayStack.length) return;
-  const top=overlayStack[overlayStack.length-1];
-  if(top==='sidebar') closeSidebar();
-  else if(top==='ctx'){ hideCtxMenu(); }
-  else if(top.startsWith('m:')) closeModal(top.slice(2));
+document.getElementById('overlay').onclick = () => {
+  if (!overlayStack.length) return;
+  const top = overlayStack[overlayStack.length-1];
+  if (top === 'sidebar') closeSidebar();
+  else if (top.startsWith('modal:')) closeModal(top.replace('modal:',''));
 };
 
-// ═══════════════════════════════════════════
-// STORAGE
-// ═══════════════════════════════════════════
-function genId(){ return crypto.randomUUID(); }
-function save(){
-  try{ localStorage.setItem(SK, JSON.stringify(appData)); }
-  catch(e){ showToast('⚠️ Kayıt hatası! Depolama dolu olabilir.','#EF4444'); }
-  checkStorage();
+// ═══════════════════════════════════════════════
+// STORAGE & MİGRASYON
+// ═══════════════════════════════════════════════
+function generateId() { return crypto.randomUUID(); }
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
+  catch(e) { console.error('Save error', e); }
+  checkStorageUsage();
 }
-function migrate(data){
-  const sd={mode:'normal',tts:'on',ttsSpeed:1.0,direction:'nltr',theme:'dark',notifTimes:[],showOnlyActiveDeck:false,dailyGoal:20,timedSeconds:15,autoBackup:'off',onboardingDone:false};
-  if(!data.settings) data.settings={};
-  for(const k in sd) if(data.settings[k]===undefined) data.settings[k]=sd[k];
-  const ss={streak:0,bestStreak:0,lastStudyDate:null,studyDays:{},xp:0,level:1,achievements:{},timedCards:0};
-  if(!data.stats) data.stats={};
-  for(const k in ss) if(data.stats[k]===undefined) data.stats[k]=ss[k];
-  if(!data.multiDeckIds) data.multiDeckIds=[];
-  if(!Array.isArray(data.multiDeckIds)) data.multiDeckIds=[];
-  data.version=8;
+
+function migrateData(data) {
+  if (!data.settings) data.settings = {};
+  const sd = { mode:'normal', tts:'on', ttsSpeed:1.0, direction:'nltr', theme:'dark', notifTimes:[], showOnlyActiveDeck:false, dailyGoal:20, timedSeconds:15, autoBackup:'off', onboardingDone:false };
+  for (const k in sd) { if (data.settings[k] === undefined) data.settings[k] = sd[k]; }
+  if (!data.stats) data.stats = {};
+  const ss = { streak:0, bestStreak:0, lastStudyDate:null, studyDays:{}, xp:0, level:1, achievements:{} };
+  for (const k in ss) { if (data.stats[k] === undefined) data.stats[k] = ss[k]; }
+  if (!data.multiDeckIds) data.multiDeckIds = [];
+  data.version = 8;
   return data;
 }
-function load(){
-  try{
-    const raw=localStorage.getItem(SK);
-    const oldRaw=localStorage.getItem('lp_ultimate_v7')||localStorage.getItem('lp_ultimate_v8');
-    if(raw){ const parsed=JSON.parse(raw); appData=migrate({...appData,...parsed}); }
-    else if(oldRaw){ appData=migrate({...appData,...JSON.parse(oldRaw)}); save(); }
-  }catch(e){ console.error('Load error',e); }
-  if(!appData.decks.length) appData.decks=[{id:genId(),name:'Genel',color:'#F97316'}];
-  if(!appData.currentDeckId||!appData.decks.find(d=>d.id===appData.currentDeckId))
-    appData.currentDeckId=appData.decks[0].id;
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    // Eski key'den migrate
+    const oldRaw = localStorage.getItem('lp_ultimate_v7');
+    if (raw) appData = migrateData({ ...appData, ...JSON.parse(raw) });
+    else if (oldRaw) { appData = migrateData({ ...appData, ...JSON.parse(oldRaw) }); save(); }
+  } catch(e) { console.error(e); }
+  if (!appData.decks.length) appData.decks = [{ id: generateId(), name: 'Genel', color: '#F97316' }];
+  if (!appData.currentDeckId || !appData.decks.find(d => d.id === appData.currentDeckId))
+    appData.currentDeckId = appData.decks[0].id;
   applyTheme();
 }
-function checkStorage(){
-  try{
-    const used=new Blob([localStorage.getItem(SK)||'']).size;
-    document.getElementById('storageWarn').classList.toggle('show', used>4.5*1024*1024);
-  }catch(e){}
+
+function checkStorageUsage() {
+  try {
+    const used = JSON.stringify(localStorage).length;
+    const limit = 5 * 1024 * 1024;
+    const el = document.getElementById('storageWarning');
+    if (used > limit * 0.85) el.classList.add('show');
+    else el.classList.remove('show');
+  } catch(e) {}
 }
 
-// ═══════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════
-function showToast(msg, bg='#1A1A24', bottom=100){
-  const el=document.createElement('div');
-  el.className='toast';
-  el.style.cssText=`bottom:${bottom}px;background:${bg};color:${bg==='#1A1A24'?'white':'#000'};border:1px solid rgba(255,255,255,0.12);`;
-  el.textContent=msg;
-  document.body.appendChild(el);
-  requestAnimationFrame(()=>el.classList.add('show'));
-  setTimeout(()=>{ el.style.animation='slideDown 0.3s forwards'; setTimeout(()=>el.remove(),350); },2200);
+// ═══════════════════════════════════════════════
+// KART FONKSİYONLARI
+// ═══════════════════════════════════════════════
+function getCards(deckIds) {
+  const ids = deckIds || (appData.multiDeckIds.length ? appData.multiDeckIds : [appData.currentDeckId]);
+  return appData.cards.filter(c => ids.includes(c.deckId));
+}
+function getCurrentDeckCards() { return appData.cards.filter(c => c.deckId === appData.currentDeckId); }
+function getDueCards() {
+  const now = Date.now();
+  return getCards().filter(c => (c.due||0) <= now).sort((a,b) => (a.due||0)-(b.due||0));
 }
 
-// ═══════════════════════════════════════════
-// KART CRUD
-// ═══════════════════════════════════════════
-function getCards(deckIds){
-  const ids=deckIds||(appData.multiDeckIds.length?appData.multiDeckIds:[appData.currentDeckId]);
-  return appData.cards.filter(c=>ids.includes(c.deckId));
-}
-function getCurCards(){ return appData.cards.filter(c=>c.deckId===appData.currentDeckId); }
-function getDueCards(){
-  const now=Date.now();
-  return getCards().filter(c=>(c.due||0)<=now).sort((a,b)=>(a.due||0)-(b.due||0));
-}
-function getAllDueCards(){
-  const now=Date.now();
-  return appData.cards.filter(c=>(c.due||0)<=now);
-}
-function addCard(data){
-  appData.cards.push({id:genId(),deckId:appData.currentDeckId,correct:0,wrong:0,repetitions:0,interval:0,ease:2.5,due:Date.now(),starred:false,...data});
+function addCard(data) {
+  appData.cards.push({ id:generateId(), deckId:appData.currentDeckId, correct:0, wrong:0, repetitions:0, interval:0, ease:2.5, due:Date.now(), starred:false, ...data });
   save(); nextCard();
 }
-function updateCard(id,data){
-  const i=appData.cards.findIndex(c=>c.id===id);
-  if(i!==-1){appData.cards[i]={...appData.cards[i],...data};save();nextCard();}
+function updateCard(id, data) {
+  const idx = appData.cards.findIndex(c => c.id === id);
+  if (idx !== -1) { appData.cards[idx] = { ...appData.cards[idx], ...data }; save(); nextCard(); }
 }
-function deleteCard(id){ appData.cards=appData.cards.filter(c=>c.id!==id); save(); nextCard(); }
+function deleteCard(id) { appData.cards = appData.cards.filter(c => c.id !== id); save(); nextCard(); }
 
-// ═══════════════════════════════════════════
-// SM-2
-// ═══════════════════════════════════════════
-function sm2(card, quality){
-  const qm={again:1,hard:2,good:4,easy:5};
-  let q=qm[quality],reps=card.repetitions||0,iv=card.interval||0,ease=card.ease||2.5;
-  if(q<3){reps=0;iv=1;}
-  else{
+// ═══════════════════════════════════════════════
+// SM2
+// ═══════════════════════════════════════════════
+function updateSM2(card, quality) {
+  const qMap = { again:1, hard:2, good:4, easy:5 };
+  let q = qMap[quality], reps = card.repetitions||0, iv = card.interval||0, ease = card.ease||2.5;
+  if (q < 3) { reps=0; iv=1; }
+  else {
     reps++;
-    if(reps===1)iv=1; else if(reps===2)iv=6; else iv=Math.round(iv*ease);
-    ease+=0.1-(5-q)*(0.08+(5-q)*0.02);
-    if(ease<1.3)ease=1.3;
+    if (reps===1) iv=1; else if (reps===2) iv=6; else iv=Math.round(iv*ease);
+    ease += 0.1-(5-q)*(0.08+(5-q)*0.02);
+    if (ease<1.3) ease=1.3;
   }
-  if(quality==='easy')iv=Math.round(iv*1.3);
-  if(quality==='hard')iv=Math.max(1,Math.round(iv*0.8));
-  card.due=Date.now()+(quality==='again'?600000:iv*86400000);
+  if (quality==='easy') iv=Math.round(iv*1.3);
+  if (quality==='hard') iv=Math.max(1,Math.round(iv*0.8));
+  card.due = Date.now() + (quality==='again' ? 600000 : iv*86400000);
   card.repetitions=reps; card.interval=iv; card.ease=ease;
   save();
 }
 
-// ═══════════════════════════════════════════
-// STREAK & GÜNLÜK KAYIT
-// ═══════════════════════════════════════════
-function todayKey(){ return new Date().toISOString().slice(0,10); }
-function recordStudy(isCorrect){
-  const today=todayKey();
-  if(!appData.stats.studyDays[today]) appData.stats.studyDays[today]={correct:0,wrong:0,cards:0};
-  appData.stats.studyDays[today][isCorrect?'correct':'wrong']++;
-  appData.stats.studyDays[today].cards++;
-  const last=appData.stats.lastStudyDate;
-  const yest=new Date(); yest.setDate(yest.getDate()-1);
-  const yKey=yest.toISOString().slice(0,10);
-  if(last===today){/* same day, no change */}
-  else if(last===yKey||!last){ appData.stats.streak++; if(appData.stats.streak>appData.stats.bestStreak) appData.stats.bestStreak=appData.stats.streak; }
-  else{ appData.stats.streak=1; }
-  appData.stats.lastStudyDate=today;
-  document.getElementById('streakCount').textContent=appData.stats.streak;
-}
+// ═══════════════════════════════════════════════
+// STREAK & İSTATİSTİK GÜNCELLEME
+// ═══════════════════════════════════════════════
+function getTodayKey() { return new Date().toISOString().slice(0,10); }
+function recordStudyActivity(correct, wrong) {
+  const today = getTodayKey();
+  if (!appData.stats.studyDays[today]) appData.stats.studyDays[today] = { correct:0, wrong:0, cards:0 };
+  appData.stats.studyDays[today].correct += correct ? 1 : 0;
+  appData.stats.studyDays[today].wrong += wrong ? 1 : 0;
+  appData.stats.studyDays[today].cards += 1;
 
-// ═══════════════════════════════════════════
-// XP & SEVİYE
-// ═══════════════════════════════════════════
-const XP={easy:10,good:7,hard:3,again:0};
-const LVL=[0,100,250,500,1000,2000,4000,7000,11000,16000,25000,40000];
-function addXP(quality){
-  const xp=XP[quality]||0;
-  appData.stats.xp+=xp;
-  const newLvl=calcLevel();
-  if(newLvl>appData.stats.level){
-    appData.stats.level=newLvl;
-    showToast(`🎉 Seviye ${newLvl}!`,'#F97316',140);
+  // Streak güncelle
+  const last = appData.stats.lastStudyDate;
+  const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+  const yKey = yesterday.toISOString().slice(0,10);
+  if (last === today) { /* aynı gün */ }
+  else if (last === yKey || !last) {
+    appData.stats.streak++;
+    if (appData.stats.streak > appData.stats.bestStreak) appData.stats.bestStreak = appData.stats.streak;
+  } else {
+    appData.stats.streak = 1;
   }
-  return xp;
-}
-function calcLevel(){
-  let l=1;
-  for(let i=1;i<LVL.length;i++) if(appData.stats.xp>=LVL[i]) l=i+1;
-  return Math.min(l,LVL.length);
-}
-
-// ═══════════════════════════════════════════
-// BAŞARIMLAR
-// ═══════════════════════════════════════════
-const BADGES=[
-  {id:'first',icon:'🌱',name:'İlk Adım',desc:'İlk kartını çalış',check:()=>appData.stats.xp>=7},
-  {id:'s3',icon:'🔥',name:'3 Gün Seri',desc:'3 gün üst üste',check:()=>appData.stats.streak>=3},
-  {id:'s7',icon:'⚡',name:'Haftalık',desc:'7 gün üst üste',check:()=>appData.stats.streak>=7},
-  {id:'s30',icon:'💎',name:'Aylık',desc:'30 gün üst üste',check:()=>appData.stats.streak>=30},
-  {id:'c10',icon:'📚',name:'10 Kart',desc:'10 kart öğren',check:()=>learnedCount()>=10},
-  {id:'c50',icon:'📖',name:'50 Kart',desc:'50 kart öğren',check:()=>learnedCount()>=50},
-  {id:'c100',icon:'🏆',name:'100 Kart',desc:'100 kart öğren',check:()=>learnedCount()>=100},
-  {id:'x500',icon:'⭐',name:'500 XP',desc:'500 XP kazan',check:()=>appData.stats.xp>=500},
-  {id:'x2k',icon:'🌟',name:'2000 XP',desc:'2000 XP kazan',check:()=>appData.stats.xp>=2000},
-  {id:'d3',icon:'📂',name:'Koleksiyoner',desc:'3 deste oluştur',check:()=>appData.decks.length>=3},
-  {id:'perf',icon:'✨',name:'Mükemmel',desc:'Oturumda sıfır hata (≥5 kart)',check:()=>sess.wrong===0&&sess.correct>=5},
-  {id:'spd',icon:'🚀',name:'Hız Ustası',desc:'Hızlı modda 10 kart',check:()=>(appData.stats.timedCards||0)>=10},
-];
-function learnedCount(){ return appData.cards.filter(c=>(c.repetitions||0)>=2).length; }
-function checkBadges(){
-  BADGES.forEach(b=>{
-    if(!appData.stats.achievements[b.id]&&b.check()){
-      appData.stats.achievements[b.id]=Date.now();
-      showToast(`${b.icon} Başarım: ${b.name}`,'#1A1A24',160);
-    }
-  });
+  appData.stats.lastStudyDate = today;
+  document.getElementById('streakCount').textContent = appData.stats.streak;
   save();
 }
 
-// ═══════════════════════════════════════════
-// OTURUM
-// ═══════════════════════════════════════════
-let sess={correct:0,wrong:0,start:Date.now(),xp:0,cards:0};
-function resetSess(){ sess={correct:0,wrong:0,start:Date.now(),xp:0,cards:0}; }
+// ═══════════════════════════════════════════════
+// XP & SEVİYE
+// ═══════════════════════════════════════════════
+const XP_PER_ANSWER = { easy:10, good:7, hard:3, again:0 };
+const LEVEL_THRESHOLDS = [0,100,250,500,1000,2000,4000,7000,11000,16000,25000];
+function addXP(quality) {
+  const xp = XP_PER_ANSWER[quality] || 0;
+  appData.stats.xp += xp;
+  const newLevel = LEVEL_THRESHOLDS.findLastIndex ? LEVEL_THRESHOLDS.findLastIndex(t => appData.stats.xp >= t) + 1 : calcLevel();
+  if (newLevel > appData.stats.level) { appData.stats.level = newLevel; showLevelUp(newLevel); }
+  return xp;
+}
+function calcLevel() {
+  let l = 1;
+  for (let i = 1; i < LEVEL_THRESHOLDS.length; i++) { if (appData.stats.xp >= LEVEL_THRESHOLDS[i]) l = i+1; }
+  return l;
+}
+function showLevelUp(level) {
+  const div = document.createElement('div');
+  div.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:#F97316;color:black;padding:10px 20px;border-radius:20px;font-weight:700;z-index:3000;animation:fadeInOut 2.5s forwards;';
+  div.textContent = `🎉 Seviye ${level}!`;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(), 2500);
+}
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
+// BAŞARIMLAR
+// ═══════════════════════════════════════════════
+const ACHIEVEMENTS = [
+  { id:'first_card', icon:'🌱', name:'İlk Adım', desc:'İlk kartını öğren', check: () => (appData.stats.xp||0) >= 7 },
+  { id:'streak_3', icon:'🔥', name:'3 Gün Seri', desc:'3 gün üst üste çalış', check: () => appData.stats.streak >= 3 },
+  { id:'streak_7', icon:'⚡', name:'Haftalık', desc:'7 gün üst üste', check: () => appData.stats.streak >= 7 },
+  { id:'streak_30', icon:'💎', name:'Aylık', desc:'30 gün üst üste', check: () => appData.stats.streak >= 30 },
+  { id:'cards_10', icon:'📚', name:'10 Kart', desc:'10 kart öğren', check: () => getLearnedCount() >= 10 },
+  { id:'cards_50', icon:'📖', name:'50 Kart', desc:'50 kart öğren', check: () => getLearnedCount() >= 50 },
+  { id:'cards_100', icon:'🏆', name:'100 Kart', desc:'100 kart öğren', check: () => getLearnedCount() >= 100 },
+  { id:'xp_500', icon:'⭐', name:'500 XP', desc:'500 XP kazan', check: () => appData.stats.xp >= 500 },
+  { id:'xp_2000', icon:'🌟', name:'2000 XP', desc:'2000 XP kazan', check: () => appData.stats.xp >= 2000 },
+  { id:'deck_3', icon:'📂', name:'Koleksiyoner', desc:'3 deste oluştur', check: () => appData.decks.length >= 3 },
+  { id:'perfect_session', icon:'✨', name:'Mükemmel', desc:'Bir oturumda sıfır hata', check: () => sessionStats.wrong === 0 && sessionStats.correct >= 5 },
+  { id:'speed_10', icon:'⚡', name:'Hız Ustası', desc:'Hızlı modda 10 kart', check: () => (appData.stats.timedCards||0) >= 10 },
+];
+function getLearnedCount() { return appData.cards.filter(c => (c.repetitions||0) >= 2).length; }
+function checkAchievements() {
+  let newOnes = [];
+  ACHIEVEMENTS.forEach(a => {
+    if (!appData.stats.achievements[a.id] && a.check()) {
+      appData.stats.achievements[a.id] = Date.now();
+      newOnes.push(a);
+    }
+  });
+  if (newOnes.length) { save(); newOnes.forEach(showAchievementToast); }
+}
+function showAchievementToast(a) {
+  const div = document.createElement('div');
+  div.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#1A1A24;border:1px solid #F97316;border-radius:16px;padding:12px 20px;z-index:3000;display:flex;align-items:center;gap:10px;font-size:14px;animation:fadeInOut 3s forwards;';
+  div.innerHTML = `<span style="font-size:24px;">${a.icon}</span><div><div style="font-weight:700;color:#F97316;">${a.name}</div><div style="font-size:11px;color:#9CA3AF;">${a.desc}</div></div>`;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(), 3000);
+}
+
+// ═══════════════════════════════════════════════
+// OTURUM İSTATİSTİKLERİ
+// ═══════════════════════════════════════════════
+let sessionStats = { correct:0, wrong:0, startTime:Date.now(), xpEarned:0, cards:0 };
+function resetSessionStats() { sessionStats = { correct:0, wrong:0, startTime:Date.now(), xpEarned:0, cards:0 }; }
+
+// ═══════════════════════════════════════════════
 // ANSWER / UNDO
-// ═══════════════════════════════════════════
-let currentCard=null, currentHint=null, currentVP=0;
-let lastAction=null;
-let timerIv=null;
+// ═══════════════════════════════════════════════
+let lastAnswer = null;
+let currentCard = null, currentHintPattern = null, currentVerbPersonIdx = 0;
+let timerInterval = null;
 
-function answer(quality){
-  if(!currentCard) return;
+function answer(quality) {
+  if (!currentCard) return;
   stopTimer();
-  const xp=addXP(quality);
-  sess.xp+=xp; sess.cards++;
-  if(quality==='again'){ currentCard.wrong=(currentCard.wrong||0)+1; sess.wrong++; recordStudy(false); }
-  else{ currentCard.correct=(currentCard.correct||0)+1; sess.correct++; recordStudy(true); }
-  if(appData.settings.mode==='timed') appData.stats.timedCards=(appData.stats.timedCards||0)+1;
-  // Undo için snapshot
-  lastAction={cardSnap:{...currentCard}, quality};
-  sm2(currentCard, quality);
-  checkBadges();
+  lastAnswer = { card: { ...currentCard }, quality };
+  const xp = addXP(quality);
+  sessionStats.xpEarned += xp;
+  sessionStats.cards++;
+  if (quality === 'again') { currentCard.wrong=(currentCard.wrong||0)+1; sessionStats.wrong++; recordStudyActivity(false,true); }
+  else { currentCard.correct=(currentCard.correct||0)+1; sessionStats.correct++; recordStudyActivity(true,false); }
+  if (appData.settings.mode==='timed') appData.stats.timedCards = (appData.stats.timedCards||0)+1;
+  updateSM2(currentCard, quality);
+  checkAchievements();
   nextCard();
 }
 
-function undoLast(){
-  if(!lastAction){ showToast('Geri alınacak işlem yok','#252535'); return; }
-  const{cardSnap,quality}=lastAction;
-  const i=appData.cards.findIndex(c=>c.id===cardSnap.id);
-  if(i!==-1){
-    appData.cards[i]={...cardSnap, due:Date.now()};
-    if(quality==='again'){ sess.wrong=Math.max(0,sess.wrong-1); }
-    else{ sess.correct=Math.max(0,sess.correct-1); }
-    sess.xp-=XP[quality]||0;
-    appData.stats.xp=Math.max(0,appData.stats.xp-(XP[quality]||0));
+function undoLastAnswer() {
+  if (!lastAnswer) return;
+  const { card, quality } = lastAnswer;
+  const idx = appData.cards.findIndex(c => c.id === card.id);
+  if (idx !== -1) {
+    appData.cards[idx] = { ...card, due: Date.now() }; // geri al
+    if (quality === 'again') { sessionStats.wrong = Math.max(0, sessionStats.wrong-1); }
+    else { sessionStats.correct = Math.max(0, sessionStats.correct-1); }
+    sessionStats.xpEarned -= (XP_PER_ANSWER[quality]||0);
+    appData.stats.xp = Math.max(0, appData.stats.xp - (XP_PER_ANSWER[quality]||0));
     save();
   }
-  lastAction=null;
-  showToast('↺ Geri alındı','#8B5CF6');
+  lastAnswer = null;
   nextCard();
 }
 
-// ═══════════════════════════════════════════
-// KART RENDER
-// ═══════════════════════════════════════════
-let sessionTotal=0;
-function nextCard(){
-  currentHint=null;
-  currentVP=Math.floor(Math.random()*6);
-  stopTimer();
-  const due=getDueCards();
-  if(sessionTotal===0) sessionTotal=due.length;
-  const done=Math.max(0,sessionTotal-due.length);
-  const pct=sessionTotal>0?Math.round(done/sessionTotal*100):100;
-  document.getElementById('progressText').innerText=due.length>0?`${due.length} kart kaldı`:'🎉 Tamamlandı!';
-  document.getElementById('progressFill').style.width=pct+'%';
-  if(!due.length){
-    sessionTotal=0; currentCard=null;
-    ['frontWord','backWord','frontSentence','backSentence','testArea','dragArea','timerArea','antonymArea'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
-    document.getElementById('frontWord').textContent='🏆';
-    document.getElementById('frontCat').textContent='';
-    document.getElementById('backCat').textContent='';
+// ═══════════════════════════════════════════════
+// KART GÖSTERME
+// ═══════════════════════════════════════════════
+let sessionTotal = 0;
+function nextCard() {
+  currentHintPattern = null;
+  currentVerbPersonIdx = Math.floor(Math.random()*6);
+  const due = getDueCards();
+  if (sessionTotal === 0) sessionTotal = due.length;
+  const done = Math.max(0, sessionTotal - due.length);
+  const pct = sessionTotal > 0 ? Math.round(done/sessionTotal*100) : 100;
+  document.getElementById('progressText').innerText = due.length > 0 ? `${due.length} kart kaldı` : '🎉 Tamamlandı!';
+  document.getElementById('progressBarFill').style.width = pct + '%';
+  if (!due.length) {
+    sessionTotal = 0;
+    currentCard = null;
+    document.getElementById('frontWord').innerHTML = '🏆';
+    document.getElementById('backWord').innerHTML = '';
+    ['frontSentence','backSentence','testArea','dragArea','antonymArea','frontCat','backCat'].forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML=''; });
     showSessionSummary();
     return;
   }
-  currentCard=due[0];
-  renderCard();
+  currentCard = due[0];
+  renderCurrentCard();
 }
 
-function frontText(){ return !currentCard?'':appData.settings.direction==='nltr'?currentCard.word:currentCard.meaning; }
-function backText(){ return !currentCard?'':appData.settings.direction==='nltr'?currentCard.meaning:currentCard.word; }
+function getFrontText() { if(!currentCard) return ''; return appData.settings.direction==='nltr'?currentCard.word:currentCard.meaning; }
+function getBackText() { if(!currentCard) return ''; return appData.settings.direction==='nltr'?currentCard.meaning:currentCard.word; }
 
-function verbQ(card){
-  const tenses=[];
-  if(card.verbPresent) tenses.push({name:'şimdiki zaman',isP:true});
-  if(card.verbPastSingular) tenses.push({name:'geçmiş tekil',f:'verbPastSingular'});
-  if(card.verbPastPlural) tenses.push({name:'geçmiş çoğul',f:'verbPastPlural'});
-  if(card.verbPerfect) tenses.push({name:'perfectum',isPf:true});
-  if(!tenses.length) return{q:card.word,a:card.meaning};
-  const ch=tenses[Math.floor(Math.random()*tenses.length)];
-  const persons=['ik','jij','hij','wij','jullie','zij'];
-  let a='',pp='';
-  if(ch.isP){const forms=(card.verbPresent||'').split(',');a=(forms[currentVP]||'').trim();pp=` (${persons[currentVP]})`;}
-  else if(ch.isPf){a=`${card.verbAuxiliary||'hebben'} ${card.verbPerfect}`;}
-  else{a=card[ch.f]||'';}
-  return{q:`${card.word} - ${ch.name}${pp}`,a};
+function getVerbQuestion(card) {
+  const tenses = [];
+  if (card.verbPresent) tenses.push({name:'şimdiki zaman',isPresent:true});
+  if (card.verbPastSingular) tenses.push({name:'geçmiş tekil',field:'verbPastSingular'});
+  if (card.verbPastPlural) tenses.push({name:'geçmiş çoğul',field:'verbPastPlural'});
+  if (card.verbPerfect) tenses.push({name:'perfectum',isPerfect:true});
+  if (!tenses.length) return {question:card.word, answer:card.meaning};
+  const chosen = tenses[Math.floor(Math.random()*tenses.length)];
+  const persons = ['ik','jij','hij','wij','jullie','zij'];
+  let ans='', pp='';
+  if (chosen.isPresent) { const forms=(card.verbPresent||'').split(','); ans=(forms[currentVerbPersonIdx]||'').trim(); pp=` (${persons[currentVerbPersonIdx]})`; }
+  else if (chosen.isPerfect) { ans=`${card.verbAuxiliary||'hebben'} ${card.verbPerfect}`; }
+  else { ans=card[chosen.field]||''; }
+  return {question:`${card.word} - ${chosen.name}${pp}`, answer:ans};
 }
 
-function renderCard(){
-  if(!currentCard) return;
-  const ft=frontText(), bt=backText();
-  document.getElementById('frontWord').textContent=ft;
-  document.getElementById('backWord').textContent=bt;
-  document.getElementById('frontCat').textContent=currentCard.category||'';
-  document.getElementById('backCat').textContent=currentCard.category||'';
-  document.getElementById('frontSentence').textContent=currentCard.sentence||'';
-  document.getElementById('backSentence').textContent=currentCard.sentence||'';
+function renderCurrentCard() {
+  if (!currentCard) return;
+  const ft=getFrontText(), bt=getBackText();
+  document.getElementById('frontWord').innerHTML = escapeHtml(ft);
+  document.getElementById('backWord').innerHTML = escapeHtml(bt);
+  document.getElementById('frontCat').innerText = currentCard.category||'';
+  document.getElementById('backCat').innerText = currentCard.category||'';
+  document.getElementById('frontSentence').innerHTML = currentCard.sentence ? `<em>${escapeHtml(currentCard.sentence)}</em>` : '';
+  document.getElementById('backSentence').innerHTML = currentCard.sentence ? `<em>${escapeHtml(currentCard.sentence)}</em>` : '';
 
-  // Resim
-  const oldImg=document.getElementById('cardImg');
-  if(oldImg) oldImg.remove();
-  if(currentCard.imageUrl){
-    const img=document.createElement('img');
-    img.id='cardImg'; img.src=currentCard.imageUrl;
-    img.style.cssText='max-width:110px;max-height:90px;border-radius:10px;margin:6px auto;display:block;object-fit:cover;';
-    img.onerror=()=>img.remove();
+  // Resim gösterimi
+  const existImg = document.getElementById('cardImageEl');
+  if (existImg) existImg.remove();
+  if (currentCard.imageUrl) {
+    const img = document.createElement('img');
+    img.id = 'cardImageEl';
+    img.src = currentCard.imageUrl;
+    img.style.cssText = 'max-width:120px;max-height:100px;border-radius:12px;margin:8px auto;display:block;object-fit:cover;';
+    img.onerror = () => img.remove();
     document.getElementById('frontWord').after(img);
   }
 
-  const ant=document.getElementById('antonymArea');
-  ant.textContent=currentCard.antonym?`↔ Zıt: ${currentCard.antonym}`:'';
-  ant.className='antonym-hidden';
+  const antArea = document.getElementById('antonymArea');
+  antArea.innerHTML = currentCard.antonym ? `↔ Zıt: ${escapeHtml(currentCard.antonym)}` : '';
+  antArea.className = 'antonym-hidden';
   document.getElementById('card').classList.remove('flipped');
-  document.getElementById('testArea').innerHTML='';
-  document.getElementById('dragArea').innerHTML='';
-  document.getElementById('timerArea').innerHTML='';
+  document.getElementById('testArea').innerHTML = '';
+  document.getElementById('dragArea').innerHTML = '';
+  document.getElementById('timerArea').innerHTML = '';
+  stopTimer();
 
   // Özel tipler
-  let fw=ft, bw=bt;
-  if(currentCard.cardType==='verb'){const vq=verbQ(currentCard);fw=vq.q;bw=vq.a;document.getElementById('frontWord').textContent=fw;document.getElementById('backWord').textContent=bw;}
-  if(currentCard.cardType==='separable'&&currentCard.sepExample){fw=currentCard.sepExample;bw=`${currentCard.sepPrefix} ${currentCard.sepBase}`;document.getElementById('frontWord').textContent=fw;document.getElementById('backWord').textContent=bw;}
-  if(currentCard.cardType==='modal'&&currentCard.modalConjugation){const forms=currentCard.modalConjugation.split(',');const persons=['ik','jij','hij','wij','jullie','zij'];document.getElementById('frontWord').textContent=`${currentCard.word} - ${persons[currentVP]} (şimdiki)`;document.getElementById('backWord').textContent=(forms[currentVP]||'').trim();}
+  if (currentCard.cardType==='verb') { const vq=getVerbQuestion(currentCard); document.getElementById('frontWord').innerHTML=escapeHtml(vq.question); document.getElementById('backWord').innerHTML=escapeHtml(vq.answer); }
+  if (currentCard.cardType==='separable'&&currentCard.sepExample) { document.getElementById('frontWord').innerHTML=escapeHtml(currentCard.sepExample); document.getElementById('backWord').innerHTML=escapeHtml(`${currentCard.sepPrefix} ${currentCard.sepBase}`); }
+  if (currentCard.cardType==='modal'&&currentCard.modalConjugation) { const forms=currentCard.modalConjugation.split(','); const persons=['ik','jij','hij','wij','jullie','zij']; document.getElementById('frontWord').innerHTML=`${escapeHtml(currentCard.word)} - ${persons[currentVerbPersonIdx]} (şimdiki)`; document.getElementById('backWord').innerHTML=escapeHtml((forms[currentVerbPersonIdx]||'').trim()); }
+  if (currentCard.cardType==='pattern') { document.getElementById('frontWord').innerHTML=escapeHtml(currentCard.word); document.getElementById('backWord').innerHTML=escapeHtml(currentCard.meaning); }
 
-  setTimeout(()=>{if(ant.textContent)ant.className='antonym-visible';},750);
+  setTimeout(()=>{ if(antArea.innerHTML) antArea.className='antonym-visible'; }, 800);
 
-  const bwTxt=document.getElementById('backWord').textContent;
-  const m=appData.settings.mode;
-  if(m==='test') renderTest(bwTxt);
-  else if(m==='hint') renderHint(bwTxt);
-  else if(m==='mcq') renderMCQ(bwTxt);
-  else if(m==='article') renderArticle();
-  else if(m==='drag') renderDrag();
-  else if(m==='fill') renderFill();
-  else if(m==='timed') renderTimed(bwTxt);
+  const bw = document.getElementById('backWord').textContent;
+  if (appData.settings.mode==='test') renderTestMode(bw);
+  else if (appData.settings.mode==='hint') renderHintMode(bw);
+  else if (appData.settings.mode==='mcq') renderMCQMode(bw);
+  else if (appData.settings.mode==='article') renderArticleMode();
+  else if (appData.settings.mode==='drag') renderDragMode();
+  else if (appData.settings.mode==='fill') renderFillMode();
+  else if (appData.settings.mode==='timed') renderTimedMode(bw);
 }
 
-// ═══════════════════════════════════════════
-// MODLAR
-// ═══════════════════════════════════════════
-function mkInput(ph,style=''){
-  const i=document.createElement('input');i.placeholder=ph;
-  i.style.cssText=`padding:9px 14px;border-radius:20px;border:2px solid #252535;background:#0D0D16;color:white;font-size:14px;text-align:center;width:85%;${style}`;
-  return i;
-}
-function mkBtn(txt,bg='#3B82F6'){
-  const b=document.createElement('button');b.textContent=txt;
-  b.style.cssText=`margin-top:8px;padding:8px 20px;border-radius:20px;background:${bg};border:none;color:${bg==='#F97316'?'#000':'white'};cursor:pointer;font-weight:600;`;
-  return b;
-}
-
-function renderTest(correct){
-  const ta=document.getElementById('testArea');
-  const inp=mkInput('Cevabını yaz...');
-  const btn=mkBtn('✓ Kontrol');
-  btn.onclick=()=>{
-    if(inp.value.trim().toLowerCase()===correct.toLowerCase()){ speakTxt(correct,appData.settings.direction==='nltr'?'tr':'nl'); answer('good'); }
-    else{ inp.style.borderColor='#EF4444'; showToast('Yanlış! Doğrusu: '+correct,'#EF4444'); setTimeout(()=>answer('again'),800); }
-  };
-  inp.onkeydown=e=>{if(e.key==='Enter')btn.click();};
-  ta.appendChild(inp); ta.appendChild(btn); setTimeout(()=>inp.focus(),60);
+// ═══════════════════════════════════════════════
+// ÇALIŞMA MODLARI
+// ═══════════════════════════════════════════════
+function renderTestMode(correct) {
+  const inp=document.createElement('input');
+  inp.placeholder='Cevabını yaz...';
+  inp.style.cssText='padding:10px;border-radius:20px;border:2px solid #2A2A36;margin-top:10px;width:85%;background:#1A1A24;color:white;font-size:15px;text-align:center;';
+  const btn=document.createElement('button'); btn.textContent='Kontrol Et'; btn.style.cssText='margin-top:8px;padding:8px 22px;border-radius:20px;background:#3B82F6;border:none;color:white;cursor:pointer;font-weight:600;';
+  btn.onclick=()=>{ if(inp.value.trim().toLowerCase()===correct.toLowerCase()) { speakText(correct, appData.settings.direction==='nltr'?'tr':'nl'); answer('good'); } else { alert('Yanlış! Doğrusu: '+correct); answer('again'); } };
+  inp.onkeydown=e=>{ if(e.key==='Enter') btn.click(); };
+  document.getElementById('testArea').append(inp,btn); setTimeout(()=>inp.focus(),50);
 }
 
-function renderHint(correct){
-  if(!currentHint){
-    let p='';
-    for(let i=0;i<correct.length;i++) p+=(correct[i]===' '?' ':(i%2===0?correct[i]:'_'));
-    currentHint=p;
+function renderHintMode(correct) {
+  if (!currentHintPattern) {
+    let p=''; for(let i=0;i<correct.length;i++) p+=(correct[i]===' '?' ':(i%2===0?correct[i]:'_'));
+    currentHintPattern=p;
   }
   const ta=document.getElementById('testArea'); ta.innerHTML='';
-  const pd=document.createElement('div'); pd.style.cssText='font-size:24px;letter-spacing:5px;margin:8px;font-weight:600;'; pd.textContent=currentHint;
-  const inp=mkInput('Cevap','width:70%;');
-  const btn=mkBtn('✓ Kontrol');
+  const pd=document.createElement('div'); pd.style.cssText='font-size:26px;letter-spacing:5px;margin:10px;font-weight:600;'; pd.textContent=currentHintPattern;
+  const inp=document.createElement('input'); inp.placeholder='Cevap'; inp.style.cssText='padding:8px 14px;border-radius:18px;background:#1A1A24;color:white;border:2px solid #2A2A36;font-size:14px;';
+  const btn=document.createElement('button'); btn.textContent='Kontrol'; btn.style.cssText='margin-left:8px;padding:8px 16px;border-radius:18px;background:#3B82F6;color:white;border:none;cursor:pointer;';
   btn.onclick=()=>{ if(inp.value.trim().toLowerCase()===correct.toLowerCase()) answer('good'); else answer('again'); };
-  inp.onkeydown=e=>{if(e.key==='Enter')btn.click();};
-  ta.appendChild(pd); ta.appendChild(inp); ta.appendChild(btn);
-  setTimeout(()=>inp.focus(),60);
+  inp.onkeydown=e=>{ if(e.key==='Enter') btn.click(); };
+  ta.appendChild(pd); ta.appendChild(inp); ta.appendChild(btn); setTimeout(()=>inp.focus(),50);
 }
 
-function renderMCQ(correct){
-  const pool=getCurCards().filter(c=>c.id!==currentCard.id).sort(()=>Math.random()-0.5).slice(0,3).map(c=>appData.settings.direction==='nltr'?c.meaning:c.word);
-  // Doğru cevap pool'da zaten varsa çıkar
-  const opts=[...new Set([...pool.filter(o=>o!==correct).slice(0,3),correct])].sort(()=>Math.random()-0.5);
-  const ct=document.createElement('div'); ct.style.cssText='display:flex;flex-direction:column;gap:7px;margin-top:10px;width:100%;';
-  opts.forEach(opt=>{
-    const b=document.createElement('button'); b.className='action-btn'; b.style.cssText='margin:0;flex:none;width:100%;border-left:none;';
-    b.textContent=opt;
-    b.onclick=()=>{
-      if(opt===correct){ b.style.background='rgba(34,197,94,0.2)'; setTimeout(()=>answer('good'),300); }
-      else{ b.style.background='rgba(239,68,68,0.2)'; setTimeout(()=>answer('again'),300); }
-    };
-    ct.appendChild(b);
-  });
+function renderMCQMode(correct) {
+  const pool=getCurrentDeckCards().filter(c=>c.id!==currentCard.id).sort(()=>Math.random()-0.5).slice(0,3).map(c=>appData.settings.direction==='nltr'?c.meaning:c.word);
+  const options=[...pool,correct].sort(()=>Math.random()-0.5);
+  const ct=document.createElement('div'); ct.style.cssText='display:flex;flex-direction:column;gap:8px;margin-top:10px;width:100%;';
+  options.forEach(opt=>{ const b=document.createElement('button'); b.className='action-btn'; b.style.margin='0'; b.textContent=opt; b.onclick=()=>{ if(opt===correct) answer('good'); else { b.style.background='rgba(239,68,68,0.2)'; setTimeout(()=>answer('again'),400); } }; ct.appendChild(b); });
   document.getElementById('testArea').appendChild(ct);
 }
 
-function renderArticle(){
-  const w=currentCard?currentCard.word:'';
-  const isDe=w.startsWith('de '),isHet=w.startsWith('het ');
-  if(!isDe&&!isHet){document.getElementById('testArea').innerHTML='<div style="font-size:12px;color:#9CA3AF;">de veya het ile başlayan kelime gerekli.</div>';return;}
-  const ca=isDe?'de':'het', noun=w.split(' ').slice(1).join(' ');
+function renderArticleMode() {
+  const word=currentCard?currentCard.word:'';
+  const isDe=word.startsWith('de '),isHet=word.startsWith('het ');
+  if (!isDe&&!isHet) return;
+  const ca=isDe?'de':'het', noun=word.split(' ').slice(1).join(' ');
   const ta=document.getElementById('testArea'); ta.innerHTML='';
-  const info=document.createElement('div'); info.style.marginBottom='10px'; info.innerHTML=`Hangi artikel? <strong>${esc(noun)}</strong>`;
-  const bc=document.createElement('div'); bc.style.cssText='display:flex;gap:11px;';
-  ['de','het'].forEach(art=>{const b=mkBtn(art,art===ca?'#22C55E':'#1A1A24');b.onclick=()=>{if(art===ca)answer('good');else answer('again');};bc.appendChild(b);});
+  const info=document.createElement('div'); info.innerHTML=`Hangi artikel? <strong>${escapeHtml(noun)}</strong>`; info.style.marginBottom='10px';
+  const bc=document.createElement('div'); bc.style.cssText='display:flex;gap:12px;';
+  ['de','het'].forEach(art=>{ const b=document.createElement('button'); b.className='action-btn'; b.textContent=art; b.onclick=()=>{ if(art===ca) answer('good'); else answer('again'); }; bc.appendChild(b); });
   ta.appendChild(info); ta.appendChild(bc);
 }
 
-function renderDrag(){
+function renderDragMode() {
   const sentence=currentCard?currentCard.sentence:'';
   const da=document.getElementById('dragArea');
-  if(!sentence){da.innerHTML='<div style="font-size:12px;color:#9CA3AF;">Bu kart için cümle yok.</div>';return;}
+  if (!sentence) { da.innerHTML='<div style="color:#9CA3AF;font-size:13px;">Bu kart için cümle yok.</div>'; return; }
   const words=sentence.split(' '), shuffled=[...words].sort(()=>Math.random()-0.5);
   da.innerHTML='';
-  const dc=document.createElement('div'); dc.className='drag-container'; dc.id='dWords';
-  const dz=document.createElement('div'); dz.className='drop-zone'; dz.id='dZone';
-  const cb=mkBtn('✓ Kontrol','#22C55E'); cb.style.cssText+='margin-top:9px;';
-  cb.onclick=()=>{
-    const uo=Array.from(dz.children).map(el=>el.textContent).join(' ');
-    if(uo===sentence) answer('good'); else answer('again');
-  };
-  function makeW(w,placed){
-    const s=document.createElement('span'); s.className='drag-word'+(placed?' placed':'');
-    s.textContent=w;
-    if(placed){ s.onclick=()=>{dc.appendChild(makeW(w,false));s.remove();}; }
-    else{ s.onclick=()=>{dz.appendChild(makeW(w,true));s.remove();}; }
+  const dc=document.createElement('div'); dc.className='drag-container'; dc.id='dragWords';
+  const dz=document.createElement('div'); dz.className='drop-zone'; dz.id='dropZone';
+  const cb=document.createElement('button'); cb.className='action-btn good'; cb.style.cssText='margin-top:10px;flex:none;width:auto;padding:8px 20px;'; cb.textContent='✓ Kontrol';
+  cb.onclick=()=>{ const uo=Array.from(dz.children).map(el=>el.textContent).join(' '); if(uo===sentence) answer('good'); else answer('again'); };
+  function makeW(w,fromDrop) {
+    const s=document.createElement('span'); s.className='drag-word'; s.textContent=w;
+    if(fromDrop){s.style.background='#22C55E';s.onclick=()=>{ dc.appendChild(makeW(w,false)); s.remove(); };}
+    else{s.onclick=()=>{ dz.appendChild(makeW(w,true)); s.remove(); };}
     return s;
   }
   shuffled.forEach(w=>dc.appendChild(makeW(w,false)));
   da.appendChild(dc); da.appendChild(dz); da.appendChild(cb);
 }
 
-function renderFill(){
+// Boşluk Doldurma Modu
+function renderFillMode() {
   const sentence=currentCard?currentCard.sentence:'';
   const ta=document.getElementById('testArea');
-  if(!sentence||!sentence.includes('___')){ta.innerHTML='<div style="font-size:12px;color:#9CA3AF;">Bu mod için ___ içeren cümle gerekli.</div>';return;}
+  if (!sentence||!sentence.includes('___')) {
+    ta.innerHTML='<div style="font-size:12px;color:#9CA3AF;">Bu mod için "___" içeren bir cümle gerekli.</div>'; return;
+  }
   const correct=appData.settings.direction==='nltr'?currentCard.word:currentCard.meaning;
   const parts=sentence.split('___');
   ta.innerHTML='';
-  const wrap=document.createElement('div'); wrap.style.cssText='display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px;margin-top:10px;font-size:14px;';
-  let fillInp=null;
+  const wrapper=document.createElement('div'); wrapper.style.cssText='display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px;margin-top:10px;font-size:15px;';
   parts.forEach((p,i)=>{
-    const sp=document.createElement('span'); sp.textContent=p; wrap.appendChild(sp);
-    if(i<parts.length-1){
-      const inp=document.createElement('input'); inp.className='fill-input'; inp.placeholder='?'; inp.id='fillInp';
-      inp.onkeydown=e=>{if(e.key==='Enter')doFill(inp,correct);};
-      wrap.appendChild(inp); fillInp=inp;
+    const sp=document.createElement('span'); sp.textContent=p; wrapper.appendChild(sp);
+    if (i<parts.length-1) {
+      const inp=document.createElement('input'); inp.className='fill-blank-input'; inp.id='fillInput'; inp.placeholder='?';
+      inp.onkeydown=e=>{ if(e.key==='Enter') checkFill(inp,correct); };
+      wrapper.appendChild(inp);
     }
   });
-  const btn=mkBtn('✓ Kontrol'); btn.style.display='block'; btn.style.margin='9px auto 0';
-  btn.onclick=()=>{const inp=document.getElementById('fillInp');if(inp)doFill(inp,correct);};
-  ta.appendChild(wrap); ta.appendChild(btn);
-  setTimeout(()=>fillInp?.focus(),60);
+  const btn=document.createElement('button'); btn.textContent='Kontrol'; btn.style.cssText='display:block;margin:10px auto 0;padding:8px 20px;border-radius:18px;background:#3B82F6;border:none;color:white;cursor:pointer;';
+  btn.onclick=()=>{ const inp=document.getElementById('fillInput'); if(inp) checkFill(inp,correct); };
+  ta.appendChild(wrapper); ta.appendChild(btn);
+  setTimeout(()=>document.getElementById('fillInput')?.focus(),50);
 }
-function doFill(inp,correct){
+function checkFill(inp,correct) {
   if(inp.value.trim().toLowerCase()===correct.toLowerCase()) answer('good');
-  else{inp.style.borderColor='#EF4444';setTimeout(()=>answer('again'),400);}
+  else { inp.style.borderColor='#EF4444'; setTimeout(()=>answer('again'),400); }
 }
 
-let timerSec=0;
-function renderTimed(correct){
-  timerSec=appData.settings.timedSeconds||15;
+// Hızlı / Zaman Sınırlı Mod
+let timerSecs=0;
+function renderTimedMode(correct) {
+  timerSecs=appData.settings.timedSeconds||15;
   const ta=document.getElementById('timerArea'); ta.innerHTML='';
-  const td=document.createElement('div'); td.className='timer-display'; td.id='timerDisp'; td.textContent=timerSec;
-  const bg=document.createElement('div'); bg.className='timer-bar-bg';
-  const fill=document.createElement('div'); fill.className='timer-bar-fill'; fill.id='timerFill'; fill.style.width='100%';
-  bg.appendChild(fill); ta.appendChild(td); ta.appendChild(bg);
-  renderTest(correct);
-  timerIv=setInterval(()=>{
-    timerSec--;
+  const td=document.createElement('div'); td.className='timer-display'; td.id='timerDisp'; td.textContent=timerSecs;
+  const tb=document.createElement('div'); tb.className='timer-bar'; const tf=document.createElement('div'); tf.className='timer-fill'; tf.id='timerFill'; tf.style.width='100%'; tb.appendChild(tf); ta.appendChild(td); ta.appendChild(tb);
+  renderTestMode(correct);
+  timerInterval=setInterval(()=>{
+    timerSecs--;
     const d=document.getElementById('timerDisp'),f=document.getElementById('timerFill');
-    if(d)d.textContent=timerSec;
-    if(f){f.style.width=(timerSec/(appData.settings.timedSeconds||15)*100)+'%';f.style.background=timerSec<=5?'#EF4444':'#F97316';}
-    if(timerSec<=0){clearInterval(timerIv);timerIv=null;answer('again');}
+    if(d) d.textContent=timerSecs;
+    if(f) f.style.width=(timerSecs/(appData.settings.timedSeconds||15)*100)+'%';
+    if(f) f.style.background=timerSecs<=5?'#EF4444':'#F97316';
+    if(timerSecs<=0) { clearInterval(timerInterval); timerInterval=null; answer('again'); }
   },1000);
 }
-function stopTimer(){if(timerIv){clearInterval(timerIv);timerIv=null;}}
+function stopTimer() { if(timerInterval){clearInterval(timerInterval);timerInterval=null;} }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // TTS & SES KAYDI
-// ═══════════════════════════════════════════
-function speakTxt(txt,lang){
-  if(appData.settings.tts!=='on'||!txt) return;
-  const u=new SpeechSynthesisUtterance(txt);
+// ═══════════════════════════════════════════════
+function speakText(text,lang) {
+  if(appData.settings.tts!=='on'||!text) return;
+  const u=new SpeechSynthesisUtterance(text);
   u.lang=lang==='nl'?'nl-NL':'tr-TR'; u.rate=appData.settings.ttsSpeed;
   speechSynthesis.cancel(); speechSynthesis.speak(u);
 }
-function playFront(e){e.stopPropagation();speakTxt(frontText(),appData.settings.direction==='nltr'?'nl':'tr');}
-function playBack(e){e.stopPropagation();speakTxt(backText(),appData.settings.direction==='nltr'?'tr':'nl');}
-function playKFront(e){e.stopPropagation();if(kesfetIdx>=kesfetList.length)return;const c=kesfetList[kesfetIdx];speakTxt(appData.settings.direction==='nltr'?c.word:c.meaning,appData.settings.direction==='nltr'?'nl':'tr');}
-function playKBack(e){e.stopPropagation();if(kesfetIdx>=kesfetList.length)return;const c=kesfetList[kesfetIdx];speakTxt(appData.settings.direction==='nltr'?c.meaning:c.word,appData.settings.direction==='nltr'?'tr':'nl');}
+function playFrontTTS(e){e.stopPropagation();speakText(getFrontText(),appData.settings.direction==='nltr'?'nl':'tr');}
+function playBackTTS(e){e.stopPropagation();speakText(getBackText(),appData.settings.direction==='nltr'?'tr':'nl');}
+function playKesfetFrontTTS(e){e.stopPropagation();if(kesfetIdx>=kesfetList.length)return;const c=kesfetList[kesfetIdx];speakText(appData.settings.direction==='nltr'?c.word:c.meaning,appData.settings.direction==='nltr'?'nl':'tr');}
+function playKesfetBackTTS(e){e.stopPropagation();if(kesfetIdx>=kesfetList.length)return;const c=kesfetList[kesfetIdx];speakText(appData.settings.direction==='nltr'?c.meaning:c.word,appData.settings.direction==='nltr'?'tr':'nl');}
 
-let mediaRec=null,audioChunks=[];
-async function toggleRecord(e){
+// Ses Kaydı
+let mediaRecorder=null, audioChunks=[];
+async function toggleRecord(e) {
   e.stopPropagation();
   const btn=document.getElementById('recordBtn');
-  if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();btn.textContent='🎤 Kaydet';return;}
-  try{
+  if(mediaRecorder&&mediaRecorder.state==='recording') {
+    mediaRecorder.stop(); btn.textContent='🎤 Kaydet'; return;
+  }
+  try {
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    audioChunks=[]; mediaRec=new MediaRecorder(stream);
-    mediaRec.ondataavailable=ev=>audioChunks.push(ev.data);
-    mediaRec.onstop=()=>{
+    audioChunks=[]; mediaRecorder=new MediaRecorder(stream);
+    mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+    mediaRecorder.onstop=()=>{
       const blob=new Blob(audioChunks,{type:'audio/webm'});
-      new Audio(URL.createObjectURL(blob)).play();
+      const url=URL.createObjectURL(blob);
+      const audio=new Audio(url); audio.play();
       stream.getTracks().forEach(t=>t.stop());
     };
-    mediaRec.start(); btn.textContent='⏹ Durdur';
-  }catch{showToast('Mikrofon izni reddedildi','#EF4444');}
+    mediaRecorder.start(); btn.textContent='⏹ Durdur';
+  } catch(err) { alert('Mikrofon erişimi reddedildi.'); }
 }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // FLIP & SWIPE
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function flipCard(){document.getElementById('card').classList.toggle('flipped');}
-function initSwipe(cardId,rId,lId,onR,onL){
-  const card=document.getElementById(cardId);if(!card)return;
+
+function initSwipe(cardId,rightIconId,leftIconId,onRight,onLeft) {
+  const card=document.getElementById(cardId); if(!card) return;
   let sx=0,sy=0,sw=false;
   card.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;sw=true;card.style.transition='none';},{passive:true});
   card.addEventListener('touchmove',e=>{
-    if(!sw)return;
+    if(!sw) return;
     const dx=e.touches[0].clientX-sx,dy=e.touches[0].clientY-sy;
-    if(Math.abs(dx)<8||Math.abs(dy)>Math.abs(dx))return;
+    if(Math.abs(dx)<10||Math.abs(dy)>Math.abs(dx)) return;
     e.preventDefault();
     const base=card.classList.contains('flipped')?180:0;
     card.style.transform=`rotateY(${base}deg) rotateZ(${dx*0.02}deg)`;
-    const ri=document.getElementById(rId),li=document.getElementById(lId);
+    const ri=document.getElementById(rightIconId),li=document.getElementById(leftIconId);
     if(ri)ri.style.opacity=dx>0?Math.min(Math.abs(dx)/80,0.8):0;
     if(li)li.style.opacity=dx<0?Math.min(Math.abs(dx)/80,0.8):0;
   },{passive:false});
   card.addEventListener('touchend',e=>{
-    if(!sw)return;
+    if(!sw) return;
     const dx=e.changedTouches[0].clientX-sx;
     card.style.transition=''; card.style.transform='';
-    const ri=document.getElementById(rId),li=document.getElementById(lId);
-    if(ri)ri.style.opacity=0;if(li)li.style.opacity=0;
-    sw=false; if(Math.abs(dx)>80){if(dx>0)onR();else onL();}
+    const ri=document.getElementById(rightIconId),li=document.getElementById(leftIconId);
+    if(ri)ri.style.opacity=0; if(li)li.style.opacity=0;
+    sw=false; if(Math.abs(dx)>80){if(dx>0)onRight();else onLeft();}
   });
 }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // KLAVYE
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 document.addEventListener('keydown',e=>{
   if(document.querySelector('.modal.open')) return;
-  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
-  if(e.key==='1')answer('again');
-  else if(e.key==='2')answer('hard');
-  else if(e.key==='3')answer('good');
-  else if(e.key==='4')answer('easy');
-  else if(e.key==='z'||e.key==='Z')undoLast();
-  else if(e.key===' '){e.preventDefault();flipCard();}
-  else if(e.key==='Enter') document.querySelector('#testArea button:last-child')?.click();
+  if(e.key==='1') answer('again'); if(e.key==='2') answer('hard');
+  if(e.key==='3') answer('good'); if(e.key==='4') answer('easy');
+  if(e.key==='z'||e.key==='Z') undoLastAnswer();
+  if((e.key===' '||e.key==='Space')&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();flipCard();}
+  if(e.key==='Enter'&&['test','hint','fill','timed'].includes(appData.settings.mode)) document.querySelector('#testArea button:last-child')?.click();
 });
 
-// ═══════════════════════════════════════════
-// SIDEBAR
-// ═══════════════════════════════════════════
-function renderSidebar(){
-  const cont=document.getElementById('deckListSidebar'); cont.innerHTML='';
-  const sv=(document.getElementById('deckSearch')?.value||'').toLowerCase();
+// ═══════════════════════════════════════════════
+// SIDEBAR & DECK
+// ═══════════════════════════════════════════════
+function renderSidebar() {
+  const container=document.getElementById('deckListSidebar'); container.innerHTML='';
+  const searchVal=(document.getElementById('deckSearch')?.value||'').toLowerCase();
   let decks=appData.settings.showOnlyActiveDeck?appData.decks.filter(d=>d.id===appData.currentDeckId):appData.decks;
-  if(sv) decks=decks.filter(d=>d.name.toLowerCase().includes(sv));
+  if(searchVal) decks=decks.filter(d=>d.name.toLowerCase().includes(searchVal));
   decks.forEach(deck=>{
-    const div=document.createElement('div'); div.className=`sidebar-item${appData.currentDeckId===deck.id?' active':''}`;
-    const dot=document.createElement('span'); dot.style.cssText=`width:9px;height:9px;border-radius:50%;background:${deck.color||'#F97316'};display:inline-block;margin-right:8px;flex-shrink:0;`;
-    const ns=document.createElement('span'); ns.style.cssText='flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;';
-    ns.textContent=deck.name;
+    const div=document.createElement('div'); div.className=`sidebar-item ${appData.currentDeckId===deck.id?'active':''}`;
+    const dot=document.createElement('span'); dot.style.cssText=`width:10px;height:10px;border-radius:50%;background:${deck.color||'#F97316'};display:inline-block;margin-right:8px;flex-shrink:0;`;
+    const ns=document.createElement('span'); ns.style.cssText='flex:1;cursor:pointer;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'; ns.textContent=deck.name;
+    const cnt=document.createElement('span'); cnt.style.cssText='font-size:10px;color:#6B7280;margin-right:6px;'; cnt.textContent=appData.cards.filter(c=>c.deckId===deck.id).length;
     ns.onclick=()=>{appData.currentDeckId=deck.id;appData.multiDeckIds=[];save();renderSidebar();sessionTotal=0;nextCard();closeSidebar();};
-    const cnt=document.createElement('span'); cnt.style.cssText='font-size:10px;color:#6B7280;margin-right:5px;flex-shrink:0;';
-    cnt.textContent=appData.cards.filter(c=>c.deckId===deck.id).length;
     const ad=document.createElement('div'); ad.className='sidebar-item-actions';
-    const eb=document.createElement('button'); eb.className='edit-deck-btn'; eb.textContent='✏️';
-    eb.onclick=e=>{e.stopPropagation();document.getElementById('editDeckName').value=deck.name;document.getElementById('editDeckColor').value=deck.color||'#F97316';window._editDeckId=deck.id;openModal('editDeckModal');};
-    const db=document.createElement('button'); db.className='delete-deck-btn'; db.textContent='🗑';
+    const eb=document.createElement('button'); eb.className='edit-deck-btn'; eb.textContent='✏️'; eb.title='Düzenle';
+    eb.onclick=e=>{ e.stopPropagation(); document.getElementById('editDeckName').value=deck.name; document.getElementById('editDeckColor').value=deck.color||'#F97316'; window.editDeckId=deck.id; openModal('editDeckModal'); };
+    const db=document.createElement('button'); db.className='delete-deck-btn'; db.textContent='🗑'; db.title='Sil';
     db.onclick=e=>{
       e.stopPropagation();
-      if(appData.decks.length===1){showToast('En az bir deste kalmalı!','#EF4444');return;}
-      if(confirm(`"${deck.name}" ve kartları silinsin mi?`)){
+      if(appData.decks.length===1) return alert('En az bir deste kalmalı!');
+      if(confirm(`"${deck.name}" ve tüm kartları silinsin mi?`)){
         appData.cards=appData.cards.filter(c=>c.deckId!==deck.id);
         appData.decks=appData.decks.filter(d=>d.id!==deck.id);
-        if(appData.currentDeckId===deck.id)appData.currentDeckId=appData.decks[0].id;
-        save();renderSidebar();sessionTotal=0;nextCard();
+        if(appData.currentDeckId===deck.id) appData.currentDeckId=appData.decks[0].id;
+        save(); renderSidebar(); sessionTotal=0; nextCard();
       }
     };
-    ad.appendChild(eb);ad.appendChild(db);
-    div.appendChild(dot);div.appendChild(ns);div.appendChild(cnt);div.appendChild(ad);
-    cont.appendChild(div);
+    ad.appendChild(eb); ad.appendChild(db);
+    div.appendChild(dot); div.appendChild(ns); div.appendChild(cnt); div.appendChild(ad);
+    container.appendChild(div);
   });
   document.getElementById('toggleDeckViewBtn').textContent=appData.settings.showOnlyActiveDeck?'👁 Aktif':'👁 Tümü';
 }
+
 document.getElementById('deckSearch').oninput=()=>renderSidebar();
 
-// ═══════════════════════════════════════════
-// MANAGER
-// ═══════════════════════════════════════════
-let sortCfg={f:'word',asc:true};
-let selCards=new Set();
+function addDeck(name,color){const id=generateId();appData.decks.push({id,name,color:color||'#F97316'});appData.currentDeckId=id;appData.multiDeckIds=[];save();renderSidebar();sessionTotal=0;nextCard();}
+
+// ═══════════════════════════════════════════════
+// MANAGER & TABLO
+// ═══════════════════════════════════════════════
+let managerSort={field:'word',asc:true};
+let selectedCards=new Set();
 
 function openManager(){
   const deck=appData.decks.find(d=>d.id===appData.currentDeckId);
   document.getElementById('managerDeckName').textContent=deck?deck.name:'';
-  selCards.clear(); renderTable(); openModal('managerModal');
+  selectedCards.clear(); renderManagerTable(); openModal('managerModal');
 }
-function renderTable(){
-  const sv=(document.getElementById('managerSearch')?.value||'').toLowerCase();
-  const fv=document.getElementById('managerFilter')?.value||'';
-  let cards=getCurCards();
-  if(sv)cards=cards.filter(c=>(c.word+' '+c.meaning).toLowerCase().includes(sv));
-  if(fv==='starred')cards=cards.filter(c=>c.starred);
-  else if(fv)cards=cards.filter(c=>c.difficulty===fv);
+
+function renderManagerTable(){
+  const search=(document.getElementById('managerSearch')?.value||'').toLowerCase();
+  const filter=document.getElementById('managerFilter')?.value||'';
+  let cards=getCurrentDeckCards();
+  if(search) cards=cards.filter(c=>(c.word+c.meaning).toLowerCase().includes(search));
+  if(filter==='hard') cards=cards.filter(c=>c.starred);
+  else if(filter) cards=cards.filter(c=>c.difficulty===filter);
+  // Sort
   cards.sort((a,b)=>{
-    let av=a[sortCfg.f]??'',bv=b[sortCfg.f]??'';
-    if(typeof av==='number') return sortCfg.asc?av-bv:bv-av;
-    return sortCfg.asc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    let av=a[managerSort.field]||'', bv=b[managerSort.field]||'';
+    if(typeof av==='number') return managerSort.asc?av-bv:bv-av;
+    return managerSort.asc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
   });
   const tbody=document.getElementById('cardsTableBody'); tbody.innerHTML='';
   cards.forEach(c=>{
     const tr=document.createElement('tr');
-    const tdCb=document.createElement('td');
-    const cb=document.createElement('input');cb.type='checkbox';cb.className='card-checkbox';cb.checked=selCards.has(c.id);
-    cb.onchange=()=>{if(cb.checked)selCards.add(c.id);else selCards.delete(c.id);updateBulkBar();};
-    tdCb.appendChild(cb);
-    const tdW=document.createElement('td');tdW.title=c.word;tdW.textContent=c.word;
-    const tdM=document.createElement('td');tdM.title=c.meaning;tdM.textContent=c.meaning;
+    const tdCb=document.createElement('td'); const cb=document.createElement('input'); cb.type='checkbox'; cb.className='card-checkbox'; cb.checked=selectedCards.has(c.id); cb.onchange=()=>{ if(cb.checked)selectedCards.add(c.id);else selectedCards.delete(c.id); updateBulkBar(); }; tdCb.appendChild(cb);
+    const tdW=document.createElement('td'); tdW.textContent=c.word; tdW.style.maxWidth='100px'; tdW.style.overflow='hidden'; tdW.style.textOverflow='ellipsis'; tdW.style.whiteSpace='nowrap';
+    const tdM=document.createElement('td'); tdM.textContent=c.meaning; tdM.style.maxWidth='100px'; tdM.style.overflow='hidden'; tdM.style.textOverflow='ellipsis'; tdM.style.whiteSpace='nowrap';
     const tdT=document.createElement('td');
-    if(c.difficulty){const tag=document.createElement('span');tag.className=`tag ${c.difficulty}`;tag.textContent=c.difficulty;tdT.appendChild(tag);}
-    else{tdT.textContent=c.cardType||'vocab';}
-    if(c.starred){const s=document.createElement('span');s.textContent=' ⭐';tdT.appendChild(s);}
-    const tdWr=document.createElement('td');tdWr.textContent=c.wrong||0;tdWr.style.color='#EF4444';
+    const typeSpan=document.createElement('span'); typeSpan.textContent=c.cardType||'vocab';
+    if(c.difficulty){const tag=document.createElement('span');tag.className=`tag ${c.difficulty}`;tag.textContent=c.difficulty;tdT.appendChild(tag);}else{tdT.appendChild(typeSpan);}
+    if(c.starred){const star=document.createElement('span');star.textContent=' ⭐';tdT.appendChild(star);}
+    const tdWr=document.createElement('td'); tdWr.textContent=c.wrong||0; tdWr.style.color='#EF4444';
     const tdA=document.createElement('td');
-    const dtb=document.createElement('button');dtb.className='detail-btn';dtb.textContent='📊';dtb.onclick=()=>openCardDetail(c.id);
-    const eb=document.createElement('button');eb.className='edit-btn';eb.textContent='✏️';eb.onclick=()=>openEditCard(c.id);
-    const db=document.createElement('button');db.className='delete-btn';db.textContent='🗑';db.onclick=()=>{if(confirm('Sil?')){deleteCard(c.id);renderTable();}};
-    tdA.appendChild(dtb);tdA.appendChild(eb);tdA.appendChild(db);
+    const eb=document.createElement('button'); eb.className='edit-btn'; eb.textContent='✏️'; eb.onclick=()=>openEditCardModal(c.id);
+    const db=document.createElement('button'); db.className='delete-btn'; db.textContent='🗑'; db.onclick=()=>{if(confirm('Sil?')){deleteCard(c.id);renderManagerTable();}};
+    const dtb=document.createElement('button'); dtb.className='edit-btn'; dtb.textContent='📊'; dtb.title='Detay'; dtb.onclick=()=>openCardDetail(c.id);
+    tdA.appendChild(dtb); tdA.appendChild(eb); tdA.appendChild(db);
     tr.appendChild(tdCb);tr.appendChild(tdW);tr.appendChild(tdM);tr.appendChild(tdT);tr.appendChild(tdWr);tr.appendChild(tdA);
     tbody.appendChild(tr);
   });
 }
+
 function updateBulkBar(){
-  document.getElementById('bulkBar').classList.toggle('show',selCards.size>0);
-  document.getElementById('bulkCount').textContent=selCards.size+' seçili';
+  const bar=document.getElementById('bulkBar'); const cnt=document.getElementById('bulkCount');
+  if(selectedCards.size>0){bar.classList.add('show');cnt.textContent=selectedCards.size+' seçili';}
+  else{bar.classList.remove('show');}
 }
-document.querySelectorAll('th[data-sort]').forEach(th=>th.onclick=()=>{
-  if(sortCfg.f===th.dataset.sort)sortCfg.asc=!sortCfg.asc;
-  else{sortCfg.f=th.dataset.sort;sortCfg.asc=true;}
-  renderTable();
+
+// Tablo başlığı sıralama
+document.querySelectorAll('th[data-sort]').forEach(th=>{
+  th.onclick=()=>{
+    if(managerSort.field===th.dataset.sort) managerSort.asc=!managerSort.asc;
+    else{managerSort.field=th.dataset.sort;managerSort.asc=true;}
+    renderManagerTable();
+  };
 });
+
 document.getElementById('selectAllCards').onchange=e=>{
-  getCurCards().forEach(c=>{if(e.target.checked)selCards.add(c.id);else selCards.delete(c.id);});
-  updateBulkBar();renderTable();
+  const cards=getCurrentDeckCards();
+  cards.forEach(c=>{ if(e.target.checked)selectedCards.add(c.id);else selectedCards.delete(c.id); });
+  updateBulkBar(); renderManagerTable();
 };
+
 document.getElementById('bulkDeleteBtn').onclick=()=>{
-  if(!selCards.size)return;
-  if(confirm(selCards.size+' kart silinsin mi?')){
-    selCards.forEach(id=>{appData.cards=appData.cards.filter(c=>c.id!==id);});
-    selCards.clear();save();nextCard();renderTable();updateBulkBar();
-  }
+  if(selectedCards.size===0) return;
+  if(confirm(selectedCards.size+' kart silinsin mi?')){ selectedCards.forEach(id=>{appData.cards=appData.cards.filter(c=>c.id!==id);}); selectedCards.clear(); save(); nextCard(); renderManagerTable(); updateBulkBar(); }
 };
+
 document.getElementById('bulkMoveBtn').onclick=()=>{
-  if(!selCards.size)return;
-  const sel=document.getElementById('bulkMoveTarget');sel.innerHTML='';
-  appData.decks.filter(d=>d.id!==appData.currentDeckId).forEach(d=>{const o=document.createElement('option');o.value=d.id;o.textContent=d.name;sel.appendChild(o);});
+  if(selectedCards.size===0) return;
+  const sel=document.getElementById('bulkMoveTarget'); sel.innerHTML='';
+  appData.decks.filter(d=>d.id!==appData.currentDeckId).forEach(d=>{ const o=document.createElement('option');o.value=d.id;o.textContent=d.name;sel.appendChild(o); });
   openModal('bulkMoveModal');
 };
+
 document.getElementById('cancelBulkMoveBtn').onclick=()=>closeModal('bulkMoveModal');
 document.getElementById('confirmBulkMoveBtn').onclick=()=>{
-  const tid=document.getElementById('bulkMoveTarget').value;if(!tid)return;
-  selCards.forEach(id=>{const c=appData.cards.find(c=>c.id===id);if(c)c.deckId=tid;});
-  selCards.clear();save();renderTable();updateBulkBar();closeModal('bulkMoveModal');nextCard();
+  const targetId=document.getElementById('bulkMoveTarget').value;
+  if(!targetId) return;
+  selectedCards.forEach(id=>{ const c=appData.cards.find(c=>c.id===id); if(c) c.deckId=targetId; });
+  selectedCards.clear(); save(); renderManagerTable(); updateBulkBar(); closeModal('bulkMoveModal'); nextCard();
 };
-document.getElementById('managerSearch').oninput=()=>renderTable();
-document.getElementById('managerFilter').onchange=()=>renderTable();
 
-// ═══════════════════════════════════════════
+document.getElementById('managerSearch').oninput=()=>renderManagerTable();
+document.getElementById('managerFilter').onchange=()=>renderManagerTable();
+
+// ═══════════════════════════════════════════════
 // KART DETAY
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function openCardDetail(cardId){
-  const c=appData.cards.find(x=>x.id===cardId);if(!c)return;
-  document.getElementById('detailWord').textContent=c.word;
-  document.getElementById('detailMeaning').textContent=c.meaning;
-  const dueDate=c.due?new Date(c.due).toLocaleDateString('tr-TR'):'Hemen';
-  document.getElementById('detailNextReview').textContent=`📅 Sonraki tekrar: ${dueDate}`;
+  const card=appData.cards.find(c=>c.id===cardId); if(!card) return;
+  document.getElementById('detailWord').textContent=card.word;
+  document.getElementById('detailMeaning').textContent=card.meaning;
+  const due=card.due?new Date(card.due).toLocaleDateString('tr-TR'):'Hemen';
+  document.getElementById('detailNextReview').textContent=`📅 Sonraki tekrar: ${due}`;
   document.getElementById('cardDetailGrid').innerHTML=`
-    <div class="cd-item"><div class="cd-val" style="color:#22C55E;">${c.correct||0}</div><div class="cd-lbl">Doğru</div></div>
-    <div class="cd-item"><div class="cd-val" style="color:#EF4444;">${c.wrong||0}</div><div class="cd-lbl">Yanlış</div></div>
-    <div class="cd-item"><div class="cd-val" style="color:#3B82F6;">${c.repetitions||0}</div><div class="cd-lbl">Tekrar</div></div>
-    <div class="cd-item"><div class="cd-val" style="color:#8B5CF6;">${c.interval||0} gün</div><div class="cd-lbl">Aralık</div></div>
-    <div class="cd-item"><div class="cd-val" style="color:#F97316;">${(c.ease||2.5).toFixed(1)}</div><div class="cd-lbl">Kolaylık</div></div>
-    <div class="cd-item"><div class="cd-val">${c.starred?'⭐':'—'}</div><div class="cd-lbl">Zorlu</div></div>`;
+    <div class="card-detail-item"><div class="card-detail-val" style="color:#22C55E;">${card.correct||0}</div><div class="card-detail-lbl">Doğru</div></div>
+    <div class="card-detail-item"><div class="card-detail-val" style="color:#EF4444;">${card.wrong||0}</div><div class="card-detail-lbl">Yanlış</div></div>
+    <div class="card-detail-item"><div class="card-detail-val" style="color:#3B82F6;">${card.repetitions||0}</div><div class="card-detail-lbl">Tekrar</div></div>
+    <div class="card-detail-item"><div class="card-detail-val" style="color:#8B5CF6;">${card.interval||0} gün</div><div class="card-detail-lbl">Aralık</div></div>
+    <div class="card-detail-item"><div class="card-detail-val" style="color:#F97316;">${(card.ease||2.5).toFixed(1)}</div><div class="card-detail-lbl">Kolaylık</div></div>
+    <div class="card-detail-item"><div class="card-detail-val">${card.starred?'⭐':'—'}</div><div class="card-detail-lbl">Zorlu</div></div>`;
   openModal('cardDetailModal');
 }
 
-// ═══════════════════════════════════════════
-// CONTEXT MENU (LONG PRESS)
-// ═══════════════════════════════════════════
-let lpTimer=null;
+// ═══════════════════════════════════════════════
+// LONG PRESS (UZUN BASMA) MENÜSÜ
+// ═══════════════════════════════════════════════
+let longPressTimer=null;
 document.getElementById('card').addEventListener('touchstart',e=>{
-  if(e.target.closest('#testArea,#dragArea,.tts-btn,#recordBtn')) return;
-  lpTimer=setTimeout(()=>showCtx(e.touches[0].clientX,e.touches[0].clientY),600);
+  if(e.target.closest('#testArea,#dragArea,.tts-btn,.action-btn,.mode-btn')) return;
+  longPressTimer=setTimeout(()=>showContextMenu(e.touches[0].clientX,e.touches[0].clientY),600);
 },{passive:true});
-document.getElementById('card').addEventListener('touchend',()=>clearTimeout(lpTimer),{passive:true});
-document.getElementById('card').addEventListener('touchmove',()=>clearTimeout(lpTimer),{passive:true});
+document.getElementById('card').addEventListener('touchend',()=>{clearTimeout(longPressTimer);},{passive:true});
+document.getElementById('card').addEventListener('touchmove',()=>{clearTimeout(longPressTimer);},{passive:true});
+// Desktop sağ tık
 document.getElementById('card').addEventListener('contextmenu',e=>{
   if(e.target.closest('#testArea,#dragArea,.tts-btn')) return;
-  e.preventDefault();showCtx(e.clientX,e.clientY);
+  e.preventDefault(); showContextMenu(e.clientX,e.clientY);
 });
-function showCtx(x,y){
-  if(!currentCard)return;
-  const m=document.getElementById('contextMenu');
-  m.style.left=Math.min(x,window.innerWidth-170)+'px';
-  m.style.top=Math.min(y,window.innerHeight-200)+'px';
-  m.classList.add('show');
+
+function showContextMenu(x,y){
+  if(!currentCard) return;
+  const menu=document.getElementById('contextMenu');
+  menu.style.left=Math.min(x,window.innerWidth-180)+'px';
+  menu.style.top=Math.min(y,window.innerHeight-200)+'px';
+  menu.classList.add('show');
   document.getElementById('ctxMark').textContent=currentCard.starred?'⭐ Zorlu Kaldır':'⭐ Zorlu İşaretle';
-  showOverlay('ctx');
+  showOverlay('contextmenu');
 }
-function hideCtxMenu(){ document.getElementById('contextMenu').classList.remove('show'); hideOverlay('ctx'); }
-document.getElementById('ctxDetail').onclick=()=>{hideCtxMenu();if(currentCard)openCardDetail(currentCard.id);};
-document.getElementById('ctxEdit').onclick=()=>{hideCtxMenu();if(currentCard)openEditCard(currentCard.id);};
-document.getElementById('ctxMark').onclick=()=>{hideCtxMenu();if(currentCard){currentCard.starred=!currentCard.starred;save();showToast(currentCard.starred?'⭐ Zorlu işaretlendi':'Zorlu işareti kaldırıldı');}};
-document.getElementById('ctxDelete').onclick=()=>{hideCtxMenu();if(currentCard&&confirm('Bu kartı sil?'))deleteCard(currentCard.id);};
+function hideContextMenu(){
+  document.getElementById('contextMenu').classList.remove('show');
+  hideOverlay('contextmenu');
+}
+document.getElementById('ctxDetail').onclick=()=>{ hideContextMenu(); if(currentCard) openCardDetail(currentCard.id); };
+document.getElementById('ctxEdit').onclick=()=>{ hideContextMenu(); if(currentCard) openEditCardModal(currentCard.id); };
+document.getElementById('ctxMark').onclick=()=>{ hideContextMenu(); if(currentCard){currentCard.starred=!currentCard.starred;save();} };
+document.getElementById('ctxDelete').onclick=()=>{ hideContextMenu(); if(currentCard&&confirm('Bu kartı sil?')){deleteCard(currentCard.id);} };
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // OTURUM ÖZETİ
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function showSessionSummary(){
-  if(sess.cards===0)return;
-  const total=sess.correct+sess.wrong;
-  const rate=total>0?Math.round(sess.correct/total*100):0;
-  const mins=Math.max(1,Math.round((Date.now()-sess.start)/60000));
-  const rateEl=document.getElementById('summaryRate');
-  rateEl.textContent=rate+'%';
-  rateEl.style.color=rate>=80?'#22C55E':rate>=50?'#F97316':'#EF4444';
-  document.getElementById('summaryCorrect').textContent=sess.correct;
-  document.getElementById('summaryWrong').textContent=sess.wrong;
+  if(sessionStats.cards===0) return;
+  const total=sessionStats.correct+sessionStats.wrong;
+  const rate=total>0?Math.round(sessionStats.correct/total*100):0;
+  const mins=Math.round((Date.now()-sessionStats.startTime)/60000);
+  document.getElementById('summaryRate').textContent=rate+'%';
+  document.getElementById('summaryRate').style.color=rate>=80?'#22C55E':rate>=50?'#F97316':'#EF4444';
+  document.getElementById('summaryCorrect').textContent=sessionStats.correct;
+  document.getElementById('summaryWrong').textContent=sessionStats.wrong;
   document.getElementById('summaryTime').textContent=mins+'dk';
-  document.getElementById('summaryXP').textContent=`+${sess.xp} XP kazandın!`;
-  const today=todayKey();
-  const todayCards=appData.stats.studyDays[today]?.cards||0;
+  document.getElementById('summaryXP').textContent=`+${sessionStats.xpEarned} XP kazandın!`;
+  const today=getTodayKey();
+  const todayCards=(appData.stats.studyDays[today]?.cards||0);
   const goal=appData.settings.dailyGoal;
-  document.getElementById('goalText').textContent=`${Math.min(todayCards,goal)}/${goal}`;
-  document.getElementById('goalFill').style.width=Math.min(100,todayCards/goal*100)+'%';
-  const newBadges=BADGES.filter(b=>appData.stats.achievements[b.id]&&Date.now()-appData.stats.achievements[b.id]<60000);
-  document.getElementById('summaryBadges').textContent=newBadges.map(b=>b.icon).join('');
+  document.getElementById('goalProgress').textContent=`${Math.min(todayCards,goal)}/${goal}`;
+  document.getElementById('goalProgressFill').style.width=Math.min(100,todayCards/goal*100)+'%';
+  // Yeni kazanılan başarımları kontrol et
+  const earned=ACHIEVEMENTS.filter(a=>appData.stats.achievements[a.id]&&Date.now()-appData.stats.achievements[a.id]<30000);
+  document.getElementById('summaryBadgeEarned').innerHTML=earned.map(a=>`<span style="font-size:20px;" title="${a.name}">${a.icon}</span>`).join('');
   openModal('sessionModal');
-  resetSess();
+  resetSessionStats();
 }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // STREAK MODAL
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function openStreakModal(){
   document.getElementById('streakModalNum').textContent=appData.stats.streak;
   document.getElementById('bestStreakNum').textContent=appData.stats.bestStreak+' gün';
-  document.getElementById('totalDaysNum').textContent=Object.keys(appData.stats.studyDays).length+' gün';
-  document.getElementById('streakSub').textContent=appData.stats.streak===0?'Bugün çalışmaya başla!':appData.stats.streak>=7?'Harika gidiyorsun! 🔥':'Devam et!';
-  const cal=document.getElementById('streakCal'); cal.innerHTML='';
+  const totalDays=Object.keys(appData.stats.studyDays).length;
+  document.getElementById('totalStudyDays').textContent=totalDays+' gün';
+  const sub=appData.stats.streak===0?'Bugün çalışmaya başla!':appData.stats.streak>=7?'Harika bir seri! 🔥':'Devam et!';
+  document.getElementById('streakSubtext').textContent=sub;
+  // Takvim
+  const cal=document.getElementById('streakCalendar'); cal.innerHTML='';
   for(let i=27;i>=0;i--){
-    const d=new Date();d.setDate(d.getDate()-i);
+    const d=new Date(); d.setDate(d.getDate()-i);
     const key=d.toISOString().slice(0,10);
-    const dd=document.createElement('div');dd.className='streak-day';
-    if(appData.stats.studyDays[key])dd.classList.add('active');
-    if(i===0)dd.classList.add('today');
-    dd.title=key;dd.textContent=d.getDate();
-    cal.appendChild(dd);
+    const dayDiv=document.createElement('div'); dayDiv.className='streak-day';
+    if(appData.stats.studyDays[key]) dayDiv.classList.add('active');
+    if(i===0) dayDiv.classList.add('today');
+    dayDiv.title=key; dayDiv.textContent=d.getDate();
+    cal.appendChild(dayDiv);
   }
   openModal('streakModal');
 }
 
-// ═══════════════════════════════════════════
-// İSTATİSTİK
-// ═══════════════════════════════════════════
-let statMode='current';
-function openStats(){ renderStats(); openModal('statsModal'); }
+// ═══════════════════════════════════════════════
+// İSTATİSTİK MODAL
+// ═══════════════════════════════════════════════
+let statFilter='current';
+function openStats(){
+  renderStats();
+  openModal('statsModal');
+}
 function renderStats(){
-  const cards=statMode==='all'?appData.cards:getCurCards();
-  const dueCards=statMode==='all'?getAllDueCards():getDueCards();
-  const total=cards.length;
-  const correct=cards.reduce((a,c)=>a+(c.correct||0),0);
-  const wrong=cards.reduce((a,c)=>a+(c.wrong||0),0);
-  const ta=correct+wrong, rate=ta>0?Math.round(correct/ta*100):0;
-  const learned=cards.filter(c=>(c.repetitions||0)>=2).length;
-
+  const cards=statFilter==='all'?appData.cards:getCurrentDeckCards();
+  const total=cards.length,correct=cards.reduce((a,c)=>a+(c.correct||0),0),wrong=cards.reduce((a,c)=>a+(c.wrong||0),0);
+  const ta=correct+wrong,rate=ta>0?Math.round(correct/ta*100):0;
+  const learned=cards.filter(c=>(c.repetitions||0)>=2).length,dueNow=getDueCards().length;
   document.getElementById('statsGrid').innerHTML=`
-    <div class="stat-card"><div class="stat-number" style="color:#22C55E;">${correct}</div><div class="stat-label">Toplam Doğru</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#EF4444;">${wrong}</div><div class="stat-label">Toplam Yanlış</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#F97316;">${rate}%</div><div class="stat-label">Başarı Oranı</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#3B82F6;">${learned}/${total}</div><div class="stat-label">Öğrenilen</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#8B5CF6;">${dueCards.length}</div><div class="stat-label">Bekleyen</div></div>
+    <div class="stat-card green"><div class="stat-number">${correct}</div><div class="stat-label">Toplam Doğru</div></div>
+    <div class="stat-card red"><div class="stat-number">${wrong}</div><div class="stat-label">Toplam Yanlış</div></div>
+    <div class="stat-card orange"><div class="stat-number">${rate}%</div><div class="stat-label">Başarı Oranı</div></div>
+    <div class="stat-card blue"><div class="stat-number">${learned}/${total}</div><div class="stat-label">Öğrenilen</div></div>
+    <div class="stat-card purple"><div class="stat-number">${dueNow}</div><div class="stat-label">Bekleyen</div></div>
     <div class="stat-card"><div class="stat-number" style="color:#F97316;">${appData.stats.xp}</div><div class="stat-label">Toplam XP</div></div>`;
 
-  // Haftalık chart
+  // Haftalık bar chart
   const wc=document.getElementById('weeklyChart'); wc.innerHTML='';
-  const dayNames=['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
-  let maxV=1;
+  const maxCards=7;
+  let maxVal=1;
   const days=[];
-  for(let i=6;i>=0;i--){
-    const d=new Date();d.setDate(d.getDate()-i);
-    const k=d.toISOString().slice(0,10);
-    const v=appData.stats.studyDays[k]?.cards||0;
-    days.push({v,lbl:dayNames[d.getDay()]});
-    if(v>maxV)maxV=v;
-  }
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);const v=appData.stats.studyDays[k]?.cards||0;days.push({k,v,label:['Paz','Pzt','Sal','Çar','Per','Cum','Cmt',][d.getDay()]});if(v>maxVal)maxVal=v;}
   days.forEach(day=>{
-    const col=document.createElement('div');col.className='bar-col';
-    const bar=document.createElement('div');bar.className='bar';
-    bar.style.height=Math.max(4,Math.round(day.v/maxV*68))+'px';
-    bar.style.background=day.v>0?'#F97316':'#252535';
-    const lbl=document.createElement('div');lbl.className='bar-lbl';lbl.textContent=day.lbl;
-    col.appendChild(bar);col.appendChild(lbl);wc.appendChild(col);
+    const col=document.createElement('div'); col.className='bar-col';
+    const bar=document.createElement('div'); bar.className='bar';
+    const h=Math.max(4,Math.round(day.v/maxVal*70)); bar.style.height=h+'px';
+    if(day.v===0) bar.style.background='#2A2A36';
+    const lbl=document.createElement('div'); lbl.className='bar-label'; lbl.textContent=day.label;
+    col.appendChild(bar); col.appendChild(lbl); wc.appendChild(col);
   });
 
   // Kategori canvas
   const catMap={};
-  cards.forEach(c=>{const cat=c.category||'Genel';catMap[cat]=(catMap[cat]||0)+1;});
-  const canvas=document.getElementById('catCanvas');
+  cards.forEach(c=>{ const cat=c.category||'Genel'; catMap[cat]=(catMap[cat]||0)+1; });
+  const canvas=document.getElementById('categoryCanvas');
   const ctx=canvas.getContext('2d');
-  ctx.clearRect(0,0,280,90);
-  ctx.fillStyle=appData.settings.theme==='dark'?'#0D0D16':'#F9FAFB';
-  ctx.fillRect(0,0,280,90);
-  const cats=Object.entries(catMap);
-  const colors=['#F97316','#3B82F6','#22C55E','#EF4444','#8B5CF6','#EC4899','#14B8A6'];
-  if(cats.length){
-    let x=8;
-    const maxH=68, bw=Math.min(34,(260/cats.length)-4);
-    cats.forEach(([cat,cnt],i)=>{
-      const bh=total>0?Math.max(4,Math.round(cnt/total*maxH)):4;
-      ctx.fillStyle=colors[i%colors.length];
-      ctx.fillRect(x,maxH-bh+8,bw,bh);
-      ctx.fillStyle=appData.settings.theme==='dark'?'#9CA3AF':'#6B7280';
-      ctx.font='9px system-ui';ctx.textAlign='center';
-      ctx.fillText(cat.slice(0,5),x+bw/2,maxH+20);
-      ctx.fillText(cnt,x+bw/2,maxH-bh+6);
-      x+=bw+4;
-    });
-  }
+  ctx.clearRect(0,0,280,100);
+  const cats=Object.entries(catMap); const colors=['#F97316','#3B82F6','#22C55E','#EF4444','#8B5CF6','#EC4899'];
+  let x=10,maxBarH=70;
+  cats.forEach(([cat,cnt],i)=>{
+    const barW=Math.min(36,(260/cats.length)-4);
+    const barH=total>0?Math.round(cnt/total*maxBarH):4;
+    ctx.fillStyle=colors[i%colors.length];
+    ctx.fillRect(x,maxBarH-barH+10,barW,barH);
+    ctx.fillStyle=appData.settings.theme==='dark'?'#9CA3AF':'#6B7280';
+    ctx.font='9px system-ui'; ctx.textAlign='center';
+    ctx.fillText(cat.slice(0,5),x+barW/2,maxBarH+22);
+    ctx.fillText(cnt,x+barW/2,maxBarH-barH+8);
+    x+=barW+4;
+  });
 
   // Zor kartlar
-  const hc=[...cards].sort((a,b)=>(b.wrong||0)-(a.wrong||0)).slice(0,5).filter(c=>(c.wrong||0)>0);
-  const hl=document.getElementById('hardList');hl.innerHTML='';
-  if(hc.length) hc.forEach(c=>{const d=document.createElement('div');d.className='hard-item';d.innerHTML=`<span>${esc(c.word)} → ${esc(c.meaning)}</span><span class="hard-stat">${c.wrong}✗</span>`;hl.appendChild(d);});
-  else hl.innerHTML='<div style="color:#9CA3AF;font-size:12px;text-align:center;padding:10px;">Henüz hata yapılmadı 🎉</div>';
+  const hardCards=[...cards].sort((a,b)=>(b.wrong||0)-(a.wrong||0)).slice(0,5);
+  const hcl=document.getElementById('hardCardsList'); hcl.innerHTML='';
+  hardCards.filter(c=>(c.wrong||0)>0).forEach(c=>{
+    const div=document.createElement('div'); div.className='hard-card-item';
+    div.innerHTML=`<span>${escapeHtml(c.word)} → ${escapeHtml(c.meaning)}</span><span class="hard-card-stat">${c.wrong} ✗</span>`;
+    hcl.appendChild(div);
+  });
+  if(!hardCards.filter(c=>(c.wrong||0)>0).length) hcl.innerHTML='<div style="color:#9CA3AF;font-size:13px;text-align:center;padding:12px;">Henüz yanlış yapılmadı 🎉</div>';
 
   // Ağaç
   const tc=document.getElementById('treeCanvas'),tctx=tc.getContext('2d');
-  tc.width=280;tc.height=150;
-  tctx.fillStyle=appData.settings.theme==='dark'?'#0D0D16':'#F9FAFB';
-  tctx.fillRect(0,0,280,150);
-  tctx.fillStyle='#8B4513';tctx.fillRect(134,108,12,40);
-  const lvl=Math.min(10,total>0?Math.floor(learned/total*10):0);
+  tc.width=280;tc.height=160;tctx.clearRect(0,0,280,160);
+  tctx.fillStyle=appData.settings.theme==='dark'?'#0F0F14':'#F9FAFB';tctx.fillRect(0,0,280,160);
+  tctx.fillStyle='#8B4513';tctx.fillRect(133,110,14,45);
+  const lvl=Math.min(10,Math.floor(learned/Math.max(1,total)*10));
   const gs=['#1a5e20','#2e7d32','#388e3c','#43a047','#4caf50','#66bb6a','#81c784','#a5d6a7','#c8e6c9','#e8f5e9'];
-  for(let i=0;i<lvl;i++){tctx.fillStyle=gs[i];const sz=46-i*4,y=108-i*11;tctx.beginPath();tctx.moveTo(140,y-sz/2);tctx.lineTo(140+sz/2,y+sz/2);tctx.lineTo(140-sz/2,y+sz/2);tctx.closePath();tctx.fill();}
-  if(lvl===0){tctx.fillStyle='#9CA3AF';tctx.font='12px system-ui';tctx.textAlign='center';tctx.fillText('Henüz öğrenilmedi',140,75);}
-
-  // Tahmini tamamlanma
-  const remaining=total-learned;
-  const avgPerDay=Object.values(appData.stats.studyDays).reduce((a,d)=>a+d.cards,0)/Math.max(1,Object.keys(appData.stats.studyDays).length);
-  const estDays=avgPerDay>0?Math.ceil(remaining/avgPerDay):null;
-  document.getElementById('estimateText').textContent=estDays!==null?`Mevcut hızınızla ${estDays} günde tamamlanabilir. (${Math.round(avgPerDay)} kart/gün)`:'Henüz yeterli veri yok.';
+  for(let i=0;i<lvl;i++){tctx.fillStyle=gs[i];const sz=50-i*4,y=110-i*12;tctx.beginPath();tctx.moveTo(140,y-sz/2);tctx.lineTo(140+sz/2,y+sz/2);tctx.lineTo(140-sz/2,y+sz/2);tctx.closePath();tctx.fill();}
+  if(lvl===0){tctx.fillStyle='#9CA3AF';tctx.font='12px system-ui';tctx.textAlign='center';tctx.fillText('Henüz öğrenilmedi',140,80);}
 }
 
-document.getElementById('statCurrent').onclick=()=>{statMode='current';document.getElementById('statCurrent').classList.add('active');document.getElementById('statAll').classList.remove('active');renderStats();};
-document.getElementById('statAll').onclick=()=>{statMode='all';document.getElementById('statAll').classList.add('active');document.getElementById('statCurrent').classList.remove('active');renderStats();};
+document.getElementById('statFilterCurrent').onclick=()=>{ statFilter='current'; document.getElementById('statFilterCurrent').classList.add('active'); document.getElementById('statFilterAll').classList.remove('active'); renderStats(); };
+document.getElementById('statFilterAll').onclick=()=>{ statFilter='all'; document.getElementById('statFilterAll').classList.add('active'); document.getElementById('statFilterCurrent').classList.remove('active'); renderStats(); };
 
-// ═══════════════════════════════════════════
-// BAŞARIMLAR
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
+// BAŞARIMLAR MODAL
+// ═══════════════════════════════════════════════
 function openAchievements(){
   const xp=appData.stats.xp;
   document.getElementById('totalXP').textContent=xp;
   document.getElementById('userLevel').textContent=appData.stats.level;
-  const curLXP=LVL[Math.min(appData.stats.level-1,LVL.length-1)];
-  const nxtLXP=LVL[Math.min(appData.stats.level,LVL.length-1)];
-  const pct=nxtLXP>curLXP?Math.min(100,Math.round((xp-curLXP)/(nxtLXP-curLXP)*100)):100;
+  const curLvlXP=LEVEL_THRESHOLDS[Math.min(appData.stats.level-1,LEVEL_THRESHOLDS.length-1)];
+  const nextLvlXP=LEVEL_THRESHOLDS[Math.min(appData.stats.level,LEVEL_THRESHOLDS.length-1)];
+  const pct=nextLvlXP>curLvlXP?Math.round((xp-curLvlXP)/(nextLvlXP-curLvlXP)*100):100;
   document.getElementById('xpBar').style.width=pct+'%';
-  const grid=document.getElementById('achievementsGrid');grid.innerHTML='';
-  BADGES.forEach(b=>{
-    const earned=!!appData.stats.achievements[b.id];
-    const div=document.createElement('div');div.className='achievement'+(earned?' earned':'');
-    div.title=earned?`Kazanıldı: ${new Date(appData.stats.achievements[b.id]).toLocaleDateString('tr-TR')}`:'Henüz kazanılmadı';
-    div.innerHTML=`<div class="achievement-icon" style="${!earned?'filter:grayscale(1);opacity:0.35':''}">${b.icon}</div><div class="achievement-name">${b.name}</div><div style="font-size:9px;color:#6B7280;">${b.desc}</div>`;
+  const grid=document.getElementById('achievementsGrid'); grid.innerHTML='';
+  ACHIEVEMENTS.forEach(a=>{
+    const earned=!!appData.stats.achievements[a.id];
+    const div=document.createElement('div'); div.className='achievement'+(earned?' earned':'');
+    div.innerHTML=`<div class="achievement-icon" style="${!earned?'filter:grayscale(1);opacity:0.4':''}">${a.icon}</div><div class="achievement-name">${a.name}</div><div style="font-size:9px;color:#6B7280;">${a.desc}</div>`;
+    div.title=earned?`Kazanıldı: ${new Date(appData.stats.achievements[a.id]).toLocaleDateString('tr-TR')}`:'Henüz kazanılmadı';
     grid.appendChild(div);
   });
   openModal('achievementsModal');
 }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // KEŞFET
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 let kesfetMode=false,kesfetList=[],kesfetIdx=0;
 function openKesfet(){
   kesfetList=[...getCards()].sort(()=>Math.random()-0.5);
-  if(!kesfetList.length){showToast('Bu destede kart yok!','#EF4444');return;}
+  if(!kesfetList.length) return alert('Bu destede kart yok!');
   kesfetIdx=0;kesfetMode=true;
   document.getElementById('main').style.display='none';
   document.getElementById('kesfetScreen').style.display='flex';
   renderKesfet();
 }
 function renderKesfet(){
-  if(kesfetIdx>=kesfetList.length)return;
+  if(kesfetIdx>=kesfetList.length) return;
   const c=kesfetList[kesfetIdx],nl=appData.settings.direction==='nltr';
   document.getElementById('kesfetWord').textContent=nl?c.word:c.meaning;
   document.getElementById('kesfetBackWord').textContent=nl?c.meaning:c.word;
@@ -1553,88 +1608,80 @@ function renderKesfet(){
   document.getElementById('kesfetCard').classList.remove('flipped');
   document.getElementById('kesfetKalan').textContent=`${kesfetList.length-kesfetIdx} kart kaldı`;
 }
-function kesfetAns(know){
-  if(kesfetIdx>=kesfetList.length)return;
+function kesfetAnswer(know){
+  if(kesfetIdx>=kesfetList.length) return;
   const c=kesfetList[kesfetIdx];
-  sm2(c,know?'good':'again');
-  if(know){c.correct=(c.correct||0)+1;recordStudy(true);}else{c.wrong=(c.wrong||0)+1;recordStudy(false);}
+  updateSM2(c,know?'good':'again');
+  if(know){c.correct=(c.correct||0)+1;recordStudyActivity(true,false);}else{c.wrong=(c.wrong||0)+1;recordStudyActivity(false,true);}
   save();kesfetIdx++;
-  if(kesfetIdx<kesfetList.length)renderKesfet();
-  else{showToast('🎉 Keşfet tamamlandı!');closeKesfet();}
+  if(kesfetIdx<kesfetList.length) renderKesfet(); else{alert('🎉 Keşfet tamamlandı!');closeKesfet();}
 }
-function closeKesfet(){
-  kesfetMode=false;
-  document.getElementById('main').style.display='flex';
-  document.getElementById('kesfetScreen').style.display='none';
-  sessionTotal=0;nextCard();
-}
+function closeKesfet(){kesfetMode=false;document.getElementById('main').style.display='flex';document.getElementById('kesfetScreen').style.display='none';sessionTotal=0;nextCard();}
 document.getElementById('kesfetCard').onclick=e=>{if(e.target.closest('.tts-btn,.kesfet-btn'))return;document.getElementById('kesfetCard').classList.toggle('flipped');};
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // ÇOKLU DESTE
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function openMultiDeck(){
-  const list=document.getElementById('multiDeckList');list.innerHTML='';
+  const list=document.getElementById('multiDeckList'); list.innerHTML='';
   appData.decks.forEach(d=>{
-    const div=document.createElement('div');div.className='multi-deck-item';
+    const div=document.createElement('div'); div.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 12px;background:#0F0F14;border-radius:12px;';
     const cb=document.createElement('input');cb.type='checkbox';cb.className='deck-checkbox';cb.value=d.id;cb.checked=appData.multiDeckIds.includes(d.id);
-    const dot=document.createElement('span');dot.style.cssText=`width:9px;height:9px;border-radius:50%;background:${d.color||'#F97316'};display:inline-block;`;
-    const lbl=document.createElement('span');lbl.textContent=d.name;lbl.style.flex='1';lbl.style.cursor='pointer';lbl.onclick=()=>cb.click();
-    const cnt=document.createElement('span');cnt.style.cssText='font-size:10px;color:#6B7280;';cnt.textContent=appData.cards.filter(c=>c.deckId===d.id).length+' kart';
+    const dot=document.createElement('span');dot.style.cssText=`width:10px;height:10px;border-radius:50%;background:${d.color||'#F97316'};display:inline-block;`;
+    const lbl=document.createElement('label');lbl.textContent=d.name;lbl.style.cursor='pointer';lbl.onclick=()=>cb.click();
+    const cnt=document.createElement('span');cnt.style.cssText='font-size:11px;color:#6B7280;margin-left:auto;';cnt.textContent=appData.cards.filter(c=>c.deckId===d.id).length+' kart';
     div.appendChild(cb);div.appendChild(dot);div.appendChild(lbl);div.appendChild(cnt);list.appendChild(div);
   });
   openModal('multiDeckModal');
 }
-document.getElementById('cancelMultiBtn').onclick=()=>closeModal('multiDeckModal');
-document.getElementById('startMultiBtn').onclick=()=>{
-  const checked=Array.from(document.querySelectorAll('#multiDeckList input:checked')).map(c=>c.value);
-  if(!checked.length){showToast('En az bir deste seç!','#EF4444');return;}
+document.getElementById('cancelMultiDeckBtn').onclick=()=>closeModal('multiDeckModal');
+document.getElementById('startMultiDeckBtn').onclick=()=>{
+  const checked=Array.from(document.querySelectorAll('#multiDeckList input:checked')).map(cb=>cb.value);
+  if(!checked.length) return alert('En az bir deste seç!');
   appData.multiDeckIds=checked;save();closeModal('multiDeckModal');closeSidebar();sessionTotal=0;nextCard();
 };
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // BİLDİRİMLER
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function scheduleNotif(){
   notifTimers.forEach(t=>clearTimeout(t));notifTimers=[];
   const times=appData.settings.notifTimes.filter(Boolean);if(!times.length)return;
   const now=new Date();
   times.forEach(t=>{
-    const parts=t.split(':');if(parts.length!==2)return;
-    const target=new Date();target.setHours(+parts[0],+parts[1],0,0);
+    const [h,m]=t.split(':');const target=new Date();target.setHours(+h,+m,0,0);
     if(target<=now)target.setDate(target.getDate()+1);
-    notifTimers.push(setTimeout(()=>{
-      if(Notification.permission==='granted') new Notification('LinguaPrime',{body:`${getDueCards().length} kart seni bekliyor!`});
-      scheduleNotif();
-    },target.getTime()-now.getTime()));
+    notifTimers.push(setTimeout(()=>{if(Notification.permission==='granted')new Notification('LinguaPrime',{body:`${getDueCards().length} kart seni bekliyor!`});scheduleNotif();},target.getTime()-now.getTime()));
   });
-  const ind=document.getElementById('notifIndicator');
-  if(ind)ind.innerHTML=times.length?'<span class="notif-dot"></span>':'';
+  const ind=document.getElementById('notifActiveIndicator');
+  if(ind) ind.innerHTML=times.length>0?'<span class="notif-indicator"></span>':'';
 }
-if(Notification.permission!=='granted'&&Notification.permission!=='denied') Notification.requestPermission();
+if(Notification.permission!=='granted'&&Notification.permission!=='denied')Notification.requestPermission();
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // OTOMATİK YEDEK
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function checkAutoBackup(){
-  const s=appData.settings.autoBackup;if(s==='off')return;
-  const today=todayKey(),last=localStorage.getItem('lp_lastBackup')||'';
-  if(s==='daily'&&last===today)return;
-  if(s==='weekly'){const diff=(Date.now()-new Date(last||0).getTime())/86400000;if(diff<7)return;}
-  exportJson(true);
+  const setting=appData.settings.autoBackup; if(setting==='off') return;
+  const today=getTodayKey();
+  const lastBackup=localStorage.getItem('lp_lastBackup')||'';
+  if(setting==='daily'&&lastBackup===today) return;
+  if(setting==='weekly'){
+    const lastDate=new Date(lastBackup||0);const diffDays=(Date.now()-lastDate.getTime())/(86400000);
+    if(diffDays<7) return;
+  }
+  exportJsonBackup(true);
   localStorage.setItem('lp_lastBackup',today);
 }
-function exportJson(silent=false){
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([JSON.stringify(appData,null,2)],{type:'application/json'}));
-  a.download=`lp_backup_${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.json`;
-  a.click();URL.revokeObjectURL(a.href);
-  if(!silent)showToast('💾 JSON yedek indirildi');
+function exportJsonBackup(silent=false){
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(appData,null,2)],{type:"application/json"}));
+  a.download=`linguaprime_backup_${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.json`;a.click();URL.revokeObjectURL(a.href);
+  if(!silent) alert('JSON yedek indirildi!');
 }
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // TEMA
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 function applyTheme(){
   const t=appData.settings.theme;
   if(t==='dark')document.body.classList.remove('light');
@@ -1643,298 +1690,239 @@ function applyTheme(){
 }
 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(appData.settings.theme==='auto')applyTheme();});
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // KART TİPİ ALANLARI
-// ═══════════════════════════════════════════
-function updTypeFields(type){
-  const map={verb:'verbFields',separable:'separableFields',modal:'modalFields',pattern:'patternFields'};
+// ═══════════════════════════════════════════════
+function updateCardTypeFields(type){
   ['verbFields','separableFields','modalFields','patternFields'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.display='none';
+    const el=document.getElementById(id); if(el)el.style.display='none';
   });
+  const map={verb:'verbFields',separable:'separableFields',modal:'modalFields',pattern:'patternFields'};
   if(map[type]){const el=document.getElementById(map[type]);if(el)el.style.display='flex';}
 }
-document.getElementById('cardTypeSelect').onchange=e=>updTypeFields(e.target.value);
+document.getElementById('cardTypeSelect').onchange=e=>updateCardTypeFields(e.target.value);
 
-function openEditCard(cardId){
-  const c=appData.cards.find(x=>x.id===cardId);if(!c)return;
-  document.getElementById('cardModalTitle').textContent='Kart Düzenle';
-  document.getElementById('cardTypeSelect').value=c.cardType||'vocab';
-  document.getElementById('cardWord').value=c.word||'';
-  document.getElementById('cardMeaning').value=c.meaning||'';
-  document.getElementById('cardSentence').value=c.sentence||'';
-  document.getElementById('cardAntonym').value=c.antonym||'';
-  document.getElementById('cardImageUrl').value=c.imageUrl||'';
-  document.getElementById('cardCategory').value=c.category||'Genel';
-  document.getElementById('cardDifficulty').value=c.difficulty||'';
-  document.getElementById('cardTags').value=(c.tags||[]).join(',');
-  document.getElementById('verbPresent').value=c.verbPresent||'';
-  document.getElementById('verbPastSingular').value=c.verbPastSingular||'';
-  document.getElementById('verbPastPlural').value=c.verbPastPlural||'';
-  document.getElementById('verbPerfect').value=c.verbPerfect||'';
-  document.getElementById('verbAuxiliary').value=c.verbAuxiliary||'hebben';
-  document.getElementById('sepPrefix').value=c.sepPrefix||'';
-  document.getElementById('sepBase').value=c.sepBase||'';
-  document.getElementById('sepExample').value=c.sepExample||'';
-  document.getElementById('modalConjugation').value=c.modalConjugation||'';
-  document.getElementById('patternSlot').value=c.patternSlot||'';
-  updTypeFields(c.cardType||'vocab');
-  window._editCardId=cardId;
+function openEditCardModal(cardId){
+  const card=appData.cards.find(c=>c.id===cardId);if(!card)return;
+  document.getElementById('cardModalTitle').innerText='Kart Düzenle';
+  document.getElementById('cardTypeSelect').value=card.cardType||'vocab';
+  document.getElementById('cardWord').value=card.word||'';
+  document.getElementById('cardMeaning').value=card.meaning||'';
+  document.getElementById('cardSentence').value=card.sentence||'';
+  document.getElementById('cardAntonym').value=card.antonym||'';
+  document.getElementById('cardImageUrl').value=card.imageUrl||'';
+  document.getElementById('cardCategory').value=card.category||'Genel';
+  document.getElementById('cardDifficulty').value=card.difficulty||'';
+  document.getElementById('cardTags').value=(card.tags||[]).join(',');
+  document.getElementById('verbPresent').value=card.verbPresent||'';
+  document.getElementById('verbPastSingular').value=card.verbPastSingular||'';
+  document.getElementById('verbPastPlural').value=card.verbPastPlural||'';
+  document.getElementById('verbPerfect').value=card.verbPerfect||'';
+  document.getElementById('verbAuxiliary').value=card.verbAuxiliary||'hebben';
+  document.getElementById('sepPrefix').value=card.sepPrefix||'';
+  document.getElementById('sepBase').value=card.sepBase||'';
+  document.getElementById('sepExample').value=card.sepExample||'';
+  document.getElementById('modalConjugation').value=card.modalConjugation||'';
+  document.getElementById('patternSlot').value=card.patternSlot||'';
+  updateCardTypeFields(card.cardType||'vocab');
+  window.editCardId=cardId;
   openModal('cardModal');
 }
 
-function clearCardForm(){
-  ['cardWord','cardMeaning','cardSentence','cardAntonym','cardImageUrl','cardTags',
-   'verbPresent','verbPastSingular','verbPastPlural','verbPerfect',
-   'sepPrefix','sepBase','sepExample','modalConjugation','patternSlot'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.value='';
-  });
+// ═══════════════════════════════════════════════
+// CSV / JSON
+// ═══════════════════════════════════════════════
+function parseCSVLine(str){const result=[];let curr='',inQ=false;for(let i=0;i<str.length;i++){if(str[i]==='"')inQ=!inQ;else if(str[i]===','&&!inQ){result.push(curr);curr='';}else curr+=str[i];}result.push(curr);return result.map(s=>s.replace(/^"|"$/g,'').replace(/""/g,'"').trim());}
+function handleCSVFile(file){const r=new FileReader();r.onload=e=>{const lines=e.target.result.split('\n');let cnt=0;for(let i=1;i<lines.length;i++){if(!lines[i].trim())continue;const p=parseCSVLine(lines[i]);if(p.length>=2&&p[0]&&p[1]){addCard({word:p[0],meaning:p[1],sentence:p[2]||'',antonym:p[3]||'',category:p[4]||'Genel',difficulty:p[5]||'',cardType:p[6]||'vocab',imageUrl:p[7]||''});cnt++;}}renderManagerTable();alert(`${cnt} kart içe aktarıldı!`);};r.readAsText(file,'UTF-8');}
+function exportCSV(){let csv="word,meaning,sentence,antonym,category,difficulty,cardType,imageUrl\n";const esc=v=>`"${String(v||'').replace(/"/g,'""')}"`;getCurrentDeckCards().forEach(c=>{csv+=`${esc(c.word)},${esc(c.meaning)},${esc(c.sentence)},${esc(c.antonym)},${esc(c.category)},${esc(c.difficulty)},${esc(c.cardType)},${esc(c.imageUrl)}\n`;});const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(["\uFEFF"+csv],{type:"text/csv"}));a.download="linguaprime_export.csv";a.click();URL.revokeObjectURL(a.href);}
+function handleJsonFile(file){const r=new FileReader();r.onload=e=>{try{const b=JSON.parse(e.target.result);if(b.decks&&b.cards&&confirm('Mevcut veriler silinecek. Emin misiniz?')){appData=migrateData(b);save();location.reload();}else if(!b.decks||!b.cards)alert('Geçersiz yedek!');}catch{alert('Geçersiz JSON!');}};r.readAsText(file,'UTF-8');}
+
+// ═══════════════════════════════════════════════
+// ONBOARDING
+// ═══════════════════════════════════════════════
+const ONBOARDING_STEPS=[
+  {icon:'🌍',title:'LinguaPrime\'e Hoş Geldin!',desc:'Dil öğrenmenin en akıllı yolu. Yapay zeka destekli SM-2 algoritmasıyla kartları tam zamanında tekrar et.'},
+  {icon:'📚',title:'Deste & Kart Sistemi',desc:'Kategorilere göre desteler oluştur. Her deste için farklı renk seç. Sağ üstteki + butonu ile hızlıca kart ekle.'},
+  {icon:'🧠',title:'6 Çalışma Modu',desc:'Normal, Test, Harf, Çoktan Seçmeli, de/het, Sürükle-Bırak, Boşluk Doldurma ve Hızlı Mod ile çalış.'},
+  {icon:'🔥',title:'Seri & XP Sistemi',desc:'Her gün çalışarak seri yap. XP kazan, seviye atla, başarımlar kazan. Alev simgesine tıkla!'},
+  {icon:'📊',title:'Detaylı İstatistik',desc:'Haftalık grafik, kategori analizi, en zor kartlar ve öğrenme ağacı ile ilerlemeyi takip et.'},
+  {icon:'🚀',title:'Hazırsın!',desc:'İlk desteni oluştur ve öğrenmeye başla. Başarılar! 🎉'},
+];
+let onboardingStep=0;
+function showOnboarding(){
+  onboardingStep=0; renderOnboardingStep(); openModal('onboardingModal');
+}
+function renderOnboardingStep(){
+  const s=ONBOARDING_STEPS[onboardingStep];
+  document.getElementById('onboardingContent').innerHTML=`<div class="onboarding-icon">${s.icon}</div><div class="onboarding-title">${s.title}</div><div class="onboarding-desc">${s.desc}</div>`;
+  const dots=document.getElementById('onboardingDots'); dots.innerHTML='';
+  ONBOARDING_STEPS.forEach((_,i)=>{const d=document.createElement('div');d.className='onboarding-dot'+(i===onboardingStep?' active':'');d.onclick=()=>{onboardingStep=i;renderOnboardingStep();};dots.appendChild(d);});
+  document.getElementById('onboardingPrev').style.visibility=onboardingStep>0?'visible':'hidden';
+  document.getElementById('onboardingNext').textContent=onboardingStep===ONBOARDING_STEPS.length-1?'Başlayalım! 🚀':'İleri →';
+}
+document.getElementById('onboardingPrev').onclick=()=>{if(onboardingStep>0){onboardingStep--;renderOnboardingStep();}};
+document.getElementById('onboardingNext').onclick=()=>{
+  if(onboardingStep<ONBOARDING_STEPS.length-1){onboardingStep++;renderOnboardingStep();}
+  else{appData.settings.onboardingDone=true;save();closeModal('onboardingModal');}
+};
+
+// ═══════════════════════════════════════════════
+// YARDIMCI
+// ═══════════════════════════════════════════════
+function escapeHtml(str){return String(str||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);}
+function setActiveModeButton(){document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.toggle('active',btn.dataset.mode===appData.settings.mode));}
+
+// ═══════════════════════════════════════════════
+// ANA EVENT LISTENER'LAR
+// ═══════════════════════════════════════════════
+document.getElementById('menuBtn').onclick=toggleSidebar;
+document.getElementById('quickAddBtn').onclick=()=>{
+  window.editCardId=null;
+  document.getElementById('cardModalTitle').innerText='Kart Ekle';
+  ['cardWord','cardMeaning','cardSentence','cardAntonym','cardImageUrl','cardTags','verbPresent','verbPastSingular','verbPastPlural','verbPerfect','sepPrefix','sepBase','sepExample','modalConjugation','patternSlot'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('cardTypeSelect').value='vocab';
   document.getElementById('cardCategory').value='Genel';
   document.getElementById('cardDifficulty').value='';
   document.getElementById('verbAuxiliary').value='hebben';
-  updTypeFields('vocab');
-}
-
-// ═══════════════════════════════════════════
-// CSV / JSON
-// ═══════════════════════════════════════════
-function parseCSV(str){
-  const r=[];let curr='',inQ=false;
-  for(let i=0;i<str.length;i++){
-    if(str[i]==='"')inQ=!inQ;
-    else if(str[i]===','&&!inQ){r.push(curr);curr='';}
-    else curr+=str[i];
-  }
-  r.push(curr);
-  return r.map(s=>s.replace(/^"|"$/g,'').replace(/""/g,'"').trim());
-}
-function handleCSV(file){
-  const rd=new FileReader();
-  rd.onload=e=>{
-    const lines=e.target.result.split('\n');let cnt=0;
-    for(let i=1;i<lines.length;i++){
-      if(!lines[i].trim())continue;
-      const p=parseCSV(lines[i]);
-      if(p.length>=2&&p[0]&&p[1]){
-        addCard({word:p[0],meaning:p[1],sentence:p[2]||'',antonym:p[3]||'',category:p[4]||'Genel',difficulty:p[5]||'',cardType:p[6]||'vocab',imageUrl:p[7]||''});
-        cnt++;
-      }
-    }
-    renderTable();showToast(`✅ ${cnt} kart içe aktarıldı`);
-  };
-  rd.readAsText(file,'UTF-8');
-}
-function exportCSV(){
-  const ef=v=>`"${String(v||'').replace(/"/g,'""')}"`;
-  let csv='word,meaning,sentence,antonym,category,difficulty,cardType,imageUrl\n';
-  getCurCards().forEach(c=>{csv+=`${ef(c.word)},${ef(c.meaning)},${ef(c.sentence)},${ef(c.antonym)},${ef(c.category)},${ef(c.difficulty)},${ef(c.cardType)},${ef(c.imageUrl)}\n`;});
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv'}));a.download='linguaprime_export.csv';a.click();URL.revokeObjectURL(a.href);
-}
-function handleJson(file){
-  const rd=new FileReader();
-  rd.onload=e=>{
-    try{
-      const b=JSON.parse(e.target.result);
-      if(b.decks&&b.cards){if(confirm('Mevcut veriler silinecek. Devam?')){appData=migrate(b);save();location.reload();}}
-      else showToast('Geçersiz yedek dosyası!','#EF4444');
-    }catch{showToast('Geçersiz JSON!','#EF4444');}
-  };
-  rd.readAsText(file,'UTF-8');
-}
-
-// ═══════════════════════════════════════════
-// ONBOARDING
-// ═══════════════════════════════════════════
-const OB_STEPS=[
-  {icon:'🌍',title:'LinguaPrime\'e Hoş Geldin!',desc:'SM-2 algoritmasıyla kartları tam zamanında tekrar et. Dil öğrenmenin en akıllı yolu.'},
-  {icon:'📚',title:'Deste & Kart Sistemi',desc:'Kategorilere göre desteler oluştur, renk ver. Sağ üstteki ＋ ile hızlıca kart ekle.'},
-  {icon:'🧠',title:'8 Çalışma Modu',desc:'Normal, Test, Harf, Çoktan Seçmeli, de/het, Sürükle-Bırak, Boşluk Doldur ve Hızlı Mod.'},
-  {icon:'🔥',title:'Seri & XP Sistemi',desc:'Her gün çalışarak seri yap, XP kazan, seviye atla, 12 farklı başarım kazan!'},
-  {icon:'📊',title:'Güçlü İstatistikler',desc:'Haftalık grafik, kategori analizi, en zor kartlar, öğrenme ağacı ve tamamlanma tahmini.'},
-  {icon:'🚀',title:'Hazırsın!',desc:'İlk desteni oluştur ve öğrenmeye başla. İyi çalışmalar! 🎉'},
-];
-let obStep=0;
-function showOnboarding(){obStep=0;renderOB();openModal('onboardingModal');}
-function renderOB(){
-  const s=OB_STEPS[obStep];
-  document.getElementById('onboardingContent').innerHTML=`<div class="onboarding-icon">${s.icon}</div><div class="onboarding-title">${s.title}</div><div class="onboarding-desc">${s.desc}</div>`;
-  const dots=document.getElementById('onboardingDots');dots.innerHTML='';
-  OB_STEPS.forEach((_,i)=>{const d=document.createElement('div');d.className='onboarding-dot'+(i===obStep?' active':'');d.onclick=()=>{obStep=i;renderOB();};dots.appendChild(d);});
-  document.getElementById('onboardingPrev').style.visibility=obStep>0?'visible':'hidden';
-  document.getElementById('onboardingNext').textContent=obStep===OB_STEPS.length-1?'Başlayalım! 🚀':'İleri →';
-}
-document.getElementById('onboardingPrev').onclick=()=>{if(obStep>0){obStep--;renderOB();}};
-document.getElementById('onboardingNext').onclick=()=>{
-  if(obStep<OB_STEPS.length-1){obStep++;renderOB();}
-  else{appData.settings.onboardingDone=true;save();closeModal('onboardingModal');}
+  updateCardTypeFields('vocab');
+  openModal('cardModal');
 };
-
-// ═══════════════════════════════════════════
-// YARDIMCI
-// ═══════════════════════════════════════════
-function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);}
-function setModeBtn(){document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active',b.dataset.mode===appData.settings.mode));}
-
-// ═══════════════════════════════════════════
-// ANA EVENT LISTENERS
-// ═══════════════════════════════════════════
-document.getElementById('menuBtn').onclick=toggleSidebar;
-document.getElementById('quickAddBtn').onclick=()=>{window._editCardId=null;document.getElementById('cardModalTitle').textContent='Kart Ekle';clearCardForm();openModal('cardModal');};
 document.getElementById('streakBadge').onclick=openStreakModal;
-
 document.getElementById('card').onclick=e=>{
-  if(e.target.closest('#testArea,#dragArea,.tts-btn,#recordBtn')) return;
+  if(e.target.closest('#testArea,#dragArea,.action-btn,.mode-btn,.tts-btn,#recordBtn')) return;
   flipCard();
 };
-document.getElementById('frontTtsBtn').onclick=playFront;
-document.getElementById('backTtsBtn').onclick=playBack;
-document.getElementById('kesfetFrontTtsBtn').onclick=playKFront;
-document.getElementById('kesfetBackTtsBtn').onclick=playKBack;
+document.getElementById('frontTtsBtn').onclick=playFrontTTS;
+document.getElementById('backTtsBtn').onclick=playBackTTS;
+document.getElementById('kesfetFrontTtsBtn').onclick=playKesfetFrontTTS;
+document.getElementById('kesfetBackTtsBtn').onclick=playKesfetBackTTS;
 document.getElementById('recordBtn').onclick=toggleRecord;
 
 ['again','hard','good','easy'].forEach(q=>document.getElementById(q+'Btn').onclick=()=>answer(q));
-document.getElementById('undoBtn').onclick=undoLast;
+document.getElementById('undoBtn').onclick=undoLastAnswer;
 
 document.getElementById('toggleDeckViewBtn').onclick=()=>{appData.settings.showOnlyActiveDeck=!appData.settings.showOnlyActiveDeck;save();renderSidebar();};
 
 document.getElementById('addDeckBtn').onclick=()=>{document.getElementById('deckName').value='';document.getElementById('deckColor').value='#F97316';openModal('deckModal');};
 document.getElementById('cancelDeckBtn').onclick=()=>closeModal('deckModal');
-document.getElementById('saveDeckBtn').onclick=()=>{
-  const n=document.getElementById('deckName').value.trim();
-  if(!n){showToast('Deste adı boş olamaz!','#EF4444');return;}
-  const id=genId();appData.decks.push({id,name:n,color:document.getElementById('deckColor').value});
-  appData.currentDeckId=id;appData.multiDeckIds=[];save();renderSidebar();sessionTotal=0;nextCard();
-  closeModal('deckModal');checkBadges();
-};
+document.getElementById('saveDeckBtn').onclick=()=>{const n=document.getElementById('deckName').value.trim();if(!n)return alert('Deste adı boş olamaz!');addDeck(n,document.getElementById('deckColor').value);closeModal('deckModal');};
 
 document.getElementById('cancelEditDeckBtn').onclick=()=>closeModal('editDeckModal');
 document.getElementById('saveEditDeckBtn').onclick=()=>{
   const n=document.getElementById('editDeckName').value.trim();
-  if(n&&window._editDeckId){const d=appData.decks.find(x=>x.id===window._editDeckId);if(d){d.name=n;d.color=document.getElementById('editDeckColor').value;}save();renderSidebar();}
+  if(n&&window.editDeckId){const d=appData.decks.find(d=>d.id===window.editDeckId);if(d){d.name=n;d.color=document.getElementById('editDeckColor').value;}save();renderSidebar();}
   closeModal('editDeckModal');
 };
 
 document.getElementById('manageCardsBtn').onclick=()=>{openManager();closeSidebar();};
 document.getElementById('closeManagerBtn').onclick=()=>closeModal('managerModal');
-document.getElementById('addCardFromManagerBtn').onclick=()=>{window._editCardId=null;document.getElementById('cardModalTitle').textContent='Kart Ekle';clearCardForm();openModal('cardModal');};
+
+document.getElementById('addCardFromManagerBtn').onclick=()=>{
+  window.editCardId=null;
+  document.getElementById('cardModalTitle').innerText='Kart Ekle';
+  ['cardWord','cardMeaning','cardSentence','cardAntonym','cardImageUrl','cardTags','verbPresent','verbPastSingular','verbPastPlural','verbPerfect','sepPrefix','sepBase','sepExample','modalConjugation','patternSlot'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('cardTypeSelect').value='vocab';document.getElementById('cardCategory').value='Genel';document.getElementById('cardDifficulty').value='';document.getElementById('verbAuxiliary').value='hebben';
+  updateCardTypeFields('vocab');openModal('cardModal');
+};
+
 document.getElementById('cancelCardBtn').onclick=()=>closeModal('cardModal');
 document.getElementById('saveCardBtn').onclick=()=>{
   const w=document.getElementById('cardWord').value.trim(),m=document.getElementById('cardMeaning').value.trim();
-  if(!w||!m){showToast('Kelime ve Anlam zorunludur!','#EF4444');return;}
+  if(!w||!m)return alert('Kelime ve Anlam zorunludur!');
   const ct=document.getElementById('cardTypeSelect').value;
-  const tags=document.getElementById('cardTags').value;
-  const data={
-    word:w,meaning:m,
-    sentence:document.getElementById('cardSentence').value.trim(),
-    antonym:document.getElementById('cardAntonym').value.trim(),
-    imageUrl:document.getElementById('cardImageUrl').value.trim(),
-    category:document.getElementById('cardCategory').value,
-    difficulty:document.getElementById('cardDifficulty').value,
-    cardType:ct,
-    tags:tags?tags.split(',').map(t=>t.trim()).filter(Boolean):[]
-  };
+  const tagsRaw=document.getElementById('cardTags').value;
+  const data={word:w,meaning:m,sentence:document.getElementById('cardSentence').value.trim(),antonym:document.getElementById('cardAntonym').value.trim(),imageUrl:document.getElementById('cardImageUrl').value.trim(),category:document.getElementById('cardCategory').value,difficulty:document.getElementById('cardDifficulty').value,cardType:ct,tags:tagsRaw?tagsRaw.split(',').map(t=>t.trim()).filter(Boolean):[]};
   if(ct==='verb'){data.verbPresent=document.getElementById('verbPresent').value.trim();data.verbPastSingular=document.getElementById('verbPastSingular').value.trim();data.verbPastPlural=document.getElementById('verbPastPlural').value.trim();data.verbPerfect=document.getElementById('verbPerfect').value.trim();data.verbAuxiliary=document.getElementById('verbAuxiliary').value;}
   if(ct==='separable'){data.sepPrefix=document.getElementById('sepPrefix').value.trim();data.sepBase=document.getElementById('sepBase').value.trim();data.sepExample=document.getElementById('sepExample').value.trim();}
   if(ct==='modal')data.modalConjugation=document.getElementById('modalConjugation').value.trim();
   if(ct==='pattern')data.patternSlot=document.getElementById('patternSlot').value.trim();
-  if(window._editCardId)updateCard(window._editCardId,data);else addCard(data);
+  if(window.editCardId)updateCard(window.editCardId,data);else addCard(data);
   closeModal('cardModal');
-  if(document.getElementById('managerModal').classList.contains('open'))renderTable();
+  if(document.getElementById('managerModal').classList.contains('open'))renderManagerTable();
 };
 
-document.getElementById('csvFileInput').onchange=e=>{if(e.target.files[0])handleCSV(e.target.files[0]);e.target.value='';};
+document.getElementById('csvFileInput').onchange=e=>{if(e.target.files[0])handleCSVFile(e.target.files[0]);e.target.value='';};
 document.getElementById('importCsvBtn').onclick=()=>document.getElementById('csvFileInput').click();
 document.getElementById('exportCsvBtn').onclick=exportCSV;
-document.getElementById('jsonFileInput').onchange=e=>{if(e.target.files[0])handleJson(e.target.files[0]);e.target.value='';};
+document.getElementById('jsonFileInput').onchange=e=>{if(e.target.files[0])handleJsonFile(e.target.files[0]);e.target.value='';};
 document.getElementById('importJsonBackupBtn').onclick=()=>document.getElementById('jsonFileInput').click();
-document.getElementById('exportJsonBackupBtn').onclick=()=>exportJson(false);
+document.getElementById('exportJsonBackupBtn').onclick=()=>exportJsonBackup(false);
 
 document.getElementById('kesfetBtn').onclick=()=>{openKesfet();closeSidebar();};
-document.getElementById('kesfetYesBtn').onclick=()=>kesfetAns(true);
-document.getElementById('kesfetNoBtn').onclick=()=>kesfetAns(false);
+document.getElementById('kesfetYesBtn').onclick=()=>kesfetAnswer(true);
+document.getElementById('kesfetNoBtn').onclick=()=>kesfetAnswer(false);
 document.getElementById('kesfetCloseBtn').onclick=closeKesfet;
 
 document.getElementById('statsBtn').onclick=()=>{openStats();closeSidebar();};
 document.getElementById('closeStatsBtn').onclick=()=>closeModal('statsModal');
+
 document.getElementById('achievementsBtn').onclick=()=>{openAchievements();closeSidebar();};
 document.getElementById('closeAchievementsBtn').onclick=()=>closeModal('achievementsModal');
 document.getElementById('closeStreakBtn').onclick=()=>closeModal('streakModal');
 document.getElementById('closeCardDetailBtn').onclick=()=>closeModal('cardDetailModal');
 document.getElementById('closeSessionBtn').onclick=()=>closeModal('sessionModal');
 document.getElementById('continueStudyBtn').onclick=()=>{closeModal('sessionModal');sessionTotal=0;nextCard();};
-document.getElementById('multiDeckStudyBtn').onclick=openMultiDeck;
+
+document.getElementById('multiDeckStudyBtn').onclick=()=>{openMultiDeck();};
 
 document.getElementById('settingsBtn').onclick=()=>{
   document.getElementById('ttsToggle').value=appData.settings.tts;
   document.getElementById('directionSelect').value=appData.settings.direction;
   document.getElementById('themeSelect').value=appData.settings.theme;
   document.getElementById('dailyGoalInput').value=appData.settings.dailyGoal;
-  document.getElementById('timedInput').value=appData.settings.timedSeconds;
-  document.getElementById('autoBackupSel').value=appData.settings.autoBackup;
+  document.getElementById('timedModeInput').value=appData.settings.timedSeconds;
+  document.getElementById('autoBackupSelect').value=appData.settings.autoBackup;
   if(appData.settings.notifTimes[0])document.getElementById('notifTime1').value=appData.settings.notifTimes[0];
   if(appData.settings.notifTimes[1])document.getElementById('notifTime2').value=appData.settings.notifTimes[1];
   document.querySelectorAll('.speed-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===appData.settings.ttsSpeed));
   closeSidebar();openModal('settingsModal');
 };
 document.getElementById('closeSettingsBtn').onclick=()=>closeModal('settingsModal');
-document.getElementById('saveNotifBtn').onclick=()=>{
-  appData.settings.notifTimes=[document.getElementById('notifTime1').value,document.getElementById('notifTime2').value].filter(Boolean);
-  save();scheduleNotif();showToast('🔔 Bildirim ayarlandı');
-};
+document.getElementById('saveNotifBtn').onclick=()=>{appData.settings.notifTimes=[document.getElementById('notifTime1').value,document.getElementById('notifTime2').value].filter(Boolean);save();scheduleNotif();alert('Bildirim ayarlandı!');};
 document.getElementById('ttsToggle').onchange=e=>{appData.settings.tts=e.target.value;save();};
-document.getElementById('directionSelect').onchange=e=>{appData.settings.direction=e.target.value;save();renderCard();};
+document.getElementById('directionSelect').onchange=e=>{appData.settings.direction=e.target.value;save();renderCurrentCard();};
 document.getElementById('themeSelect').onchange=e=>{appData.settings.theme=e.target.value;save();applyTheme();};
-document.getElementById('dailyGoalInput').onchange=e=>{appData.settings.dailyGoal=Math.max(1,parseInt(e.target.value)||20);save();};
-document.getElementById('timedInput').onchange=e=>{appData.settings.timedSeconds=Math.max(5,parseInt(e.target.value)||15);save();};
-document.getElementById('autoBackupSel').onchange=e=>{appData.settings.autoBackup=e.target.value;save();};
-document.querySelectorAll('.speed-btn').forEach(btn=>btn.onclick=()=>{
-  appData.settings.ttsSpeed=Number(btn.dataset.speed);save();
-  document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-});
-document.querySelectorAll('.mode-btn').forEach(btn=>btn.onclick=()=>{
-  appData.settings.mode=btn.dataset.mode;save();renderCard();setModeBtn();
-});
+document.getElementById('dailyGoalInput').onchange=e=>{appData.settings.dailyGoal=parseInt(e.target.value)||20;save();};
+document.getElementById('timedModeInput').onchange=e=>{appData.settings.timedSeconds=parseInt(e.target.value)||15;save();};
+document.getElementById('autoBackupSelect').onchange=e=>{appData.settings.autoBackup=e.target.value;save();};
+document.querySelectorAll('.speed-btn').forEach(btn=>btn.onclick=()=>{appData.settings.ttsSpeed=Number(btn.dataset.speed);save();document.querySelectorAll('.speed-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');});
+document.querySelectorAll('.mode-btn').forEach(btn=>btn.onclick=()=>{appData.settings.mode=btn.dataset.mode;save();renderCurrentCard();setActiveModeButton();});
 
-// Toast CSS animasyonları
-const styleEl=document.createElement('style');
-styleEl.textContent=`
-@keyframes slideUp{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-@keyframes slideDown{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(-12px)}}
-.toast.show{animation:slideUp 0.3s forwards;}
-`;
-document.head.appendChild(styleEl);
+// CSS animasyon
+const style=document.createElement('style');
+style.textContent='@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(10px)}15%{opacity:1;transform:translateX(-50%) translateY(0)}85%{opacity:1}100%{opacity:0;transform:translateX(-50%) translateY(-10px)}}';
+document.head.appendChild(style);
 
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 // BAŞLATMA
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════════════
 load();
 document.getElementById('streakCount').textContent=appData.stats.streak;
 renderSidebar();
 initSwipe('card','swipeRight','swipeLeft',()=>answer('good'),()=>answer('again'));
-initSwipe('kesfetCard','kesfetSwipeRight','kesfetSwipeLeft',()=>kesfetAns(true),()=>kesfetAns(false));
+initSwipe('kesfetCard','kesfetSwipeRight','kesfetSwipeLeft',()=>kesfetAnswer(true),()=>kesfetAnswer(false));
 scheduleNotif();
-setModeBtn();
-checkStorage();
+setActiveModeButton();
+checkStorageUsage();
 checkAutoBackup();
-checkBadges();
+checkAchievements();
 sessionTotal=0;
 nextCard();
 
-if(!appData.settings.onboardingDone){
-  setTimeout(()=>showOnboarding(),400);
-}
+// Onboarding
+if(!appData.settings.onboardingDone){setTimeout(()=>showOnboarding(),500);}
 
-// Boş kart yönlendirme ipucu
+// Boş deste yönlendirme
 setTimeout(()=>{
   if(appData.cards.length===0&&!document.querySelector('.modal.open')){
-    const tip=document.createElement('div');
-    tip.style.cssText='position:absolute;bottom:90px;left:50%;transform:translateX(-50%);background:#F97316;color:#000;padding:9px 18px;border-radius:18px;font-weight:600;font-size:13px;cursor:pointer;z-index:500;white-space:nowrap;box-shadow:0 4px 16px rgba(249,115,22,0.4);';
-    tip.textContent='➕ İlk kartını ekle!';
-    tip.onclick=()=>{document.getElementById('quickAddBtn').click();tip.remove();};
-    document.getElementById('main').appendChild(tip);
-    setTimeout(()=>{if(tip.parentNode)tip.remove();},7000);
+    const div=document.createElement('div');
+    div.style.cssText='position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#F97316;color:#000;padding:10px 20px;border-radius:20px;font-weight:600;font-size:13px;cursor:pointer;z-index:500;white-space:nowrap;';
+    div.textContent='➕ İlk kartını ekle!';
+    div.onclick=()=>{document.getElementById('quickAddBtn').click();div.remove();};
+    document.getElementById('main').appendChild(div);
+    setTimeout(()=>div.remove(),8000);
   }
-},1800);
+},1500);
 </script>
 </body>
 </html>
