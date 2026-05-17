@@ -6,7 +6,9 @@
 <meta name="theme-color" content="#0A0A0F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;LinguaPrime&quot;,&quot;short_name&quot;:&quot;LinguaPrime&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%230A0A0F&quot;,&quot;theme_color&quot;:&quot;%230A0A0F&quot;}">
+<meta name="apple-mobile-web-app-title" content="LinguaPrime">
+<meta name="description" content="Hollandaca öğrenmek için AI destekli flashcard uygulaması">
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22LinguaPrime%20Ultimate%22%2C%22short_name%22%3A%22LinguaPrime%22%2C%22description%22%3A%22AI%20destekli%20Hollandaca%20%C3%B6%C4%9Frenme%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230A0A0F%22%2C%22theme_color%22%3A%22%230A0A0F%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20192%20192'%3E%3Crect%20width%3D'192'%20height%3D'192'%20rx%3D'40'%20fill%3D'%23F97316'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20font-size%3D'120'%20text-anchor%3D'middle'%20dominant-baseline%3D'middle'%3E%F0%9F%87%B3%F0%9F%87%B1%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 <title>LinguaPrime Ultimate</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
@@ -235,16 +237,63 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
 .ai-result-card:hover{border-color:var(--orange);}
 .ai-result-card.selected{border-color:var(--orange);background:rgba(249,115,22,0.08);}
 
+/* GROQ KEY GİRİŞ EKRANI */
+.groq-setup{position:fixed;inset:0;background:var(--bg);z-index:5000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;}
+.groq-setup-icon{font-size:64px;margin-bottom:16px;}
+.groq-setup-title{font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px;}
+.groq-setup-desc{font-size:14px;color:var(--subtle);line-height:1.65;margin-bottom:20px;max-width:360px;}
+.groq-key-input{width:100%;max-width:360px;background:var(--surface2);border:2px solid var(--border);border-radius:16px;padding:13px 16px;color:var(--text);font-size:14px;font-family:var(--font);margin-bottom:12px;text-align:center;letter-spacing:1px;}
+.groq-key-input:focus{outline:none;border-color:var(--orange);}
+.groq-setup-hint{font-size:12px;color:var(--muted);margin-top:8px;}
+.groq-setup-hint a{color:var(--orange);text-decoration:none;}
+
+/* HİKAYE MODALİ */
+.story-modal-content{background:var(--surface2);border-radius:16px;padding:16px;line-height:1.8;font-size:15px;max-height:50dvh;overflow-y:auto;white-space:pre-wrap;}
+.story-highlight{background:rgba(249,115,22,0.2);color:var(--orange);border-radius:4px;padding:1px 4px;font-weight:700;}
+.story-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.story-select{background:var(--surface2);border:1px solid var(--surface3);border-radius:13px;padding:9px 12px;color:var(--text);font-size:13px;font-family:var(--font);}
+.story-tr{background:var(--surface);border-radius:12px;padding:12px;font-size:13px;color:var(--subtle);margin-top:10px;line-height:1.7;display:none;}
+.story-tr.show{display:block;}
+.story-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+
+/* DÜZELTME MODALİ */
+.correction-box{background:var(--surface2);border-radius:14px;padding:14px;margin-top:8px;}
+.correction-original{font-size:14px;color:var(--red);text-decoration:line-through;margin-bottom:6px;}
+.correction-fixed{font-size:15px;color:var(--green);font-weight:700;margin-bottom:8px;}
+.correction-explain{font-size:13px;color:var(--subtle);line-height:1.6;}
+
+/* ZAYIF NOKTA PANELİ */
+.weakness-item{background:var(--surface2);border-radius:13px;padding:12px;margin-bottom:8px;border-left:4px solid var(--red);}
+.weakness-item.ok{border-left-color:var(--green);}
+.weakness-word{font-size:15px;font-weight:700;margin-bottom:3px;}
+.weakness-detail{font-size:12px;color:var(--subtle);}
+
+/* AI YÜKLENİYOR */
+.ai-loading{display:flex;align-items:center;gap:10px;padding:16px;color:var(--subtle);font-size:13px;}
+.ai-dots{display:flex;gap:4px;}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:aiDotPulse 1.2s infinite;}
+.ai-dot:nth-child(2){animation-delay:0.2s;}
+.ai-dot:nth-child(3){animation-delay:0.4s;}
+@keyframes aiDotPulse{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
+
+/* PWA INSTALL BANNER */
+.pwa-banner{position:fixed;bottom:calc(80px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:12px 18px;display:flex;align-items:center;gap:12px;z-index:1050;box-shadow:0 8px 32px rgba(0,0,0,0.3);max-width:340px;width:92%;}
+.pwa-banner-text{flex:1;font-size:13px;}
+.pwa-banner-title{font-weight:700;margin-bottom:2px;}
+.pwa-banner-sub{font-size:11px;color:var(--subtle);}
+.pwa-banner-btn{background:var(--orange);color:#000;border:none;padding:8px 14px;border-radius:13px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;font-family:var(--font);}
+.pwa-banner-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;}
+
 /* KONFETI */
 .confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;}
 
-/* SESLİ KOMUT ROZET */
+/* SESLİ KOMUT */
 .voice-badge{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:50px;height:50px;border-radius:50%;background:var(--purple);border:none;color:white;font-size:22px;cursor:pointer;z-index:1100;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(139,92,246,0.45);transition:transform 0.15s,background 0.2s;}
 .voice-badge:active{transform:scale(0.93);}
 .voice-badge.listening{background:var(--red);animation:voicePulse 1s infinite;}
 @keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.5)}50%{box-shadow:0 0 0 14px rgba(239,68,68,0)}}
 
-/* FİİL DRİLİ MODU */
+/* FİİL DRİLİ */
 .verb-drill-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;width:100%;}
 .verb-drill-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface2);border-radius:12px;}
 .verb-person{font-size:12px;color:var(--subtle);font-weight:700;width:36px;flex-shrink:0;}
@@ -253,18 +302,18 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
 .verb-input.correct{border-bottom-color:var(--green);color:var(--green);}
 .verb-input.wrong{border-bottom-color:var(--red);color:var(--red);}
 
-/* ZİN AANVULLEN (GRAMER BOŞLUK) */
+/* GRAMER BOŞLUK */
 .grammar-fill-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;margin-top:10px;font-size:15px;line-height:2;}
 .grammar-options{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px;}
 .grammar-opt-btn{padding:9px 18px;border-radius:20px;background:var(--surface2);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:14px;font-weight:600;font-family:var(--font);transition:background 0.15s;}
 
-/* WOORDVOLGORDE MODU */
+/* WOORDVOLGORDE */
 .woordvolgorde-zone{min-height:52px;background:var(--surface2);border-radius:18px;padding:10px;margin-top:10px;border:2px dashed var(--border);display:flex;flex-wrap:wrap;gap:7px;align-items:center;justify-content:center;}
 .wv-word{background:var(--orange);color:white;padding:7px 13px;border-radius:18px;cursor:pointer;font-size:13px;font-weight:700;transition:transform 0.1s;}
 .wv-word:active{transform:scale(0.94);}
 .wv-word.placed{background:var(--green);}
 
-/* GRAMER ANALİZ PANELİ */
+/* GRAMER ANALİZ */
 .grammar-panel{background:var(--surface2);border-radius:15px;padding:13px;margin-top:6px;}
 .grammar-panel-title{font-size:12px;color:var(--subtle);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
 .grammar-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
@@ -273,8 +322,6 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
 .grammar-bar-fill{height:100%;border-radius:6px;transition:width 0.5s;}
 .grammar-bar-pct{font-size:11px;color:var(--subtle);width:32px;text-align:right;flex-shrink:0;}
 .grammar-insight{background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);border-radius:12px;padding:10px 13px;font-size:13px;color:var(--orange);margin-top:8px;}
-
-/* ADAPTIF FİİL — zayıf şahıs gösterge */
 .person-heatmap{display:flex;gap:5px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
 .person-chip{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;border:2px solid transparent;}
 
@@ -315,6 +362,9 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
     <div class="sidebar-item" id="addDeckBtn" role="button" tabindex="0">➕ Yeni Deste</div>
     <div class="sidebar-item" id="manageCardsBtn" role="button" tabindex="0">📋 Kart Yönetimi</div>
     <div class="sidebar-item" id="kesfetBtn" role="button" tabindex="0">🔍 Keşfet</div>
+    <div class="sidebar-item" id="storyBtn" role="button" tabindex="0">📖 AI Hikaye</div>
+    <div class="sidebar-item" id="correctBtn" role="button" tabindex="0">✍️ Cümle Düzelt</div>
+    <div class="sidebar-item" id="weaknessBtn" role="button" tabindex="0">🎯 Zayıf Noktalarım</div>
     <div class="sidebar-item" id="statsBtn" role="button" tabindex="0">📊 İstatistik</div>
     <div class="sidebar-item" id="achievementsBtn" role="button" tabindex="0">🏅 Başarımlar</div>
     <div class="sidebar-item" id="settingsBtn" role="button" tabindex="0">⚙️ Ayarlar</div>
@@ -376,6 +426,126 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
     <button class="action-btn easy" id="easyBtn" aria-label="Kolay">⚡ Kolay</button>
   </div>
   <div class="storage-warning" id="storageWarning">⚠️ Depolama dolmak üzere! JSON yedek alın.</div>
+</div>
+
+<!-- GROQ SETUP EKRANI -->
+<div class="groq-setup" id="groqSetup" style="display:none;">
+  <div class="groq-setup-icon">🤖</div>
+  <div class="groq-setup-title">AI Özelliklerini Aktifleştir</div>
+  <div class="groq-setup-desc">Hikaye üretici, cümle düzeltici ve zayıf nokta analizi için ücretsiz Groq API key'i gir. Key sadece bu oturumda hafızada tutulur, hiçbir yere kaydedilmez.</div>
+  <input class="groq-key-input" id="groqKeyInput" type="password" placeholder="gsk_..." autocomplete="off" aria-label="Groq API Key">
+  <button class="btn-primary" id="groqKeySaveBtn" style="width:100%;max-width:360px;padding:13px;">Aktifleştir</button>
+  <button class="btn-secondary" id="groqKeySkipBtn" style="width:100%;max-width:360px;padding:11px;margin-top:8px;">Şimdilik Geç</button>
+  <div class="groq-setup-hint">Ücretsiz key için: <a href="https://console.groq.com" target="_blank">console.groq.com</a> — 2 dakika yeterli</div>
+</div>
+
+<!-- HİKAYE MODALİ -->
+<div class="modal" id="storyModal" style="max-width:600px;">
+  <h3>📖 AI Hikaye Üretici</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:4px;">Öğrendiğin kelimeler hikayede <strong style="color:var(--orange);">kalın</strong> gösterilecek</div>
+  <div class="story-controls">
+    <div>
+      <label style="font-size:11px;color:var(--subtle);display:block;margin-bottom:4px;">📚 Dil Seviyesi</label>
+      <select class="story-select" id="storyLevel">
+        <option value="A1">A1 — Başlangıç</option>
+        <option value="A2" selected>A2 — Temel</option>
+        <option value="B1">B1 — Orta</option>
+        <option value="B2">B2 — İleri</option>
+      </select>
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--subtle);display:block;margin-bottom:4px;">📏 Uzunluk</label>
+      <select class="story-select" id="storyLength">
+        <option value="kısa">Kısa (~5 cümle)</option>
+        <option value="orta" selected>Orta (~10 cümle)</option>
+        <option value="uzun">Uzun (~20 cümle)</option>
+      </select>
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--subtle);display:block;margin-bottom:4px;">🎭 Tema</label>
+      <select class="story-select" id="storyTheme">
+        <option value="serbest">Serbest</option>
+        <option value="markette">Markette</option>
+        <option value="kafede">Kafede</option>
+        <option value="işte">İşte</option>
+        <option value="seyahatte">Seyahatte</option>
+        <option value="evde">Evde</option>
+        <option value="doktorda">Doktorda</option>
+        <option value="okulda">Okulda</option>
+      </select>
+    </div>
+    <div>
+      <label style="font-size:11px;color:var(--subtle);display:block;margin-bottom:4px;">🗂️ Kartlar</label>
+      <select class="story-select" id="storyDeckScope">
+        <option value="all">Tüm desteler</option>
+        <option value="current">Bu deste</option>
+        <option value="learned">Öğrenilenler</option>
+        <option value="wrong">Yanlışlarım</option>
+      </select>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+    <input type="checkbox" id="storyShowTR" style="accent-color:var(--orange);width:16px;height:16px;">
+    <label for="storyShowTR" style="font-size:13px;cursor:pointer;">Türkçe çeviriyi göster</label>
+  </div>
+  <button class="btn-primary" id="generateStoryBtn" style="width:100%;padding:12px;">✨ Hikaye Üret</button>
+  <div id="storyOutput" style="display:none;">
+    <div class="story-modal-content" id="storyText"></div>
+    <div class="story-tr" id="storyTR"></div>
+    <div class="story-actions">
+      <button class="btn-secondary" id="storyTTSBtn">🔊 Sesli Oku</button>
+      <button class="btn-secondary" id="storyRegenerateBtn">🔄 Yenile</button>
+      <button class="btn-secondary" id="storyCopyBtn">📋 Kopyala</button>
+    </div>
+  </div>
+  <div class="modal-buttons"><button class="btn-secondary" id="closeStoryBtn">Kapat</button></div>
+</div>
+
+<!-- CÜMLE DÜZELTME MODALİ -->
+<div class="modal" id="correctionModal" style="max-width:520px;">
+  <h3>✍️ Hollandaca Cümle Düzelt</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:4px;">Hollandaca bir cümle yaz, AI düzeltsin ve açıklasın</div>
+  <textarea id="correctionInput" style="background:var(--surface2);border:1px solid var(--surface3);border-radius:14px;padding:12px;color:var(--text);font-size:14px;width:100%;min-height:80px;font-family:var(--font);resize:vertical;" placeholder="Ik ben gaan naar de winkel..." aria-label="Hollandaca cümle"></textarea>
+  <div style="display:flex;gap:8px;">
+    <select class="story-select" id="correctionLevel" style="flex:1;">
+      <option value="A1">A1 seviyesi açıklama</option>
+      <option value="A2" selected>A2 seviyesi açıklama</option>
+      <option value="B1">B1 seviyesi açıklama</option>
+    </select>
+    <button class="btn-primary" id="correctSendBtn" style="padding:10px 18px;">Düzelt</button>
+  </div>
+  <div id="correctionOutput" style="display:none;">
+    <div class="correction-box">
+      <div style="font-size:11px;color:var(--subtle);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;">Orijinal</div>
+      <div class="correction-original" id="corrOriginal"></div>
+      <div style="font-size:11px;color:var(--subtle);margin-bottom:4px;margin-top:8px;text-transform:uppercase;letter-spacing:0.5px;">Düzeltilmiş</div>
+      <div class="correction-fixed" id="corrFixed"></div>
+      <div style="font-size:11px;color:var(--subtle);margin-bottom:4px;margin-top:8px;text-transform:uppercase;letter-spacing:0.5px;">Açıklama</div>
+      <div class="correction-explain" id="corrExplain"></div>
+    </div>
+    <button class="tts-btn" id="corrTTSBtn" style="margin-top:8px;">🔊 Düzeltilmiş Hali Dinle</button>
+  </div>
+  <div class="modal-buttons"><button class="btn-secondary" id="closeCorrectionBtn">Kapat</button></div>
+</div>
+
+<!-- ZAYIF NOKTA MODALİ -->
+<div class="modal" id="weaknessModal" style="max-width:520px;">
+  <h3>🎯 Zayıf Noktalarım</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:8px;">Hata verilerine göre AI analizi</div>
+  <button class="btn-primary" id="analyzeWeaknessBtn" style="width:100%;padding:12px;margin-bottom:8px;">🤖 AI ile Analiz Et</button>
+  <div id="weaknessOutput"></div>
+  <div class="modal-buttons"><button class="btn-secondary" id="closeWeaknessBtn">Kapat</button></div>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwaBanner" style="display:none;">
+  <span style="font-size:32px;">📱</span>
+  <div class="pwa-banner-text">
+    <div class="pwa-banner-title">Ana Ekrana Ekle</div>
+    <div class="pwa-banner-sub">Uygulama gibi kullan, offline çalışır</div>
+  </div>
+  <button class="pwa-banner-btn" id="pwaInstallBtn">Ekle</button>
+  <button class="pwa-banner-close" id="pwaBannerClose">✕</button>
 </div>
 
 <!-- KONFETI & SESLİ KOMUT -->
@@ -651,9 +821,16 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
       </div>
     </div>
     <div><label style="font-size:13px;color:var(--subtle);display:block;margin-bottom:4px;">💾 Otomatik Yedek</label><select id="autoBackupSelect" aria-label="Otomatik yedek"><option value="off">Kapalı</option><option value="daily">Günlük</option><option value="weekly">Haftalık</option></select></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--border);">
-      <span style="font-size:13px;color:var(--subtle);">🤖 AI Özellik (Anthropic API)</span>
-      <div id="aiStatus" style="font-size:11px;color:var(--green);">● Aktif</div>
+    <div style="padding:10px 0;border-top:1px solid var(--border);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-size:13px;color:var(--subtle);">🤖 Groq AI</span>
+        <div id="groqStatusBadge" style="font-size:11px;padding:3px 10px;border-radius:20px;background:var(--surface3);color:var(--muted);">● Bağlı değil</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <input type="password" id="groqKeySettings" placeholder="gsk_..." style="flex:1;font-size:12px;" aria-label="Groq API Key" autocomplete="off">
+        <button class="btn-primary" id="groqKeySaveSettings" style="padding:8px 12px;white-space:nowrap;font-size:12px;">Kaydet</button>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:5px;">Key sadece bu oturumda tutulur, diske kaydedilmez.</div>
     </div>
   </div>
   <div class="modal-buttons"><button class="btn-secondary" id="closeSettingsBtn">Kapat</button></div>
@@ -1591,63 +1768,6 @@ function handleJsonFile(file) {
   }; r.readAsText(file, 'UTF-8');
 }
 
-// ═══ AI ENTEGRASYONU (Anthropic API) ═══
-async function aiGenerateCard(word) {
-  const btn = document.getElementById('aiGenerateBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="ai-spinner"></span>';
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{
-          role: 'user',
-          content: `Hollandaca kelime/ifade için Türkçe flashcard oluştur: "${word}"
-
-Sadece JSON döndür, başka hiçbir şey yazma:
-{
-  "meaning": "Türkçe anlamı",
-  "sentence": "Basit Hollandaca örnek cümle (mümkünse ___ kullan)",
-  "antonym": "Zıt anlam varsa (yoksa boş bırak)",
-  "category": "Fiiller veya Genel veya Ulaşım veya Modal veya Kalıplar"
-}`
-        }]
-      })
-    });
-
-    if (!response.ok) throw new Error('API hatası');
-    const data = await response.json();
-    const text = data.content.map(i => i.text || '').join('').trim();
-    const clean = text.replace(/```json|```/g, '').trim();
-    const result = JSON.parse(clean);
-
-    // Sonuçları forma doldur
-    if (result.meaning) document.getElementById('cardMeaning').value = result.meaning;
-    if (result.sentence) document.getElementById('cardSentence').value = result.sentence;
-    if (result.antonym) document.getElementById('cardAntonym').value = result.antonym;
-    if (result.category) document.getElementById('cardCategory').value = result.category;
-
-    showToast('✨ AI doldurdu!', '#7C3AED', 'white');
-  } catch (e) {
-    // Offline veya API yoksa sessizce hata yönet
-    showToast('AI şu an kullanılamıyor', '#EF4444');
-    console.warn('AI generate error:', e);
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '✨ AI';
-  }
-}
-
-document.getElementById('aiGenerateBtn').onclick = () => {
-  const word = document.getElementById('cardWord').value.trim();
-  if (!word) { showToast('Önce kelimeyi yaz!', '#F97316'); return; }
-  aiGenerateCard(word);
-};
-
 // ═══ ONBOARDING ═══
 const OB_STEPS = [
   { icon: '🌍', title: 'Hoş Geldin!', desc: 'SM-2 algoritmasıyla kartları tam zamanında tekrar et. Bilimsel yöntemi, eğlenceyle birleştirdik.' },
@@ -2132,16 +2252,414 @@ showSessionSummary = function() {
   if (rate >= 0.7 && total >= 3) setTimeout(triggerConfetti, 200);
 };
 
-// Klavye kısayolu: V = sesli komut
-document.addEventListener('keydown', e => {
-  if (document.querySelector('.modal.open')) return;
-  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-  if (e.key === 'v' || e.key === 'V') { if (voiceListening) stopVoiceCommands(); else startVoiceCommands(); }
+// ═══ GROQ AI ═══
+let groqKey = null; // Sadece session'da, diske yazılmaz
+
+function setGroqKey(key) {
+  groqKey = key ? key.trim() : null;
+  updateGroqStatusUI();
+}
+
+function updateGroqStatusUI() {
+  const badge = document.getElementById('groqStatusBadge');
+  if (badge) {
+    badge.textContent = groqKey ? '● Bağlı' : '● Bağlı değil';
+    badge.style.background = groqKey ? 'rgba(34,197,94,0.15)' : 'var(--surface3)';
+    badge.style.color = groqKey ? 'var(--green)' : 'var(--muted)';
+  }
+  const ks = document.getElementById('groqKeySettings');
+  if (ks && groqKey) ks.value = groqKey;
+}
+
+async function groqRequest(messages, maxTokens = 1200) {
+  if (!groqKey) throw new Error('NO_KEY');
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      max_tokens: maxTokens,
+      temperature: 0.7,
+      messages
+    })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    if (res.status === 401) throw new Error('INVALID_KEY');
+    throw new Error(err.error?.message || 'API hatası');
+  }
+  const data = await res.json();
+  return data.choices[0].message.content.trim();
+}
+
+function showAILoading(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = `<div class="ai-loading"><div class="ai-dots"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div><span>AI üretiyor...</span></div>`;
+  el.style.display = 'block';
+}
+
+// ═══ GROQ SETUP EKRANI ═══
+function showGroqSetup(fromAIFeature = false) {
+  document.getElementById('groqSetup').style.display = 'flex';
+}
+function hideGroqSetup() {
+  document.getElementById('groqSetup').style.display = 'none';
+}
+
+document.getElementById('groqKeySaveBtn').onclick = () => {
+  const key = document.getElementById('groqKeyInput').value.trim();
+  if (!key.startsWith('gsk_')) { showToast('Geçersiz key formatı! gsk_ ile başlamalı.', '#EF4444'); return; }
+  setGroqKey(key);
+  hideGroqSetup();
+  showToast('✅ AI aktif!', '#22C55E', '#000');
+};
+
+document.getElementById('groqKeySaveSettings').onclick = () => {
+  const key = document.getElementById('groqKeySettings').value.trim();
+  if (!key) { setGroqKey(null); showToast('Groq key temizlendi', '#6B7280'); return; }
+  if (!key.startsWith('gsk_')) { showToast('Geçersiz format! gsk_ ile başlamalı.', '#EF4444'); return; }
+  setGroqKey(key);
+  showToast('✅ Groq AI aktif!', '#22C55E', '#000');
+};
+
+function requireGroqKey() {
+  if (!groqKey) { showGroqSetup(true); return false; }
+  return true;
+}
+
+// ═══ HİKAYE ÜRETİCİ ═══
+let lastStoryText = '', lastStoryWords = [];
+
+async function generateStory() {
+  if (!requireGroqKey()) return;
+
+  const level = document.getElementById('storyLevel').value;
+  const length = document.getElementById('storyLength').value;
+  const theme = document.getElementById('storyTheme').value;
+  const scope = document.getElementById('storyDeckScope').value;
+  const showTR = document.getElementById('storyShowTR').checked;
+
+  // Kart seçimi
+  let cards = [];
+  if (scope === 'current') cards = getCurrentDeckCards();
+  else if (scope === 'learned') cards = appData.cards.filter(c => (c.repetitions || 0) >= 2);
+  else if (scope === 'wrong') cards = appData.cards.filter(c => (c.wrong || 0) > 0).sort((a, b) => (b.wrong || 0) - (a.wrong || 0));
+  else cards = appData.cards;
+
+  if (!cards.length) { showToast('Önce kart ekle!', '#EF4444'); return; }
+
+  // En fazla 20 kelime seç (yanlış yapılanlar önce)
+  const sorted = [...cards].sort((a, b) => (b.wrong || 0) - (a.wrong || 0));
+  const selected = sorted.slice(0, 20);
+  lastStoryWords = selected.map(c => c.word);
+  const wordList = selected.map(c => `${c.word} (${c.meaning})`).join(', ');
+
+  const lengthMap = { kısa: '4-6 cümle', orta: '8-12 cümle', uzun: '16-22 cümle' };
+  const themeText = theme === 'serbest' ? '' : `Hikaye ${theme} geçsin.`;
+
+  const prompt = `Sen bir Hollandaca öğretmenisin. ${level} seviyesinde, ${lengthMap[length]} uzunluğunda bir Hollandaca hikaye yaz.
+
+${themeText}
+
+Bu kelimelerin mümkün olduğunca çoğunu doğal şekilde kullan: ${wordList}
+
+Kurallar:
+- Sadece ${level} seviyesine uygun kelime ve gramer kullan
+- Kullanılan öğrenme kelimelerini **çift yıldız** içine al (örn: **gaan**)
+- Hikayeyi doğal ve ilgi çekici yap
+${showTR ? '- Hollandaca hikayenin altına "---TÜRKÇE---" yaz ve Türkçe çevirisini ekle' : '- Sadece Hollandaca yaz, çeviri ekleme'}
+
+Sadece hikayeyi yaz, başka açıklama ekleme.`;
+
+  const btn = document.getElementById('generateStoryBtn');
+  btn.disabled = true; btn.textContent = '⏳ Üretiliyor...';
+  document.getElementById('storyOutput').style.display = 'none';
+
+  try {
+    const result = await groqRequest([{ role: 'user', content: prompt }], 1500);
+
+    let nlText = result, trText = '';
+    if (showTR && result.includes('---TÜRKÇE---')) {
+      const parts = result.split('---TÜRKÇE---');
+      nlText = parts[0].trim();
+      trText = parts[1].trim();
+    }
+
+    lastStoryText = nlText;
+
+    // **kelime** → highlight
+    const highlighted = nlText.replace(/\*\*(.+?)\*\*/g, '<span class="story-highlight">$1</span>');
+    document.getElementById('storyText').innerHTML = highlighted;
+
+    const trEl = document.getElementById('storyTR');
+    if (trText) { trEl.textContent = trText; trEl.className = 'story-tr show'; }
+    else trEl.className = 'story-tr';
+
+    document.getElementById('storyOutput').style.display = 'block';
+  } catch (e) {
+    if (e.message === 'INVALID_KEY') { setGroqKey(null); showToast('Geçersiz Groq key!', '#EF4444'); }
+    else showToast('Hata: ' + e.message, '#EF4444');
+  } finally {
+    btn.disabled = false; btn.textContent = '✨ Hikaye Üret';
+  }
+}
+
+document.getElementById('generateStoryBtn').onclick = generateStory;
+document.getElementById('storyRegenerateBtn').onclick = generateStory;
+document.getElementById('storyCopyBtn').onclick = () => {
+  navigator.clipboard?.writeText(lastStoryText).then(() => showToast('📋 Kopyalandı!', '#22C55E', '#000'));
+};
+document.getElementById('storyTTSBtn').onclick = () => {
+  const plain = lastStoryText.replace(/\*\*(.+?)\*\*/g, '$1');
+  speakText(plain, 'nl');
+};
+document.getElementById('closeStoryBtn').onclick = () => closeModal('storyModal');
+
+// ═══ CÜMLE DÜZELTİCİ ═══
+async function correctSentence() {
+  if (!requireGroqKey()) return;
+  const text = document.getElementById('correctionInput').value.trim();
+  if (!text) { showToast('Cümle yaz!', '#EF4444'); return; }
+  const level = document.getElementById('correctionLevel').value;
+
+  const btn = document.getElementById('correctSendBtn');
+  btn.disabled = true; btn.textContent = '⏳';
+  document.getElementById('correctionOutput').style.display = 'none';
+
+  const prompt = `Hollandaca öğrencisinin yazdığı cümleyi düzelt. Öğrenci seviyesi: ${level}.
+
+Cümle: "${text}"
+
+Şu formatta JSON döndür (başka hiçbir şey yazma):
+{"original":"${text}","fixed":"düzeltilmiş cümle","explanation":"${level} seviyesinde Türkçe açıklama, ne yanlıştı ve neden","correct":true/false}
+
+Cümle doğruysa fixed=original ve correct=true yaz.`;
+
+  try {
+    const result = await groqRequest([{ role: 'user', content: prompt }], 400);
+    const clean = result.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
+
+    document.getElementById('corrOriginal').textContent = data.original;
+    document.getElementById('corrFixed').textContent = data.fixed;
+    document.getElementById('corrExplain').textContent = data.explanation;
+
+    if (data.correct) {
+      document.getElementById('corrOriginal').style.textDecoration = 'none';
+      document.getElementById('corrOriginal').style.color = 'var(--green)';
+      document.getElementById('corrFixed').style.display = 'none';
+    } else {
+      document.getElementById('corrOriginal').style.textDecoration = 'line-through';
+      document.getElementById('corrOriginal').style.color = 'var(--red)';
+      document.getElementById('corrFixed').style.display = 'block';
+    }
+
+    document.getElementById('correctionOutput').style.display = 'block';
+    document.getElementById('corrTTSBtn').onclick = () => speakText(data.fixed, 'nl');
+  } catch (e) {
+    if (e.message === 'INVALID_KEY') { setGroqKey(null); showToast('Geçersiz Groq key!', '#EF4444'); }
+    else showToast('Hata oluştu', '#EF4444');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Düzelt';
+  }
+}
+
+document.getElementById('correctSendBtn').onclick = correctSentence;
+document.getElementById('correctionInput').onkeydown = e => { if (e.ctrlKey && e.key === 'Enter') correctSentence(); };
+document.getElementById('closeCorrectionBtn').onclick = () => closeModal('correctionModal');
+
+// ═══ ZAYIF NOKTA ANALİZİ ═══
+async function analyzeWeakness() {
+  if (!requireGroqKey()) return;
+
+  const btn = document.getElementById('analyzeWeaknessBtn');
+  btn.disabled = true; btn.textContent = '⏳ Analiz ediliyor...';
+  showAILoading('weaknessOutput');
+
+  // Veri topla
+  const wrongCards = appData.cards.filter(c => (c.wrong || 0) > 0).sort((a, b) => (b.wrong || 0) - (a.wrong || 0)).slice(0, 15);
+  const ge = appData.stats.grammarErrors || {};
+  const pe = appData.stats.personErrors || {};
+
+  // Fiil şahıs hataları özeti
+  const personNames = ['ik', 'jij', 'hij', 'wij', 'jullie', 'zij'];
+  const personTotals = [0, 0, 0, 0, 0, 0];
+  Object.values(pe).forEach(arr => arr.forEach((v, i) => { personTotals[i] += v; }));
+  const worstPerson = personTotals.indexOf(Math.max(...personTotals));
+
+  const dataStr = `
+Yanlış kelimeler (en fazla hatalı): ${wrongCards.map(c => `${c.word}(${c.wrong}x yanlış)`).join(', ')}
+Gramer hataları: artikel=${ge.artikel?.wrong || 0}yanlış/${ge.artikel?.correct || 0}doğru, fiil çekimi=${ge.verbchekim?.wrong || 0}yanlış/${ge.verbchekim?.correct || 0}doğru, kelime sırası=${ge.woordvolgorde?.wrong || 0}yanlış/${ge.woordvolgorde?.correct || 0}doğru
+En çok hata yapılan şahıs: ${personNames[worstPerson]} (${personTotals[worstPerson]} hata)
+Toplam kart: ${appData.cards.length}, Öğrenilen: ${appData.cards.filter(c => (c.repetitions || 0) >= 2).length}
+Seviye: A2`;
+
+  const prompt = `Hollandaca öğrencisinin hata verilerine bak ve Türkçe analiz yaz.
+
+${dataStr}
+
+Şu formatta JSON döndür (başka hiçbir şey yazma):
+{
+  "genel": "2-3 cümle genel değerlendirme",
+  "zayiflar": [
+    {"baslik": "Zayıf alan adı", "aciklama": "Kısa açıklama", "oneri": "Pratik öneri", "seviye": "kritik/orta/iyi"}
+  ],
+  "gunluk_egzersiz": "Bu hafta için kısa pratik önerisi"
+}`;
+
+  try {
+    const result = await groqRequest([{ role: 'user', content: prompt }], 800);
+    const clean = result.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
+    const out = document.getElementById('weaknessOutput');
+    out.innerHTML = '';
+
+    // Genel
+    const g = document.createElement('div');
+    g.style.cssText = 'background:var(--surface2);border-radius:13px;padding:12px;margin-bottom:10px;font-size:14px;line-height:1.6;';
+    g.textContent = data.genel;
+    out.appendChild(g);
+
+    // Zayıf alanlar
+    (data.zayiflar || []).forEach(z => {
+      const div = document.createElement('div');
+      div.className = `weakness-item ${z.seviye === 'iyi' ? 'ok' : ''}`;
+      const icon = z.seviye === 'kritik' ? '🔴' : z.seviye === 'orta' ? '🟡' : '🟢';
+      div.innerHTML = `<div class="weakness-word">${icon} ${escapeHtml(z.baslik)}</div><div class="weakness-detail">${escapeHtml(z.aciklama)}</div><div style="font-size:12px;color:var(--blue);margin-top:4px;">💡 ${escapeHtml(z.oneri)}</div>`;
+      out.appendChild(div);
+    });
+
+    // Günlük egzersiz
+    if (data.gunluk_egzersiz) {
+      const eg = document.createElement('div');
+      eg.style.cssText = 'background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:13px;padding:12px;font-size:13px;color:var(--blue);margin-top:4px;';
+      eg.innerHTML = `<strong>📅 Bu Hafta:</strong> ${escapeHtml(data.gunluk_egzersiz)}`;
+      out.appendChild(eg);
+    }
+  } catch (e) {
+    if (e.message === 'INVALID_KEY') { setGroqKey(null); showToast('Geçersiz Groq key!', '#EF4444'); }
+    else { document.getElementById('weaknessOutput').innerHTML = '<div style="color:var(--red);font-size:13px;">Analiz yapılamadı. Daha fazla pratik yapınca tekrar dene.</div>'; }
+  } finally {
+    btn.disabled = false; btn.textContent = '🤖 AI ile Analiz Et';
+  }
+}
+
+document.getElementById('analyzeWeaknessBtn').onclick = analyzeWeakness;
+document.getElementById('closeWeaknessBtn').onclick = () => closeModal('weaknessModal');
+
+// ═══ AI KART DOLDURMA (Groq ile gerçek) ═══
+document.getElementById('aiGenerateBtn').onclick = async () => {
+  const word = document.getElementById('cardWord').value.trim();
+  if (!word) { showToast('Önce kelimeyi yaz!', '#F97316'); return; }
+  if (!requireGroqKey()) return;
+
+  const btn = document.getElementById('aiGenerateBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="ai-spinner"></span>';
+
+  const prompt = `Hollandaca kelime/ifade için A2 seviyesinde Türkçe flashcard oluştur: "${word}"
+
+Sadece JSON döndür, başka hiçbir şey yazma:
+{"meaning":"Türkçe anlamı","sentence":"Basit A2 Hollandaca örnek cümle (mümkünse ___ kullan boşluk için)","antonym":"Zıt anlam varsa yoksa boş string","category":"Fiiller veya Genel veya Ulaşım veya Modal veya Kalıplar"}`;
+
+  try {
+    const result = await groqRequest([{ role: 'user', content: prompt }], 300);
+    const clean = result.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
+    if (data.meaning) document.getElementById('cardMeaning').value = data.meaning;
+    if (data.sentence) document.getElementById('cardSentence').value = data.sentence;
+    if (data.antonym) document.getElementById('cardAntonym').value = data.antonym;
+    if (data.category) document.getElementById('cardCategory').value = data.category;
+    showToast('✨ AI doldurdu!', '#7C3AED', 'white');
+  } catch (e) {
+    if (e.message === 'INVALID_KEY') { setGroqKey(null); showToast('Geçersiz Groq key!', '#EF4444'); }
+    else if (e.message === 'NO_KEY') showToast('Groq key gerekli!', '#F97316');
+    else showToast('AI şu an kullanılamıyor', '#EF4444');
+  } finally {
+    btn.disabled = false; btn.innerHTML = '✨ AI';
+  }
+};
+
+// ═══ SIDEBAR YENİ BUTONLAR ═══
+document.getElementById('storyBtn').onclick = () => { openModal('storyModal'); closeSidebar(); };
+document.getElementById('correctBtn').onclick = () => { openModal('correctionModal'); closeSidebar(); };
+document.getElementById('weaknessBtn').onclick = () => { openModal('weaknessModal'); closeSidebar(); };
+
+// ═══ PWA ═══
+let deferredPrompt = null;
+
+// Service Worker kayıt
+if ('serviceWorker' in navigator) {
+  const swCode = `
+const CACHE = 'linguaprime-v4';
+const OFFLINE_URL = self.location.pathname;
+self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.add(OFFLINE_URL))); self.skipWaiting(); });
+self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
+self.addEventListener('fetch', e => { if (e.request.mode === 'navigate') { e.respondWith(caches.match(OFFLINE_URL).then(r => r || fetch(e.request)).catch(() => caches.match(OFFLINE_URL))); } else { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); } });
+`;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).then(reg => {
+    console.log('SW kayıtlı:', reg.scope);
+  }).catch(err => console.warn('SW hatası:', err));
+}
+
+// PWA install prompt
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // 3 saniye sonra banner göster
+  setTimeout(() => {
+    const banner = document.getElementById('pwaBanner');
+    if (banner) banner.style.display = 'flex';
+  }, 3000);
 });
 
-renderSidebar();
+document.getElementById('pwaInstallBtn').onclick = async () => {
+  if (!deferredPrompt) {
+    // iOS için manuel talimat
+    showToast('Safari\'de: Paylaş → Ana Ekrana Ekle', '#3B82F6', 'white');
+    return;
+  }
+  deferredPrompt.prompt();
+  const result = await deferredPrompt.userChoice;
+  if (result.outcome === 'accepted') showToast('✅ Ana ekrana eklendi!', '#22C55E', '#000');
+  deferredPrompt = null;
+  document.getElementById('pwaBanner').style.display = 'none';
+};
+
+document.getElementById('pwaBannerClose').onclick = () => {
+  document.getElementById('pwaBanner').style.display = 'none';
+};
+
+window.addEventListener('appinstalled', () => {
+  showToast('🎉 LinguaPrime kuruldu!', '#22C55E', '#000');
+  document.getElementById('pwaBanner').style.display = 'none';
+});
+
+// iOS PWA kontrolü — zaten kuruluysa banner gösterme
+if (window.navigator.standalone) {
+  document.getElementById('pwaBanner').style.display = 'none';
+}
+
+// ═══ İLK AÇILIŞTA GROQ SETUP ═══
+// Uygulama ilk yüklenince 2sn sonra setup ekranı göster
+setTimeout(() => {
+  if (!groqKey && !sessionStorage.getItem('groqSkipped')) {
+    showGroqSetup();
+  }
+}, 2000);
+
+document.getElementById('groqKeySkipBtn').onclick = () => {
+  sessionStorage.setItem('groqSkipped', '1');
+  hideGroqSetup();
+};
+
 initSwipe('card', 'swipeRight', 'swipeLeft', () => answer('good'), () => answer('again'));
 initSwipe('kesfetCard', 'kesfetSwipeRight', 'kesfetSwipeLeft', () => kesfetAnswer(true), () => kesfetAnswer(false));
+load();
+document.getElementById('streakCount').textContent = appData.stats.streak;
+renderSidebar();
 scheduleNotif(); setActiveModeButton(); checkStorageUsage(); checkAutoBackup(); checkAchievements();
 sessionTotal = 0; resetSession(); nextCard();
 if (!appData.settings.onboardingDone) setTimeout(showOnboarding, 500);
