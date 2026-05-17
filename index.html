@@ -678,6 +678,14 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
     <div class="sidebar-item" id="storyBtn" role="button" tabindex="0">📖 AI Hikaye</div>
     <div class="sidebar-item" id="correctBtn" role="button" tabindex="0">✍️ Cümle Düzelt</div>
     <div class="sidebar-item" id="weaknessBtn" role="button" tabindex="0">🎯 Zayıf Noktalarım</div>
+    <div class="sidebar-item" id="aiDictBtn" role="button" tabindex="0">🔤 AI Sözlük & Kart Üretici</div>
+    <div class="sidebar-item" id="chatBtn" role="button" tabindex="0">💬 AI Canlı Sohbet</div>
+    <div class="sidebar-item" id="podcastBtn" role="button" tabindex="0">🎙️ AI Podcast İstasyonu</div>
+    <div class="sidebar-item" id="rpgBtn" role="button" tabindex="0">🎭 Kültür Şoku RPG</div>
+    <div class="sidebar-item" id="whatsappBtn" role="button" tabindex="0">📱 WhatsApp Simülatörü</div>
+    <div class="sidebar-item" id="personalityBtn" role="button" tabindex="0">🧬 Kişilik Profili</div>
+    <div class="sidebar-item" id="memoryBtn" role="button" tabindex="0">🏛️ Hafıza Sarayı</div>
+    <div class="sidebar-item" id="socialBtn" role="button" tabindex="0">🤝 Sosyal Zeka Motoru</div>
     <div class="sidebar-item" id="statsBtn" role="button" tabindex="0">📊 İstatistik</div>
     <div class="sidebar-item" id="achievementsBtn" role="button" tabindex="0">🏅 Başarımlar</div>
     <div class="sidebar-item" id="settingsBtn" role="button" tabindex="0">⚙️ Ayarlar</div>
@@ -1222,6 +1230,192 @@ canvas{border-radius:12px;display:block;margin:0 auto;}
 </div>
 
 <div id="toastContainer"></div>
+
+<!-- AI SÖZLÜK MODALI -->
+<div class="modal" id="aiDictModal" style="max-width:560px;">
+  <h3>🔤 AI Sözlük & Akıllı Kart Üretici</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:6px;">Hollandaca bir kelime yazın — Groq artikel, anlam, kök analizi ve 3 örnek cümle üretir.</div>
+  <div style="display:flex;gap:8px;">
+    <input type="text" id="dictWordInput" placeholder="Hollandaca kelime yazın (Örn: gezellig, werken...)" style="flex:1;">
+    <button class="ai-btn" id="dictSearchBtn">✨ Analiz Et</button>
+  </div>
+  <div id="dictResult" style="display:none;margin-top:10px;">
+    <div style="background:var(--surface2);border-radius:14px;padding:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div id="dictWordDisplay" style="font-size:22px;font-weight:800;color:var(--orange);"></div>
+        <div id="dictArtikel" style="font-size:13px;background:rgba(59,130,246,0.15);color:var(--blue);padding:4px 12px;border-radius:20px;font-weight:700;"></div>
+      </div>
+      <div id="dictMeaning" style="font-size:15px;font-weight:600;margin-bottom:8px;"></div>
+      <div id="dictType" style="font-size:12px;color:var(--subtle);margin-bottom:10px;"></div>
+      <div id="dictRoot" style="background:rgba(139,92,246,0.1);border-left:3px solid var(--purple);padding:8px 12px;border-radius:0 8px 8px 0;font-size:13px;margin-bottom:10px;display:none;"></div>
+      <div style="font-size:12px;font-weight:700;color:var(--subtle);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Örnek Cümleler</div>
+      <div id="dictSentences" style="display:flex;flex-direction:column;gap:6px;"></div>
+    </div>
+    <button class="btn-primary" id="dictAddCardBtn" style="width:100%;margin-top:10px;">⚡ Flashcard Olarak Ekle</button>
+  </div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closeAiDictBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- AI CANLARI SOHBET MODALI -->
+<div class="modal" id="chatModal" style="max-width:600px;max-height:92dvh;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+    <h3>💬 AI Canlı Sohbet & Gramer Koç</h3>
+    <select id="chatScenario" class="story-select" style="width:160px;font-size:11px;">
+      <option value="kafe">☕ Kafede sipariş</option>
+      <option value="is">💼 İş görüşmesi</option>
+      <option value="market">🛒 Süpermarkette</option>
+      <option value="doktor">🏥 Doktorda</option>
+      <option value="ev">🏠 Ev sahibiyle</option>
+      <option value="arkadas">👫 Arkadaşlarla</option>
+    </select>
+  </div>
+  <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:42dvh;min-height:180px;background:var(--surface2);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
+  <div id="chatGrammarTip" style="display:none;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:10px;padding:10px;font-size:12px;line-height:1.5;margin-top:6px;"></div>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <input type="text" id="chatInput" placeholder="Hollandaca yazın..." style="flex:1;font-size:13px;">
+    <button class="ai-btn" id="chatSendBtn">Gönder</button>
+  </div>
+  <div class="modal-buttons" style="margin-top:8px;">
+    <button class="btn-secondary" id="chatResetBtn">Yeni Sohbet</button>
+    <button class="btn-secondary" id="closeChatBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- PODCAST MODALI -->
+<div class="modal" id="podcastModal" style="max-width:560px;">
+  <h3>🎙️ AI Dinamik Podcast İstasyonu</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:8px;">Bu haftanın zorlandığın kelimelerinden iki kişilik bir Hollandaca podcast üretilir. Tıklanabilir altyazıyla dinle.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+    <select id="podcastLevel" class="story-select">
+      <option value="A1">A1 — Başlangıç</option>
+      <option value="A2" selected>A2 — Temel</option>
+      <option value="B1">B1 — Orta</option>
+      <option value="B2">B2 — İleri Orta</option>
+    </select>
+    <select id="podcastTopic" class="story-select">
+      <option value="gunluk">Günlük yaşam</option>
+      <option value="is">İş dünyası</option>
+      <option value="seyahat">Seyahat</option>
+      <option value="yemek">Yemek & Restoran</option>
+    </select>
+  </div>
+  <button class="ai-btn" id="generatePodcastBtn" style="width:100%;justify-content:center;padding:12px;">🎙️ Podcast Üret</button>
+  <div id="podcastOutput" style="display:none;margin-top:12px;">
+    <div style="background:var(--surface2);border-radius:14px;padding:12px;">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+        <button id="podcastPlayBtn" style="width:44px;height:44px;border-radius:50%;background:var(--orange);border:none;color:white;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">▶</button>
+        <div>
+          <div style="font-size:13px;font-weight:700;">Ahmet & Sophie</div>
+          <div style="font-size:11px;color:var(--subtle);" id="podcastDuration">Süre hesaplanıyor...</div>
+        </div>
+      </div>
+      <div id="podcastTranscript" style="font-size:13px;line-height:1.9;max-height:300px;overflow-y:auto;"></div>
+    </div>
+  </div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closePodcastBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- RPG MODALI -->
+<div class="modal" id="rpgModal" style="max-width:600px;">
+  <h3>🎭 Kültür Şoku RPG — Hollanda'da Bir Gün</h3>
+  <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+    <select id="rpgScenario" class="story-select" style="flex:1;">
+      <option value="belediye">🏛️ Belediyede ikametgah kaydı</option>
+      <option value="ev">🏠 Ev sahibiyle kira görüşmesi</option>
+      <option value="market">🛒 Albert Heijn'de sıra kavgası</option>
+      <option value="tikkie">💶 Tikkie (ödeme) meselesi</option>
+      <option value="bisiklet">🚲 Bisiklet çarpışması</option>
+      <option value="is_gorusmesi">💼 Hollandalı patronla görüşme</option>
+    </select>
+    <button class="ai-btn" id="startRpgBtn">🎮 Başla</button>
+  </div>
+  <div id="rpgCqDisplay" style="display:none;text-align:right;font-size:11px;color:var(--orange);font-weight:700;margin-bottom:4px;"></div>
+  <div id="rpgMessages" style="background:var(--surface2);border-radius:14px;padding:12px;min-height:200px;max-height:45dvh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.6;"></div>
+  <div id="rpgInputArea" style="display:none;margin-top:8px;">
+    <input type="text" id="rpgInput" placeholder="Hollandaca cevabınızı yazın..." style="width:100%;margin-bottom:6px;">
+    <div style="display:flex;gap:8px;">
+      <button class="ai-btn" id="rpgSendBtn" style="flex:1;justify-content:center;">Cevapla</button>
+      <button class="btn-secondary" id="rpgHintBtn">💡 İpucu</button>
+    </div>
+  </div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closeRpgBtn">Çıkış</button>
+  </div>
+</div>
+
+<!-- WHATSAPP SİMÜLATÖR MODALI -->
+<div class="modal" id="whatsappModal" style="max-width:480px;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+    <div style="width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🇳🇱</div>
+    <div>
+      <div style="font-size:15px;font-weight:800;">Sophie van der Berg</div>
+      <div style="font-size:11px;color:var(--green);">● Online</div>
+    </div>
+    <button class="btn-secondary" id="waNewChatBtn" style="margin-left:auto;font-size:11px;padding:5px 10px;">Yeni Sohbet</button>
+  </div>
+  <div id="waMessages" style="background:#111;border-radius:14px;padding:12px;min-height:260px;max-height:44dvh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"></div>
+  <div style="display:flex;gap:8px;margin-top:8px;">
+    <input type="text" id="waInput" placeholder="Mesaj yaz..." style="flex:1;font-size:13px;border-radius:20px;">
+    <button style="width:44px;height:44px;border-radius:50%;background:var(--green);border:none;color:white;font-size:18px;cursor:pointer;" id="waSendBtn">➤</button>
+  </div>
+  <div class="modal-buttons" style="margin-top:6px;">
+    <button class="btn-secondary" id="closeWaBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- KİŞİLİK PROFİLİ MODALI -->
+<div class="modal" id="personalityModal" style="max-width:540px;">
+  <h3>🧬 Kişilik Bazlı Öğrenme Profili</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:10px;">Groq sizi tanıyor. Bu bilgiler tüm AI modlarında öğretme stilinizi kişiselleştirmek için kullanılır.</div>
+  <div id="personalityContent" style="min-height:120px;"></div>
+  <div style="margin-top:10px;">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px;">Kısa Sizi Anlayalım (3 soru):</div>
+    <div style="display:flex;flex-direction:column;gap:8px;" id="personalityQuiz"></div>
+  </div>
+  <button class="ai-btn" id="analyzePersonalityBtn" style="width:100%;justify-content:center;margin-top:10px;">🧬 Profilimi Oluştur</button>
+  <div id="personalityResult" style="display:none;margin-top:10px;background:var(--surface2);border-radius:14px;padding:14px;"></div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closePersonalityBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- HAFIZA SARAYI MODALI -->
+<div class="modal" id="memoryModal" style="max-width:540px;">
+  <h3>🏛️ Hafıza Sarayı & Duygu Çapası</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:8px;">Groq seçtiğiniz kelimeye duygusal çapa, kök analizi ve akılda kalıcı hafıza teknikleri üretir.</div>
+  <div style="display:flex;gap:8px;margin-bottom:8px;">
+    <input type="text" id="memoryWordInput" placeholder="Kelime (Örn: teleurgesteld, gezellig...)" style="flex:1;">
+    <button class="ai-btn" id="generateMemoryBtn">🏛️ Üret</button>
+  </div>
+  <div id="memoryResult" style="display:none;"></div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closeMemoryBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- SOSYAL ZEKA MOTORU MODALI -->
+<div class="modal" id="socialModal" style="max-width:580px;">
+  <h3>🤝 Sosyal Zeka Motoru</h3>
+  <div style="font-size:12px;color:var(--subtle);margin-bottom:8px;">Hollandacayı doğru söylediniz ama kültürel olarak mı uydu? Groq 3 katmanlı analiz yapıyor: Dilbilgisi + Sosyal Alt Metin + Kültürel Kod.</div>
+  <div style="display:flex;gap:8px;margin-bottom:6px;">
+    <select id="socialContext" class="story-select" style="flex:1;">
+      <option value="is">İş ortamı</option>
+      <option value="arkadas">Arkadaş ortamı</option>
+      <option value="resmi">Resmi/Bürokratik</option>
+      <option value="komsu">Komşuluk/Sosyal</option>
+    </select>
+  </div>
+  <textarea id="socialInput" placeholder="Hollandaca cümlenizi yazın... (Örn: Het spijt me, ik kan niet komen.)" style="background:var(--surface2);border:1px solid var(--surface3);border-radius:13px;padding:10px 14px;color:var(--text);font-size:14px;width:100%;font-family:var(--font);resize:none;min-height:80px;"></textarea>
+  <button class="ai-btn" id="analyzeSocialBtn" style="width:100%;justify-content:center;margin-top:8px;">🤝 Sosyal Analiz Yap</button>
+  <div id="socialResult" style="display:none;margin-top:10px;"></div>
+  <div class="modal-buttons">
+    <button class="btn-secondary" id="closeSocialBtn">Kapat</button>
+  </div>
+</div>
 
 <script>
 // ═══ CORE APPLICATION STATE ═══
@@ -3351,6 +3545,490 @@ window.addEventListener('DOMContentLoaded', () => {
   sessionTotal = 0; resetSession(); nextCard();
   if (!appData.settings.onboardingDone) setTimeout(showOnboarding, 500);
 });
+
+// ═══ YENİ CSS STİLLER (dinamik ekleme) ═══
+const newStyles = document.createElement('style');
+newStyles.textContent = `
+.chat-msg{max-width:78%;padding:9px 13px;border-radius:18px;font-size:13px;line-height:1.55;}
+.chat-msg.bot{background:var(--surface3);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-msg.user{background:var(--orange);color:#0A0A0F;align-self:flex-end;border-bottom-right-radius:4px;}
+.wa-msg{max-width:80%;padding:8px 12px;border-radius:12px;font-size:13px;line-height:1.5;word-break:break-word;}
+.wa-msg.them{background:#1e2d1e;color:#e9fde9;align-self:flex-start;border-bottom-left-radius:2px;}
+.wa-msg.me{background:#005c4b;color:#e9fde9;align-self:flex-end;border-bottom-right-radius:2px;}
+.wa-time{font-size:10px;opacity:0.6;text-align:right;margin-top:2px;}
+.rpg-narrator{background:rgba(139,92,246,0.1);border-left:3px solid var(--purple);padding:8px 12px;border-radius:0 10px 10px 0;font-style:italic;font-size:12px;color:var(--subtle);}
+.rpg-npc{background:var(--surface3);border-radius:12px 12px 12px 2px;padding:10px 13px;font-size:13px;line-height:1.6;}
+.rpg-user{background:var(--orange);color:#0A0A0F;border-radius:12px 12px 2px 12px;padding:10px 13px;font-size:13px;align-self:flex-end;}
+.memory-card{background:var(--surface2);border-radius:14px;padding:14px;margin-bottom:8px;border-left:4px solid var(--orange);}
+.memory-card.anchor{border-left-color:var(--blue);}
+.memory-card.phonetic{border-left-color:var(--green);}
+.memory-card.root{border-left-color:var(--purple);}
+.social-layer{background:var(--surface2);border-radius:12px;padding:11px 14px;margin-bottom:8px;}
+.social-layer-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;}
+.dict-sentence{background:var(--surface);border-radius:10px;padding:9px 12px;font-size:13px;line-height:1.6;}
+.dict-sentence .nl{font-weight:600;color:var(--orange);}
+.dict-sentence .tr{font-size:12px;color:var(--subtle);margin-top:2px;}
+.personality-q{background:var(--surface2);border-radius:12px;padding:10px 12px;}
+.personality-q select{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:5px 8px;color:var(--text);font-size:12px;font-family:var(--font);margin-top:6px;width:100%;}
+.cq-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(249,115,22,0.15);color:var(--orange);}
+`;
+document.head.appendChild(newStyles);
+
+// ═══ KİŞİLİK PROFİLİ YÖNETİMİ ═══
+let personalityProfile = JSON.parse(localStorage.getItem('lp_personality') || 'null');
+
+document.getElementById('personalityBtn').onclick = () => { toggleSidebar(); openPersonalityModal(); };
+document.getElementById('closePersonalityBtn').onclick = () => closeModal('personalityModal');
+
+function openPersonalityModal() {
+  const quiz = document.getElementById('personalityQuiz');
+  quiz.innerHTML = '';
+  const questions = [
+    { q: 'Öğrenme tarzınız?', opts: ['Analitik (kural-mantık)', 'Görsel (hikaye-resim)', 'Sosyal (konuşma-pratik)', 'Oyuncu (oyun-yarışma)'] },
+    { q: 'Mizah anlayışınız?', opts: ['Ciddi ve resmi tercih', 'Hafif mizah', 'Şakacı ve eğlenceli', 'Duruma göre değişir'] },
+    { q: 'Öğrenme hızınız?', opts: ['Yavaş ve derinlemesine', 'Orta tempolu', 'Hızlı geçmek isterim', 'Zor konularda yavaş'] }
+  ];
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'personality-q';
+    div.innerHTML = `<div style="font-size:12px;font-weight:600;">${q.q}</div>
+      <select id="pq_${i}"><option value="">Seçin...</option>${q.opts.map(o => `<option value="${o}">${o}</option>`).join('')}</select>`;
+    quiz.appendChild(div);
+  });
+  const content = document.getElementById('personalityContent');
+  if (personalityProfile) {
+    content.innerHTML = `<div style="background:rgba(249,115,22,0.08);border-radius:12px;padding:12px;font-size:13px;line-height:1.6;">
+      <div style="font-weight:700;color:var(--orange);margin-bottom:6px;">🧬 Mevcut Profiliniz</div>
+      ${escapeHtml(personalityProfile.summary || '')}
+    </div>`;
+  } else {
+    content.innerHTML = `<div style="font-size:13px;color:var(--subtle);padding:10px 0;">Henüz profil oluşturulmamış. Aşağıdaki soruları yanıtlayın.</div>`;
+  }
+  openModal('personalityModal');
+}
+
+document.getElementById('analyzePersonalityBtn').onclick = async () => {
+  if (!requireGroqKey()) return;
+  const answers = [0,1,2].map(i => document.getElementById(`pq_${i}`)?.value || '');
+  if (answers.some(a => !a)) { showToast('Lütfen tüm soruları yanıtlayın!', '#EF4444'); return; }
+  const btn = document.getElementById('analyzePersonalityBtn');
+  btn.disabled = true; btn.textContent = '⏳ Analiz ediliyor...';
+  const prompt = `Hollandaca öğrenen bir kişinin öğrenme profili oluştur. Cevaplar: Öğrenme tarzı: "${answers[0]}", Mizah: "${answers[1]}", Hız: "${answers[2]}". JSON formatında döndür: {"summary":"2 cümle kişilik özeti","style":"öğretme stili açıklaması","tip":"özel ipucu","persona":"Analist|Hikayeci|Sosyal|Oyuncu"}`;
+  try {
+    const res = await groqRequest([{role:'user',content:prompt}], 400);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    personalityProfile = data;
+    localStorage.setItem('lp_personality', JSON.stringify(data));
+    const result = document.getElementById('personalityResult');
+    result.style.display = 'block';
+    result.innerHTML = `<div style="font-weight:700;color:var(--orange);margin-bottom:8px;">🧬 ${escapeHtml(data.persona)} Profili</div>
+      <div style="font-size:13px;line-height:1.6;margin-bottom:8px;">${escapeHtml(data.summary)}</div>
+      <div style="font-size:12px;color:var(--subtle);">💡 <strong>Stil:</strong> ${escapeHtml(data.style)}</div>
+      <div style="font-size:12px;color:var(--orange);margin-top:4px;">⭐ <strong>İpucu:</strong> ${escapeHtml(data.tip)}</div>`;
+    showToast('🧬 Profil oluşturuldu!', '#8B5CF6', 'white');
+  } catch(e) { showToast('Hata!', '#EF4444'); }
+  finally { btn.disabled = false; btn.textContent = '🧬 Profilimi Oluştur'; }
+};
+
+// ═══ AI SÖZLÜK ═══
+document.getElementById('aiDictBtn').onclick = () => { toggleSidebar(); openModal('aiDictModal'); document.getElementById('dictResult').style.display='none'; document.getElementById('dictWordInput').value=''; };
+document.getElementById('closeAiDictBtn').onclick = () => closeModal('aiDictModal');
+
+let lastDictData = null;
+document.getElementById('dictSearchBtn').onclick = async () => {
+  const word = document.getElementById('dictWordInput').value.trim();
+  if (!word) { showToast('Kelime yazın!', '#EF4444'); return; }
+  if (!requireGroqKey()) return;
+  const btn = document.getElementById('dictSearchBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="ai-spinner"></span>';
+  const personalityNote = personalityProfile ? `Kullanıcı profili: ${personalityProfile.persona} tipi öğrenci.` : '';
+  const prompt = `${personalityNote} Hollandaca "${word}" kelimesi için tam analiz yap. JSON formatında döndür: {"word":"${word}","artikel":"de/het/geen (sadece isimse)","meaning":"Türkçe anlamı","type":"İsim/Fiil/Sıfat/Zarf/Ön-ilgeç","rootAnalysis":"kök analizi varsa (Örn: Woordenboek = woorden+boek = kelimeler+kitap)","sentences":[{"nl":"cümle1","tr":"çevirisi"},{"nl":"cümle2","tr":"çevirisi"},{"nl":"cümle3","tr":"çevirisi"}]}`;
+  try {
+    const res = await groqRequest([{role:'user',content:prompt}], 700);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    lastDictData = data;
+    document.getElementById('dictWordDisplay').textContent = data.word;
+    document.getElementById('dictArtikel').textContent = data.artikel || data.type;
+    document.getElementById('dictMeaning').textContent = data.meaning;
+    document.getElementById('dictType').textContent = `Tür: ${data.type}`;
+    const rootEl = document.getElementById('dictRoot');
+    if (data.rootAnalysis) { rootEl.innerHTML = `🧩 <strong>Kök Analizi:</strong> ${escapeHtml(data.rootAnalysis)}`; rootEl.style.display='block'; } else rootEl.style.display='none';
+    const sentEl = document.getElementById('dictSentences');
+    sentEl.innerHTML = '';
+    (data.sentences||[]).forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'dict-sentence';
+      div.innerHTML = `<div class="nl">${escapeHtml(s.nl)}</div><div class="tr">${escapeHtml(s.tr)}</div>`;
+      sentEl.appendChild(div);
+    });
+    document.getElementById('dictResult').style.display = 'block';
+  } catch(e) { showToast('Hata: '+e.message, '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='✨ Analiz Et'; }
+};
+document.getElementById('dictWordInput').onkeydown = e => { if(e.key==='Enter') document.getElementById('dictSearchBtn').click(); };
+document.getElementById('dictAddCardBtn').onclick = () => {
+  if (!lastDictData) return;
+  const targetDeck = appData.currentDeckId && appData.currentDeckId !== 'all' && appData.currentDeckId !== 'multi' ? appData.currentDeckId : (appData.decks[0]?.id || 'deck_1');
+  const wordWithArticle = lastDictData.artikel && ['de','het'].includes(lastDictData.artikel) ? `${lastDictData.artikel} ${lastDictData.word}` : lastDictData.word;
+  appData.cards.push({ id:'card_'+Date.now(), deckId:targetDeck, word:wordWithArticle, meaning:lastDictData.meaning, sentence:lastDictData.sentences?.[0]?.nl||'', category:lastDictData.type||'Genel', repetitions:0, interval:0, ease:2.5, due:Date.now() });
+  save(); renderSidebar(); checkAchievements();
+  showToast('⚡ Kart eklendi!', '#22C55E', '#000');
+};
+
+// ═══ CANLARI SOHBET ═══
+let chatHistory = [];
+document.getElementById('chatBtn').onclick = () => { toggleSidebar(); openChatModal(); };
+document.getElementById('closeChatBtn').onclick = () => closeModal('chatModal');
+document.getElementById('chatResetBtn').onclick = () => { chatHistory = []; document.getElementById('chatMessages').innerHTML = ''; document.getElementById('chatGrammarTip').style.display='none'; };
+
+function openChatModal() {
+  openModal('chatModal');
+  if (!chatHistory.length) initChat();
+}
+
+function addChatMsg(text, isBot) {
+  const el = document.createElement('div');
+  el.className = `chat-msg ${isBot?'bot':'user'}`;
+  el.textContent = text;
+  document.getElementById('chatMessages').appendChild(el);
+  document.getElementById('chatMessages').scrollTop = 9999;
+}
+
+async function initChat() {
+  chatHistory = [];
+  document.getElementById('chatMessages').innerHTML = '';
+  document.getElementById('chatGrammarTip').style.display = 'none';
+  const scenario = document.getElementById('chatScenario').value;
+  const scenarioMap = { kafe:'bir kafede sipariş verme', is:'iş görüşmesi yapma', market:'süpermarkette alışveriş', doktor:'doktora gitme', ev:'ev sahibiyle kiralık daire görüşmesi', arkadas:'Hollandalı arkadaşlarla sosyal sohbet' };
+  const sysMsg = `Sen Sophie adında bir Hollandalısın. Senaryo: ${scenarioMap[scenario]||'günlük sohbet'}. Sadece Hollandaca konuş, kısa ve doğal cümleler kur. Kullanıcının Türkçe konuşması durumunda Hollandaca devam et.`;
+  chatHistory.push({role:'system',content:sysMsg});
+  const openingMsg = {kafe:'Goedemiddag! Wat kan ik voor u doen?', is:'Goedemorgen! Welkom. Neem gerust plaats.', market:'Sorry, ik was hier eerst.', doktor:'Goedemorgen. Hoe kan ik u helpen vandaag?', ev:'Hallo! U bent hier voor het appartement, toch?', arkadas:'Hé! Leuk je te zien! Hoe gaat het met jou?'}[scenario]||'Hallo!';
+  chatHistory.push({role:'assistant',content:openingMsg});
+  addChatMsg(openingMsg, true);
+}
+
+document.getElementById('chatSendBtn').onclick = sendChatMsg;
+document.getElementById('chatInput').onkeydown = e => { if(e.key==='Enter') sendChatMsg(); };
+
+async function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  if (!requireGroqKey()) return;
+  input.value = '';
+  addChatMsg(text, false);
+  chatHistory.push({role:'user',content:text});
+  const btn = document.getElementById('chatSendBtn');
+  btn.disabled=true; btn.textContent='...';
+  const grammarCheckPrompt = `${text} — Bu Hollandaca cümlede hata varsa JSON ile döndür: {"hasError":true/false,"errorExplain":"Türkçe açıklama varsa, yoksa boş string"}`;
+  try {
+    const [replyData, grammarData] = await Promise.all([
+      groqRequest(chatHistory.map(m => m.role==='system'?m:{role:m.role,content:m.content}), 250),
+      groqRequest([{role:'system',content:'Hollandaca gramer kontrolörüsün. Sadece JSON döndür.'},{role:'user',content:grammarCheckPrompt}], 200).catch(()=>'{"hasError":false,"errorExplain":""}')
+    ]);
+    let reply = '';
+    try { reply = JSON.parse(replyData); } catch(e) { reply = replyData; }
+    if (typeof reply === 'object') reply = Object.values(reply)[0] || '';
+    chatHistory.push({role:'assistant',content:reply});
+    addChatMsg(reply, true);
+    try {
+      const grammar = JSON.parse(typeof grammarData==='string'?grammarData.replace(/```json|```/g,'').trim():JSON.stringify(grammarData));
+      const tipEl = document.getElementById('chatGrammarTip');
+      if (grammar.hasError && grammar.errorExplain) {
+        tipEl.innerHTML = `💡 <strong>Gramer İpucu:</strong> ${escapeHtml(grammar.errorExplain)}`;
+        tipEl.style.display = 'block';
+      } else { tipEl.style.display = 'none'; }
+    } catch(e) {}
+  } catch(e) { addChatMsg('Üzgünüm, bir hata oluştu.', true); }
+  finally { btn.disabled=false; btn.textContent='Gönder'; }
+}
+
+// ═══ PODCAST İSTASYONU ═══
+let podcastLines = [];
+let podcastCurrentLine = 0;
+let podcastPlaying = false;
+
+document.getElementById('podcastBtn').onclick = () => { toggleSidebar(); openModal('podcastModal'); document.getElementById('podcastOutput').style.display='none'; };
+document.getElementById('closePodcastBtn').onclick = () => { speechSynthesis.cancel(); openModal('podcastModal'); closeModal('podcastModal'); };
+document.getElementById('generatePodcastBtn').onclick = generatePodcast;
+
+async function generatePodcast() {
+  if (!requireGroqKey()) return;
+  const level = document.getElementById('podcastLevel').value;
+  const topic = document.getElementById('podcastTopic').value;
+  const hardWords = appData.cards.filter(c=>(c.wrong||0)>0).sort((a,b)=>b.wrong-a.wrong).slice(0,8).map(c=>c.word);
+  const wordList = hardWords.length ? hardWords.join(', ') : appData.cards.slice(0,8).map(c=>c.word).join(', ');
+  const btn = document.getElementById('generatePodcastBtn');
+  btn.disabled=true; btn.textContent='⏳ Yazıyor...';
+  const topicMap = {gunluk:'günlük yaşam',is:'iş dünyası',seyahat:'seyahat',yemek:'yemek ve restoran'};
+  const prompt = `${level} seviyesinde Hollandaca, "${topicMap[topic]||'günlük yaşam'}" hakkında Ahmet (erkek, Türk) ve Sophie (kadın, Hollandalı) arasında doğal bir podcast diyaloğu yaz. Şu kelimeleri kullan: ${wordList}. 8-12 satır olsun. JSON formatında: {"lines":[{"speaker":"Ahmet","text":"...","translation":"Türkçe çevirisi"},{"speaker":"Sophie","text":"...","translation":"Türkçe çevirisi"},...]}`;
+  try {
+    const res = await groqRequest([{role:'user',content:prompt}], 1200);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    podcastLines = data.lines || [];
+    const transcript = document.getElementById('podcastTranscript');
+    transcript.innerHTML = '';
+    podcastLines.forEach((line, i) => {
+      const div = document.createElement('div');
+      div.id = `pl_${i}`;
+      div.style.cssText = 'margin-bottom:6px;cursor:pointer;border-radius:8px;padding:4px 6px;transition:background 0.2s;';
+      div.innerHTML = `<span style="font-weight:700;color:${line.speaker==='Sophie'?'var(--green)':'var(--blue)'};">${line.speaker}:</span> <span class="podcast-nl">${escapeHtml(line.text)}</span><div style="font-size:11px;color:var(--subtle);margin-top:2px;">${escapeHtml(line.translation)}</div>`;
+      div.onclick = () => speakPodcastLine(i);
+      transcript.appendChild(div);
+    });
+    document.getElementById('podcastDuration').textContent = `${podcastLines.length} satır · Tıkla dinle`;
+    document.getElementById('podcastOutput').style.display = 'block';
+    podcastCurrentLine = 0;
+  } catch(e) { showToast('Podcast üretme hatası!', '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='🎙️ Podcast Üret'; }
+}
+
+function speakPodcastLine(idx) {
+  if (idx >= podcastLines.length) { document.getElementById('podcastPlayBtn').textContent='▶'; return; }
+  const line = podcastLines[idx];
+  const el = document.getElementById(`pl_${idx}`);
+  document.querySelectorAll('[id^="pl_"]').forEach(e => e.style.background='');
+  if (el) el.style.background = 'rgba(249,115,22,0.12)';
+  const u = new SpeechSynthesisUtterance(line.text);
+  u.lang = 'nl-NL'; u.rate = 0.85;
+  u.onend = () => speakPodcastLine(idx+1);
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+  podcastCurrentLine = idx;
+}
+
+document.getElementById('podcastPlayBtn').onclick = () => {
+  if (speechSynthesis.speaking) { speechSynthesis.cancel(); document.getElementById('podcastPlayBtn').textContent='▶'; }
+  else { document.getElementById('podcastPlayBtn').textContent='⏸'; speakPodcastLine(0); }
+};
+
+// ═══ KÜLTÜR ŞOKU RPG ═══
+let rpgHistory = [];
+let rpgCQ = 50;
+document.getElementById('rpgBtn').onclick = () => { toggleSidebar(); openModal('rpgModal'); document.getElementById('rpgMessages').innerHTML=''; document.getElementById('rpgInputArea').style.display='none'; rpgHistory=[]; };
+document.getElementById('closeRpgBtn').onclick = () => closeModal('rpgModal');
+document.getElementById('startRpgBtn').onclick = startRpg;
+document.getElementById('rpgSendBtn').onclick = sendRpgMsg;
+document.getElementById('rpgInput').onkeydown = e => { if(e.key==='Enter') sendRpgMsg(); };
+document.getElementById('rpgHintBtn').onclick = async () => {
+  if (!requireGroqKey()) return;
+  try {
+    const res = await groqRequest([...rpgHistory,{role:'user',content:'Türkçe olarak ne söylemem gerektiği hakkında kısa bir ipucu ver (cevabı verme, sadece yönlendir). JSON: {"hint":"ipucu"}'}], 150);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    showToast('💡 '+data.hint, '#8B5CF6', 'white');
+  } catch(e) {}
+};
+
+async function startRpg() {
+  if (!requireGroqKey()) return;
+  const scenario = document.getElementById('rpgScenario').value;
+  const scenarioMap = {
+    belediye:'Hollanda belediyesinde ikametgah kaydı (BSN) yaptırmaya geldiniz. Memur Hollandalı ve bürokratik davranıyor.',
+    ev:'Ev sahibi Bay van Dijk ile kiralık daire görüşmesi. Ev sahibi çok sorular soruyor ve şüpheci.',
+    market:'Albert Heijn süpermarketinde kasada ödeme yaparken biri sıranızı çalıyor.',
+    tikkie:'Hollandalı iş arkadaşınız dünkü kahve için 1.50€ Tikkie gönderdi.',
+    bisiklet:'Bisikletiniz bir Hollandalının bisikletiyle çarpıştı.',
+    is_gorusmesi:'Hollandalı patronla resmi iş görüşmesi.'
+  };
+  rpgHistory = [{role:'system',content:`Sen bir Hollanda yaşam simülasyonu RPG'sisin. Senaryo: ${scenarioMap[scenario]||scenario}. Hollandaca konuş, gerçekçi ol, Hollandalı kültürel özellikleri yansıt (direkt, çok ödeme odaklı, bürokratik). Her yanıtta kullanıcının kültürel IQ'sunu (CQ) değerlendir. JSON döndür: {"npc":"NPC'nin cevabı (Hollandaca)","narration":"kısa durum açıklaması (Türkçe)","cqChange":+5/-5/0,"cqReason":"neden"}`}];
+  rpgCQ = 50;
+  const msgs = document.getElementById('rpgMessages');
+  msgs.innerHTML = '';
+  const intro = document.createElement('div');
+  intro.className = 'rpg-narrator';
+  intro.textContent = `🎭 Senaryo: ${scenarioMap[scenario]||scenario}`;
+  msgs.appendChild(intro);
+  document.getElementById('rpgCqDisplay').style.display = 'block';
+  document.getElementById('rpgCqDisplay').innerHTML = `<span class="cq-badge">🧠 Kültürel IQ: ${rpgCQ}</span>`;
+  const btn = document.getElementById('startRpgBtn');
+  btn.disabled=true; btn.textContent='⏳';
+  try {
+    const res = await groqRequest([...rpgHistory,{role:'user',content:'Sahneyi başlat. Sadece JSON döndür.'}], 400);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    rpgHistory.push({role:'assistant',content:res});
+    addRpgMsg(data.npc, 'npc');
+    if (data.narration) addRpgMsg(data.narration, 'narrator');
+    document.getElementById('rpgInputArea').style.display='block';
+    document.getElementById('rpgInput').focus();
+  } catch(e) { showToast('RPG başlatma hatası!', '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='🎮 Başla'; }
+}
+
+function addRpgMsg(text, type) {
+  const el = document.createElement('div');
+  el.className = type==='npc'?'rpg-npc':type==='user'?'rpg-user':'rpg-narrator';
+  el.textContent = text;
+  const msgs = document.getElementById('rpgMessages');
+  msgs.appendChild(el);
+  msgs.scrollTop = 9999;
+}
+
+async function sendRpgMsg() {
+  const input = document.getElementById('rpgInput');
+  const text = input.value.trim();
+  if (!text) return;
+  if (!requireGroqKey()) return;
+  input.value = '';
+  addRpgMsg(text, 'user');
+  rpgHistory.push({role:'user',content:text});
+  const btn = document.getElementById('rpgSendBtn');
+  btn.disabled=true; btn.textContent='...';
+  try {
+    const res = await groqRequest(rpgHistory, 400);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    rpgHistory.push({role:'assistant',content:res});
+    addRpgMsg(data.npc, 'npc');
+    if (data.narration) addRpgMsg(data.narration, 'narrator');
+    if (data.cqChange) {
+      rpgCQ = Math.max(0, Math.min(100, rpgCQ + data.cqChange));
+      const color = data.cqChange > 0 ? '#22C55E' : '#EF4444';
+      showToast(`${data.cqChange>0?'📈':'📉'} CQ ${data.cqChange>0?'+':''}${data.cqChange}: ${data.cqReason||''}`, color, '#fff');
+      document.getElementById('rpgCqDisplay').innerHTML = `<span class="cq-badge">🧠 Kültürel IQ: ${rpgCQ}/100</span>`;
+    }
+  } catch(e) { showToast('Hata!', '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='Cevapla'; }
+}
+
+// ═══ WHATSAPP SİMÜLATÖR ═══
+let waHistory = [];
+document.getElementById('whatsappBtn').onclick = () => { toggleSidebar(); openModal('whatsappModal'); if (!waHistory.length) startWaChat(); };
+document.getElementById('closeWaBtn').onclick = () => closeModal('whatsappModal');
+document.getElementById('waNewChatBtn').onclick = () => { waHistory=[]; document.getElementById('waMessages').innerHTML=''; startWaChat(); };
+document.getElementById('waSendBtn').onclick = sendWaMsg;
+document.getElementById('waInput').onkeydown = e => { if(e.key==='Enter') sendWaMsg(); };
+
+async function startWaChat() {
+  if (!requireGroqKey()) return;
+  const userLevel = appData.cards.filter(c=>(c.repetitions||0)>=2).length > 20 ? 'B1' : 'A2';
+  waHistory = [{role:'system',content:`Sen Sophie adında genç bir Hollandalı arkadaşsın. WhatsApp'ta kısa, günlük Hollandaca mesajlar at. Emojiler kullan. Türkçe yazılırsa yine Hollandaca cevap ver ama anladığını belirt. Kullanıcının seviyesi ${userLevel}. Bazen soru sor, samimi ol.`}];
+  const greetings = ['Hé! Hoe is het met je? 😊','Hoi! Wat ben je aan het doen? 🌷','Hey! Lang niet gezien! Alles goed? 😄'];
+  const greeting = greetings[Math.floor(Math.random()*greetings.length)];
+  waHistory.push({role:'assistant',content:greeting});
+  addWaMsg(greeting, false);
+}
+
+function addWaMsg(text, isMe) {
+  const msgs = document.getElementById('waMessages');
+  const div = document.createElement('div');
+  div.style.cssText = `display:flex;justify-content:${isMe?'flex-end':'flex-start'};`;
+  const bubble = document.createElement('div');
+  bubble.className = `wa-msg ${isMe?'me':'them'}`;
+  bubble.innerHTML = `${escapeHtml(text)}<div class="wa-time">${new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}</div>`;
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  msgs.scrollTop = 9999;
+}
+
+async function sendWaMsg() {
+  const input = document.getElementById('waInput');
+  const text = input.value.trim();
+  if (!text || !requireGroqKey()) return;
+  input.value = '';
+  addWaMsg(text, true);
+  waHistory.push({role:'user',content:text});
+  const btn = document.getElementById('waSendBtn');
+  btn.textContent='⌛';
+  try {
+    const res = await groqRequest(waHistory, 180);
+    let reply = res;
+    try { reply = Object.values(JSON.parse(res.replace(/```json|```/g,'').trim()))[0]||res; } catch(e) {}
+    waHistory.push({role:'assistant',content:reply});
+    setTimeout(() => { addWaMsg(reply, false); btn.textContent='➤'; }, 800);
+  } catch(e) { btn.textContent='➤'; }
+}
+
+// ═══ HAFIZA SARAYI ═══
+document.getElementById('memoryBtn').onclick = () => { toggleSidebar(); openModal('memoryModal'); document.getElementById('memoryResult').style.display='none'; document.getElementById('memoryWordInput').value=''; };
+document.getElementById('closeMemoryBtn').onclick = () => closeModal('memoryModal');
+document.getElementById('generateMemoryBtn').onclick = generateMemory;
+document.getElementById('memoryWordInput').onkeydown = e => { if(e.key==='Enter') generateMemory(); };
+
+async function generateMemory() {
+  const word = document.getElementById('memoryWordInput').value.trim();
+  if (!word) { showToast('Kelime yazın!', '#EF4444'); return; }
+  if (!requireGroqKey()) return;
+  const btn = document.getElementById('generateMemoryBtn');
+  btn.disabled=true; btn.textContent='⏳';
+  const personalityNote = personalityProfile ? `Kullanıcı ${personalityProfile.persona} tipinde.` : '';
+  const prompt = `${personalityNote} Hollandaca "${word}" kelimesi için hafıza teknikleri üret. JSON: {"anchor":{"scene":"Hollanda'ya özgü duygusal sahne (Türkçe)","emotion":"duygu adı"},"phonetic":{"tip":"Türkçe konuşan için telaffuz ipucu"},"root":{"analysis":"kök/ek analizi varsa, yoksa boş"},"mnemonic":"komik ve akılda kalıcı Türkçe hafıza tekniği","idiom":"bu kelimeyle ilgili Hollandaca deyim veya atasözü"}`;
+  try {
+    const res = await groqRequest([{role:'user',content:prompt}], 600);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    const result = document.getElementById('memoryResult');
+    result.innerHTML = '';
+    const cards = [
+      {cls:'anchor', icon:'⚓', title:'Duygusal Çapa', content:`<strong>${data.anchor.emotion}:</strong> ${data.anchor.scene}`},
+      {cls:'phonetic', icon:'👄', title:'Fonetik İpucu', content:data.phonetic.tip},
+      ...(data.root.analysis ? [{cls:'root', icon:'🧩', title:'Kök Analizi', content:data.root.analysis}] : []),
+      {cls:'', icon:'🎭', title:'Hafıza Tekniği', content:data.mnemonic},
+      ...(data.idiom ? [{cls:'', icon:'📢', title:'Deyim/Atasözü', content:data.idiom}] : [])
+    ];
+    cards.forEach(c => {
+      const div = document.createElement('div');
+      div.className = `memory-card ${c.cls}`;
+      div.innerHTML = `<div style="font-size:11px;font-weight:700;color:var(--subtle);margin-bottom:5px;">${c.icon} ${c.title.toUpperCase()}</div><div style="font-size:13px;line-height:1.6;">${escapeHtml(c.content)}</div>`;
+      result.appendChild(div);
+    });
+    result.style.display = 'block';
+  } catch(e) { showToast('Hata!', '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='🏛️ Üret'; }
+}
+
+// ═══ SOSYAL ZEKA MOTORU ═══
+document.getElementById('socialBtn').onclick = () => { toggleSidebar(); openModal('socialModal'); document.getElementById('socialResult').style.display='none'; };
+document.getElementById('closeSocialBtn').onclick = () => closeModal('socialModal');
+document.getElementById('analyzeSocialBtn').onclick = analyzeSocial;
+document.getElementById('socialInput').onkeydown = e => { if(e.key==='Enter'&&e.ctrlKey) analyzeSocial(); };
+
+async function analyzeSocial() {
+  const text = document.getElementById('socialInput').value.trim();
+  if (!text) { showToast('Cümle yazın!', '#EF4444'); return; }
+  if (!requireGroqKey()) return;
+  const context = document.getElementById('socialContext').value;
+  const contextMap = {is:'iş ortamı', arkadas:'arkadaş ortamı', resmi:'resmi/bürokratik', komsu:'komşuluk/sosyal'};
+  const btn = document.getElementById('analyzeSocialBtn');
+  btn.disabled=true; btn.textContent='⏳ Analiz...';
+  const prompt = `Hollandaca öğrencinin "${text}" cümlesini ${contextMap[context]} bağlamında 3 katmanlı analiz et. JSON: {"grammar":{"correct":true/false,"note":"dilbilgisi notu Türkçe"},"social":{"subtext":"Hollandalı bunu duyunca ne düşünür? (Türkçe)","reaction":"tipik Hollandalı tepkisi"},"cultural":{"score":0-10,"scoreLabel":"Kültürel Uyum","advice":"daha Hollandalıca nasıl söylenir? + neden?"}}`;
+  try {
+    const res = await groqRequest([{role:'user',content:prompt}], 600);
+    const data = JSON.parse(res.replace(/```json|```/g,'').trim());
+    const result = document.getElementById('socialResult');
+    const grammarColor = data.grammar.correct ? 'var(--green)' : 'var(--red)';
+    const scoreColor = data.cultural.score >= 7 ? 'var(--green)' : data.cultural.score >= 4 ? 'var(--orange)' : 'var(--red)';
+    result.innerHTML = `
+      <div class="social-layer" style="border-left:3px solid ${grammarColor};">
+        <div class="social-layer-title" style="color:${grammarColor};">✍️ Katman 1: Dilbilgisi</div>
+        <div style="font-size:13px;line-height:1.5;">${escapeHtml(data.grammar.note||'Dilbilgisi doğru.')}</div>
+      </div>
+      <div class="social-layer" style="border-left:3px solid var(--blue);">
+        <div class="social-layer-title" style="color:var(--blue);">🧠 Katman 2: Sosyal Alt Metin</div>
+        <div style="font-size:13px;line-height:1.5;margin-bottom:6px;">${escapeHtml(data.social.subtext)}</div>
+        <div style="font-size:12px;color:var(--subtle);">Hollandalı tepkisi: <em>${escapeHtml(data.social.reaction)}</em></div>
+      </div>
+      <div class="social-layer" style="border-left:3px solid ${scoreColor};">
+        <div class="social-layer-title" style="color:${scoreColor};">🇳🇱 Katman 3: Kültürel Kod — <span style="font-size:14px;">${data.cultural.score}/10</span></div>
+        <div style="font-size:13px;line-height:1.5;color:var(--orange);">💡 ${escapeHtml(data.cultural.advice)}</div>
+      </div>`;
+    result.style.display = 'block';
+  } catch(e) { showToast('Analiz hatası!', '#EF4444'); }
+  finally { btn.disabled=false; btn.textContent='🤝 Sosyal Analiz Yap'; }
+}
+
+// Sidebar event bağlantıları (mevcut olmayan eklemeler)
+document.getElementById('storyBtn').onclick = () => { toggleSidebar(); openModal('storyModal'); document.getElementById('storyOutput').style.display = 'none'; };
+document.getElementById('correctBtn').onclick = () => { toggleSidebar(); openModal('correctModal'); document.getElementById('correctionOutput').style.display = 'none'; document.getElementById('correctionInput').value=''; };
+document.getElementById('weaknessBtn').onclick = () => { toggleSidebar(); openModal('weaknessModal'); document.getElementById('weaknessOutput').style.display='none'; };
+document.getElementById('kesfetBtn').onclick = () => {
+  toggleSidebar();
+  kesfetList = appData.cards.filter(c => !c.repetitions || c.repetitions === 0).sort(() => 0.5 - Math.random()).slice(0, 20);
+  if (!kesfetList.length) kesfetList = [...appData.cards].sort((a,b) => (a.repetitions || 0) - (b.repetitions || 0)).slice(0, 15);
+  if (!kesfetList.length) { showToast('Keşfet modu için kart bulunamadı!', '#EF4444'); return; }
+  kesfetMode = true; kesfetIdx = 0;
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('kesfetScreen').style.display = 'flex';
+  renderKesfet();
+};
+
 </script>
 </body>
 </html>
