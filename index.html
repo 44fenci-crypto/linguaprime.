@@ -3040,12 +3040,20 @@ function parseAiJson(text) {
   }
 }
 
-async function groqRequest(messages, maxTokens = 400) {
+async function groqRequest(messages, maxTokens = 400, jsonMode = true) {
   if (!groqKey) throw new Error('NO_KEY');
+  const body = {
+    model: 'llama-3.1-8b-instant',
+    messages,
+    temperature: 0.3,
+    max_tokens: maxTokens
+  };
+  if (jsonMode) body.response_format = { type: 'json_object' };
+
   const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: 'llama-3.1-8b-instant', messages, response_format: { type: 'json_object' }, temperature: 0.3, max_tokens: maxTokens })
+    body: JSON.stringify(body)
   });
   if (response.status === 401) throw new Error('INVALID_KEY');
   if (response.status === 429) throw new Error('RATE_LIMIT');
@@ -3624,7 +3632,7 @@ async function sendChatMsg() {
   const grammarCheckPrompt = `${text} — Bu Hollandaca cümlede hata varsa JSON ile döndür: {"hasError":true/false,"errorExplain":"Türkçe açıklama varsa, yoksa boş string"}`;
   try {
     const [replyData, grammarData] = await Promise.all([
-      groqRequest(chatHistory.map(m => m.role==='system'?m:{role:m.role,content:m.content}), 250),
+      groqRequest(chatHistory.map(m => m.role==='system'?m:{role:m.role,content:m.content}), 250, false),
       groqRequest([{role:'system',content:'Hollandaca gramer kontrolörüsün. Sadece JSON döndür.'},{role:'user',content:grammarCheckPrompt}], 200).catch(()=>'{"hasError":false,"errorExplain":""}')
     ]);
     let reply = '';
@@ -3640,7 +3648,10 @@ async function sendChatMsg() {
         tipEl.style.display = 'block';
       } else { tipEl.style.display = 'none'; }
     } catch(e) {}
-  } catch(e) { addChatMsg('Üzgünüm, bir hata oluştu.', true); }
+  } catch(e) {
+    addChatMsg('Üzgünüm, AI bağlantısında bir sorun oluştu. Groq anahtarınızı ve internet bağlantınızı kontrol edin.', true);
+    showToast('Sohbet AI hatası: ' + e.message, '#EF4444');
+  }
   finally { btn.disabled=false; btn.textContent='Gönder'; }
 }
 
@@ -3830,12 +3841,15 @@ async function sendWaMsg() {
   const btn = document.getElementById('waSendBtn');
   btn.textContent='⌛';
   try {
-    const res = await groqRequest(waHistory, 180);
-    let reply = res;
-    try { reply = Object.values(parseAiJson(res))[0]||res; } catch(e) {}
+    const res = await groqRequest(waHistory, 180, false);
+    let reply = res.trim();
     waHistory.push({role:'assistant',content:reply});
     setTimeout(() => { addWaMsg(reply, false); btn.textContent='➤'; }, 800);
-  } catch(e) { btn.textContent='➤'; }
+  } catch(e) {
+    addWaMsg('AI bağlantısında sorun var. Groq anahtarınızı kontrol eder misiniz?', false);
+    showToast('WhatsApp AI hatası: ' + e.message, '#EF4444');
+    btn.textContent='➤';
+  }
 }
 
 // ═══ HAFIZA SARAYI ═══
